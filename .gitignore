@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Slidev and Vite generated files
+dist/
+.slidev/
+.vite/
+slides-export/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp

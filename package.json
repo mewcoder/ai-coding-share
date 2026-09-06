@@ -1,0 +1,16 @@
+{
+  "name": "ai-coding-share",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md",
+    "export:pdf": "slidev export slides.md --format pdf",
+    "export:png": "slidev export slides.md --format png"
+  },
+  "devDependencies": {
+    "@slidev/cli": "latest",
+    "@slidev/theme-default": "latest",
+    "playwright-chromium": "latest"
+  }
+}
