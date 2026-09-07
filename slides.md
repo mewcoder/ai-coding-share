@@ -9,12 +9,12 @@ mdc: true
 
 <div class="editorial-slide cover">
   <div class="cover-left">
-    <h1>AI Coding<br />从原理到实践</h1>
+    <h1><span class="cover-title-en">AI Coding</span><span class="cover-title-cn">从原理到实践</span></h1>
     <div class="cover-rule"></div>
     <p class="cover-subtitle">从 AI Coding 的发展历程出发，了解 Agent 的基本原理与运行机制，认识 Coding Agent 的工具链，并探索适合个人与团队的工作流实践。</p>
   </div>
   <div class="cover-right">
-      <img class="cover-agent-illustration" src="/images/cover-agent-workflow-clean.png?v=1" alt="" aria-hidden="true" />
+      <img class="cover-agent-illustration" src="/images/cover-agent-orchestration-transparent.png" alt="AI Coding Agent 编排文档、终端、浏览器与工具的工作流插画" aria-hidden="true" />
   </div>
 </div>
 
@@ -44,16 +44,8 @@ mdc: true
 
 <div class="editorial-slide evolution-page">
   <h1 class="title">AI Coding 的发展</h1>
-  <p class="lead">AI Coding 的演进，是 AI 逐步进入开发环境并接管更多执行环节的过程。</p>
-  <div class="evolution-note">0.0—3.0 是能力分层，0.0 是工程接入前的对照阶段，并非严格的发布时间排序。</div>
   <div class="evolution-track" aria-hidden="true"></div>
   <div class="evolution-stages">
-    <article class="evolution-stage stage-chat">
-      <div class="stage-heading"><strong>0.0</strong><span>2022.11—2023 年初</span></div>
-      <h3>通用对话</h3>
-      <div class="stage-detail"><b>代表工具</b><p>ChatGPT（Web）</p></div>
-      <div class="stage-detail"><b>协作方式</b><p>开发者在浏览器与终端间手动搬运代码和报错。</p></div>
-    </article>
     <article class="evolution-stage stage-completion">
       <div class="stage-heading"><strong>1.0</strong><span>2021—2022 年底</span></div>
       <h3>代码补全</h3>
@@ -71,7 +63,7 @@ mdc: true
       <h3>Agent</h3>
       <div class="stage-detail"><b>代表工具</b><p>Claude Code、Cursor、Codex</p></div>
       <div class="stage-detail"><b>协作方式</b><p>开发者给出目标，Agent 自主执行、测试和修复。</p></div>
-      <div class="stage-detail"><b>工作面</b><p>CLI、IDE、Workbench 是三种工作面，不代表能力等级。</p></div>
+      <div class="stage-detail"><b>产品形态</b><p>CLI、IDE、Workbench 是三种产品形态，不代表能力等级。</p></div>
     </article>
   </div>
 </div>
@@ -80,7 +72,6 @@ mdc: true
 
 <div class="editorial-slide multi-agent-page">
   <h1 class="title">Cloud Agent 与 Multi-Agent</h1>
-  <p class="lead">AI Coding 正从“人和 AI 同步协作”，走向“人定义目标，Agent 异步完成任务”。</p>
   <div class="multi-agent-layout">
     <div class="multi-agent-content">
       <div class="agent-parallel-grid">
@@ -118,106 +109,390 @@ mdc: true
 
 ---
 
+<div class="editorial-slide model-tier-page">
+  <h1 class="title">主流模型</h1>
+  <div class="model-tier-list">
+    <section class="model-tier-row tier-frontier">
+      <div class="model-tier-label"><strong>1</strong><div><h2>顶级模型</h2><span>能力上限</span></div></div>
+      <div class="model-tier-models">
+        <span>GPT-6 Astra</span><span>Claude Fable 5.1</span><span>Claude Fable 5</span>
+        <span>Claude Opus 5</span><span>GPT-5.6 Sol</span>
+      </div>
+    </section>
+    <section class="model-tier-row tier-frontline">
+      <div class="model-tier-label"><strong>2</strong><div><h2>强模型</h2><span>综合能力</span></div></div>
+      <div class="model-tier-models">
+        <span>Kimi K3</span><span>GLM-5.3</span><span>Qwen3.8 Max</span>
+        <span>Grok 4.6</span><span>DeepSeek V4 Pro</span>
+      </div>
+    </section>
+    <section class="model-tier-row tier-efficient">
+      <div class="model-tier-label"><strong>3</strong><div><h2>高效模型</h2><span>速度与成本</span></div></div>
+      <div class="model-tier-models">
+        <span>Gemini 3.8 Flash</span><span>GLM-5.3-Flash</span><span>GPT-5.6 Luna</span>
+        <span>Qwen3.8-Flash-Next</span><span>DeepSeek V4 Flash</span>
+      </div>
+    </section>
+  </div>
+</div>
+
+---
+
 <div class="editorial-slide model-trends-page">
   <h1 class="title">模型趋势解读</h1>
-  <p class="lead">模型从单轮回答走向持续完成任务，能力、效率、环境交互与 Harness 同步演进。</p>
   <ul class="bullet-list trend-grid">
     <li><div class="trend-item-copy"><div class="trend-main"><strong>Agent 化：</strong><span>从单轮回答走向长时间、多步骤任务执行，能够规划、调用工具、验证并持续完成。</span></div><div class="trend-meta">代表：GPT-6 Astra、Claude Fable 5.1</div></div></li>
     <li><div class="trend-item-copy"><div class="trend-main"><strong>能力与效率并行：</strong><span>旗舰模型持续冲击能力上限，轻量模型则追求更低延迟、更低成本和更高并发。</span></div><div class="trend-meta">效率路线：GPT-5.6 Luna、DeepSeek-V4-Flash</div></div></li>
     <li><div class="trend-item-copy"><div class="trend-main"><strong>环境交互原生化：</strong><span>模型开始针对浏览器、桌面和专业软件环境专项训练，从“理解信息、调用 API”走向“理解界面、直接操作并完成任务”。</span></div><div class="trend-meta">代表：GPT-6 Astra 的 Computer Use</div></div></li>
     <li><div class="trend-item-copy"><div class="trend-main"><strong>模型与 Harness 协同演进：</strong><span>模型提升能力上限，Harness 从“弥补模型缺陷”逐步转向“组织和放大模型能力”。</span></div><div class="trend-meta">模型原生能力增强后，Prompt、Skill 和规则会逐步去除历史补丁</div></div></li>
+    <li><div class="trend-item-copy"><div class="trend-main"><strong>递归自我改进（RSI）：</strong><span>前沿模型已经开始参与下一代模型的研发与改进，推动模型研发与迭代加速。</span></div></div></li>
   </ul>
 </div>
 
 ---
 
 <div class="editorial-slide chapter-page">
-  <div class="chapter-number">二</div>
-  <h1>Agent 基本原理</h1>
-  <p>模型只是起点，工具和循环才让能力进入环境。</p>
-</div>
-
----
-
-<div class="editorial-slide">
-  <h1 class="title">Agent 的组成</h1>
-  <p class="lead">Agent 可以理解为一个能够持续行动的组合。</p>
-  <div class="equation">LLM + Context + Tools + Loop</div>
-  <div class="definition-grid">
-    <div class="definition"><h3>LLM</h3><p>负责理解、推理、规划和生成。</p></div>
-    <div class="definition"><h3>Context</h3><p>决定模型在这一轮能够看见哪些信息。</p></div>
-    <div class="definition"><h3>Tools 与 Loop</h3><p>Tools 让 Agent 改变外部世界，Loop 让行动结果回到下一轮判断。</p></div>
+  <div class="chapter-index">第二章</div>
+  <div class="chapter-copy">
+    <h1>Agent 基本原理</h1>
   </div>
-  <div class="context-note" style="margin-top: 36px">Coding Agent = Agent + 软件工程环境。文件、Shell、测试和 Git 让通用能力落到 SWE 场景。</div>
 </div>
 
 ---
 
-<div class="editorial-slide">
+<div class="editorial-slide agent-concept-page">
+  <h1 class="title">Agent 的基本概念</h1>
+  <div class="agent-focus-layout">
+    <section class="agent-equation-panel">
+      <div class="agent-equation-block">
+        <div class="agent-equation-main">Agent = Model + Harness</div>
+      </div>
+      <div class="agent-equation-divider"></div>
+      <div class="agent-equation-block coding-equation-block">
+        <div class="agent-equation-label">Coding Agent</div>
+        <p>面向 SWE（Software Engineering）场景的 Agent，通常具备文件读写、代码搜索、Shell、测试、Git 等工具。</p>
+      </div>
+    </section>
+    <section class="agent-harness-panel">
+      <h2>Harness</h2>
+      <div class="agent-harness-identity">模型之外的运行框架</div>
+      <div class="agent-harness-formula">上下文管理 + 工具接口<br />+ 约束 + 验证 + 纠正</div>
+    </section>
+  </div>
+  <div class="agent-extension-note">通用 Agent 可进一步扩展 Web、Browser、Apps 等能力，而 Coding 正逐渐成为其重要的通用执行能力。</div>
+</div>
+
+---
+
+<div class="editorial-slide agent-loop-page">
   <h1 class="title">Agent Loop</h1>
-  <p class="lead">LLM 基于上下文做决策，通过工具与环境交互，直到任务完成或停止。</p>
   <div class="loop-layout">
-    <div class="image-panel loop-image"><img src="/images/image.png" alt="Agent Loop 工作机制" /></div>
-    <div class="numbered-list">
-      <div class="numbered-item"><strong>1</strong><div><h3>理解目标</h3><p>读取用户目标、约束和当前上下文。</p></div></div>
-      <div class="numbered-item"><strong>2</strong><div><h3>决定行动</h3><p>判断是否需要读取文件、调用工具或继续推理。</p></div></div>
-      <div class="numbered-item"><strong>3</strong><div><h3>执行工具</h3><p>运行命令、修改代码、启动测试或查询服务。</p></div></div>
-      <div class="numbered-item"><strong>4</strong><div><h3>观察结果</h3><p>把输出写回上下文，验证结果并决定是否继续。</p></div></div>
+    <div class="loop-animation" role="img" aria-label="Agent Loop 从消息进入模型，经工具判断与执行后，把结果写回消息列表的循环动画">
+      <div class="agent-loop-diagram">
+        <div class="loop-flow-node loop-user-node">
+          <strong>用户提问</strong>
+          <span>“帮我创建 hello.py”</span>
+        </div>
+        <div class="loop-flow-node loop-messages-node">
+          <strong>messages[]</strong>
+          <span>累积式消息列表</span>
+        </div>
+        <div class="loop-flow-node loop-model-node">
+          <strong>大模型（LLM）</strong>
+          <span>模型阅读消息历史</span>
+          <span>判断：需要工具吗？</span>
+          <span>返回 finish_reason 信号</span>
+        </div>
+        <div class="loop-decision-node">
+          <div class="loop-decision-content"><strong>finish_reason</strong><span>== “tool_calls”？</span></div>
+        </div>
+        <div class="loop-flow-node loop-result-node">
+          <strong>返回结果</strong>
+          <span>循环结束</span>
+        </div>
+        <div class="loop-flow-node loop-tool-node">
+          <strong>执行工具调用</strong>
+          <span>Edit(path, content)</span>
+        </div>
+        <svg class="loop-flow-svg" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+    <marker id="loop-arrow-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#16150f" />
+            </marker>
+          </defs>
+          <g class="loop-svg-base">
+            <path d="M 220 123 L 220 162" />
+            <path d="M 390 216 L 500 216" />
+            <path d="M 720 222 L 720 244 L 645 244 L 645 264" />
+            <path d="M 790 338 L 805 338 L 805 366 L 820 366" />
+            <path d="M 645 412 L 645 438 L 720 438 L 720 462" />
+            <path d="M 500 516 L 40 516 L 40 216 L 50 216" />
+          </g>
+          <g class="loop-svg-motion">
+            <path d="M 220 123 L 220 162" />
+            <path d="M 390 216 L 500 216" />
+            <path d="M 720 222 L 720 244 L 645 244 L 645 264" />
+            <path d="M 790 338 L 805 338 L 805 366 L 820 366" />
+            <path d="M 645 412 L 645 438 L 720 438 L 720 462" />
+            <path d="M 500 516 L 40 516 L 40 216 L 50 216" />
+          </g>
+        </svg>
+        <div class="loop-feedback-label">追加 tool_result 到 messages</div>
+        <span class="loop-branch-label loop-no-label">否</span>
+        <span class="loop-branch-label loop-yes-label">是</span>
+      </div>
+    </div>
+    <div class="loop-react-copy">
+      <p><strong>一次任务，多轮请求</strong><br />Model 返回 Tool Call 时，Agent 执行 Tool，并把 Tool Result 写回 Messages。下一轮请求读取更新后的 Context，继续决定下一步。只有 Model 直接返回最终结果，或触发停止条件，Loop 才结束。</p>
     </div>
   </div>
 </div>
 
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">Context：模型本轮可见的输入</h1>
-  <p class="lead">代码、文件和终端输出不会自动进入 Context，Agent 需要先读取或执行。</p>
-  <div class="context-layout">
-    <div class="context-figure"><h3>第一次请求</h3><div class="image-panel"><img src="/images/image-2.png" alt="第一次请求中的 Context" /></div></div>
-    <div class="context-figure"><h3>第二次请求</h3><div class="image-panel"><img src="/images/image-3.png" alt="第二次请求中的 Context" /></div></div>
+<div class="editorial-slide loop-request-page">
+  <h1 class="title">Agent Loop：第一次请求</h1>
+  <div class="loop-json-grid">
+    <section class="loop-json-panel loop-json-request">
+      <h2>发给模型</h2>
+      <pre class="loop-json-code"><code>{
+  "model": <span class="json-blue">"glm-5.2"</span>,
+  "messages": [
+    { "role": <span class="json-yellow">"user"</span>, "content": "创建 hello.py，打印 Hello, World!" }
+  ],
+  "tools": [{
+    "type": "function",
+    "function": {
+      "name": <span class="json-pink">"Edit"</span>,
+      "parameters": {
+        "type": "object",
+        "required": ["path", "content"]
+      }
+    }
+  }]
+}</code></pre>
+    </section>
+    <section class="loop-json-panel loop-json-response">
+      <h2>模型返回</h2>
+      <pre class="loop-json-code"><code>{
+  "model": <span class="json-blue">"glm-5.2"</span>,
+  "choices": [{
+    "finish_reason": <span class="json-pink">"tool_calls"</span>,
+    "message": {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [{
+        "id": "call_abc123",
+        "type": "function",
+        "function": {
+          "name": <span class="json-pink">"Edit"</span>,
+          "arguments": "{\"path\":\"hello.py\",\"content\":\"print('Hello, World!')\"}"
+        }
+      }]
+    }
+  }]
+}</code></pre>
+    </section>
   </div>
-  <div class="context-note">主要输入包括 messages、tools，以及消息中的图片和文件。Context Window 决定单次请求能够容纳的最大 Token 容量。</div>
+  <div class="loop-request-caption"><strong>第一次请求</strong><span>模型没有直接回答，而是返回 <code>tool_calls</code>，要求 Harness 执行 <code>Edit</code>。</span></div>
 </div>
 
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">KV Cache 与会话选择</h1>
-  <p class="lead">稳定的 Context 前缀可以复用，减少重复计算并提升响应速度。</p>
-  <div class="kv-layout">
-    <div class="kv-images"><div class="image-panel"><img src="/images/image-5.png" alt="KV Cache 原理" /></div><div class="image-panel"><img src="/images/image-6.png" alt="KV Cache 实践示意" /></div></div>
-    <div class="kv-points"><h3>实践启发</h3><ol><li>固定前缀尽量不变。需要切换 System Prompt、工具或规则时，新开对话。</li><li>目标相关就继续当前会话，目标变化就新开会话。</li><li>长上下文要同时考虑延迟、价格和压缩或重建策略。</li></ol></div>
+<div class="editorial-slide loop-request-page loop-second-request-page">
+  <h1 class="title">Agent Loop：第二次请求</h1>
+  <div class="loop-json-grid">
+    <section class="loop-json-panel loop-json-request">
+      <h2>再次发给模型</h2>
+      <pre class="loop-json-code"><code>{
+  "model": <span class="json-blue">"glm-5.2"</span>,
+  "messages": [
+    { "role": "user", "content": "创建 hello.py，打印 Hello, World!" },
+    { "role": "assistant", "content": null,
+      "tool_calls": [{
+        "id": "call_abc123",
+        "type": "function",
+        "function": { "name": <span class="json-pink">"Edit"</span>,
+          "arguments": "{\"path\":\"hello.py\",\"content\":\"print('Hello, World!')\"}"
+        }}
+      ]},
+    { "role": <span class="json-yellow">"tool"</span>, "tool_call_id": "call_abc123",
+      "content": "{\"success\":true,\"path\":\"hello.py\"}" }
+  ],
+  "tools": [{
+    "type": "function",
+    "function": { "name": <span class="json-pink">"Edit"</span>,
+      "parameters": { "type": "object", "required": ["path", "content"] }
+  }}]
+}</code></pre>
+    </section>
+    <section class="loop-json-panel loop-json-response">
+      <h2>模型最终返回</h2>
+      <pre class="loop-json-code"><code>{
+  "model": <span class="json-blue">"glm-5.2"</span>,
+  "choices": [{
+    "finish_reason": <span class="json-yellow">"stop"</span>,
+    "message": {
+      "role": "assistant",
+      "content": "已创建 hello.py，文件内容为：\nprint('Hello, World!')"
+    }
+  }]
+}</code></pre>
+    </section>
+  </div>
+  <div class="loop-request-caption"><strong>第二次请求</strong><span>Harness 把工具结果作为 <code>role: tool</code> 追加到消息列表，模型读取结果后返回最终回答。</span></div>
+</div>
+
+---
+
+<div class="editorial-slide agent-system-page">
+  <h1 class="title">Agent 核心构成</h1>
+  <div class="agent-architecture-visual">
+    <div class="agent-architecture-stage">
+      <img class="agent-architecture-image" src="/images/agent-architecture-v3.png" alt="Agent Loop 与外围 Harness 能力模块的关系图" />
+      <div class="agent-architecture-note note-context"><span>组织当前任务所需的上下文信息</span></div>
+      <div class="agent-architecture-note note-state"><span>维护任务进度与会话状态</span></div>
+      <div class="agent-architecture-note note-tools"><span>连接并调用外部能力</span></div>
+      <div class="agent-architecture-note note-execution"><span>提供实际操作与执行空间</span></div>
+      <div class="agent-architecture-note note-guardrails"><span>控制权限、边界与安全约束</span></div>
+    </div>
   </div>
 </div>
 
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">MCP：连接外部工具与数据源</h1>
-  <p class="lead">MCP 让 Agent 用统一方式发现和调用外部能力。</p>
-  <div class="mcp-layout">
-    <div class="image-panel mcp-image"><img src="/images/image-7.png" alt="MCP 连接 Agent 与外部能力" /></div>
-    <div class="side-note"><h3>两种部署方式</h3><ul class="bullet-list"><li><strong>本地 MCP：</strong>运行在本机，通过本地进程与 Agent 通信。</li><li><strong>远程 MCP：</strong>运行在服务器，通过网络与 Agent 通信。</li><li><strong>核心关注：</strong>接口、权限和结构化结果。</li></ul></div>
+<div class="editorial-slide mcp-rebuilt-page">
+  <h1 class="title">MCP</h1>
+  <div class="mcp-rebuilt-layout">
+    <div class="mcp-rebuilt-visual"><img src="/images/mcp-architecture-v4.png" alt="Agent 直接调用内置工具，并通过 MCP 调用外部工具" /></div>
+    <div class="mcp-rebuilt-copy">
+      <div class="mcp-definition"><strong>MCP</strong><p>一种开放协议，让外部能力以工具的形式被 Agent 发现和调用。</p></div>
+      <div class="mcp-deploy mcp-local"><h3>本地 MCP</h3><p>运行在本机，通过本地进程与 Agent 通信。</p></div>
+      <div class="mcp-deploy mcp-remote"><h3>远程 MCP</h3><p>运行在服务器，通过网络与 Agent 通信。</p></div>
+    </div>
   </div>
 </div>
 
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">Skills：封装任务方法</h1>
-  <p class="lead">Skill 把专家经验、工作流、品味和工具使用方式封装成可复用的能力单元。</p>
-  <div class="skill-layout">
-    <div class="image-panel skill-image"><img src="/images/image-8.png" alt="Skill 的运行机制和基本结构" /></div>
-    <div class="side-note"><h3>Skill 的五个特征</h3><ul class="bullet-list"><li><strong>可复用与可分发：</strong>像 Agent 的能力包，可安装、共享和跨任务复用。</li><li><strong>渐进式披露：</strong>先发现，后加载，按需读取。</li><li><strong>模块化与可组合：</strong>小 Skill 可以组合成更复杂的能力。</li><li><strong>经验可执行化：</strong>把 SOP 和工具用法沉淀成方法。</li><li><strong>可迭代与可评测：</strong>可以独立升级和验证，无需重新训练模型。</li></ul></div>
+<div class="editorial-slide skill-rebuilt-page">
+  <h1 class="title">Skills</h1>
+  <p class="lead">Skill 把一类任务的方法封装成 Agent 可复用的能力单元。</p>
+  <div class="skill-rebuilt-layout">
+    <div class="skill-rebuilt-visual">
+      <img src="/images/skill-workflow-v4.png" alt="Skill 从发现、加载、按需读取到执行的四步流程" />
+    </div>
+    <div class="skill-feature-note">
+      <h3>五个特征</h3>
+      <div class="skill-feature-list">
+        <div class="skill-feature-item"><strong>可复用与可分发</strong><span>一份 Skill 可以安装、共享，并跨任务复用。</span></div>
+        <div class="skill-feature-item"><strong>渐进式披露</strong><span>先发现，后加载，按需读取。</span></div>
+        <div class="skill-feature-item"><strong>模块化与可组合</strong><span>小 Skill 可以组合成更复杂的能力。</span></div>
+        <div class="skill-feature-item"><strong>经验可执行化</strong><span>把 SOP 和工具用法沉淀成方法。</span></div>
+        <div class="skill-feature-item"><strong>可迭代与可评测</strong><span>可以独立升级和验证，无需重新训练模型。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+
+<div class="editorial-slide context-rebuilt-page">
+  <h1 class="title">Context</h1>
+  <div class="context-rebuilt-layout">
+    <section class="context-input-panel">
+      <div class="context-request-title">上下文组成</div>
+      <div class="context-request-stack">
+        <article class="context-request-item context-request-instructions">
+          <div class="context-request-number">1</div>
+          <div class="context-request-body">
+            <div class="context-request-heading"><b>Instructions</b></div>
+            <p>系统指令 / 开发者指令 / 已加载的 Skill 指令</p>
+          </div>
+        </article>
+        <article class="context-request-item context-request-messages">
+          <div class="context-request-number">2</div>
+          <div class="context-request-body">
+            <div class="context-request-heading"><b>Messages</b></div>
+          <p>用户输入、模型回复与 tool_call，以及 Tool Result。</p>
+          </div>
+        </article>
+        <article class="context-request-item context-request-tools">
+          <div class="context-request-number">3</div>
+          <div class="context-request-body">
+            <div class="context-request-heading"><b>Tools</b></div>
+            <p>当前允许模型调用的 Tools，以及 MCP 提供的 Schema</p>
+          </div>
+        </article>
+      </div>
+      <div class="context-source-note">文件、代码和终端输出需要先由 Tool 读取、检索或执行，结果才会进入这次请求。</div>
+    </section>
+    <section class="context-window-panel">
+      <div class="context-compression-title">上下文压缩</div>
+      <p class="context-window-one-line">Context Window：一次请求可容纳的 Token 上限。</p>
+      <div class="context-message-compression">
+        <div class="context-message-strategies">
+          <strong>压缩机制</strong>
+          <span><b>清理 Tool Result</b><small>终端日志、搜索结果、长代码等旧输出，做删除或截断。</small></span>
+          <span><b>总结历史消息</b><small>把较早的用户消息、Agent 回复和执行过程总结成 Summary。</small></span>
+          <span><b>保留近期上下文</b><small>保留最近几轮 Messages 与当前任务状态。</small></span>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+---
+
+<div class="editorial-slide cache-page kv-cache-page">
+  <h1 class="title">KV Cache：单次推理中的内部缓存</h1>
+  <div class="kv-cache-visual">
+    <img src="/images/image-5.png" alt="KV Cache 前缀复用示意" />
+  </div>
+</div>
+
+---
+
+<div class="editorial-slide cache-page prompt-cache-page">
+  <h1 class="title">Prompt Cache：跨请求复用相同前缀</h1>
+  <div class="prompt-cache-layout">
+    <div class="prompt-cache-visual">
+      <div class="image-panel"><img src="/images/image-6.png" alt="缓存命中与输入价格示意" /></div>
+      <p class="prompt-cache-caption">服务商匹配请求前缀，命中后直接复用已计算结果，减少重复计算成本。</p>
+    </div>
+    <section class="prompt-cache-copy">
+      <div class="prompt-cache-copy-head">
+        <strong>缓存关系</strong>
+      </div>
+      <div class="prompt-cache-common">
+        <p>都复用不变前缀，减少重复计算。</p>
+      </div>
+      <div class="prompt-cache-levels prompt-cache-levels-redesign">
+        <div class="prompt-cache-level-kv"><b>KV Cache</b><span>模型内部<br />单次推理内</span></div>
+        <span class="prompt-cache-level-arrow">→</span>
+        <div class="prompt-cache-level-prompt"><b>Prompt Cache</b><span>推理服务<br />多次请求间</span></div>
+      </div>
+      <div class="prompt-cache-section prompt-cache-relation">
+        <p>Prompt Cache 命中时，可复用已计算的前缀状态（通常就是 KV Cache）。</p>
+      </div>
+      <div class="prompt-cache-section prompt-cache-condition">
+        <strong>实践启发</strong>
+        <ul class="bullet-list prompt-cache-bullets">
+          <li>系统提示词和工具定义保持固定。</li>
+          <li>用户输入、运行结果等动态信息追加到末尾。</li>
+        </ul>
+      </div>
+    </section>
   </div>
 </div>
 
 ---
 
 <div class="editorial-slide chapter-page">
-  <div class="chapter-number">三</div>
-  <h1>AI Coding 工具链</h1>
-  <p>工具的价值，在于把 Agent 接到真实的开发环境。</p>
+  <div class="chapter-index">第三章</div>
+  <div class="chapter-copy">
+    <h1>AI Coding 工具链</h1>
+  </div>
 </div>
 
 ---
@@ -352,9 +627,11 @@ mdc: true
 ---
 
 <div class="editorial-slide chapter-page">
-  <div class="chapter-number">四</div>
-  <h1>AI Coding 工作流</h1>
-  <p>从 Prompt 走向目标、环境、验证和交付的完整路径。</p>
+  <div class="chapter-index">第四章</div>
+  <div class="chapter-copy">
+    <h1>AI Coding 工作流</h1>
+    <p>从 Prompt 走向目标、环境、验证和交付的完整路径。</p>
+  </div>
 </div>
 
 ---
@@ -393,9 +670,11 @@ mdc: true
 ---
 
 <div class="editorial-slide chapter-page">
-  <div class="chapter-number">五</div>
-  <h1>实践与思考</h1>
-  <p>把一次成功的协作，沉淀成下一次可以复用的方法。</p>
+  <div class="chapter-index">第五章</div>
+  <div class="chapter-copy">
+    <h1>实践与思考</h1>
+    <p>把一次成功的协作，沉淀成下一次可以复用的方法。</p>
+  </div>
 </div>
 
 ---
