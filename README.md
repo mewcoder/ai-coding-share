@@ -30,21 +30,17 @@ CLI、IDE、Workbench 是三种产品形态，不代表能力等级。
 
 Agent 从本地走向云端，在独立环境中执行长任务；开发者从实时协作转向目标管理。
 
-**Codex Cloud**：云端独立环境，支持异步执行与长任务。
-
-**Cursor Cloud Agents**：把本地编辑转向云端任务执行。
-
-**GitHub Copilot cloud agent**：由 Issue 驱动执行，并回到 PR 协作。
+- **Codex Cloud**：云端独立环境，支持异步执行与长任务。
+- **Cursor Cloud Agents**：把本地编辑转向云端任务执行。
+- **GitHub Copilot cloud agent**：由 Issue 驱动执行，并回到 PR 协作。
 
 #### Multi-Agent
 
 多个不同品牌或不同角色的 Agent 并行执行、分工协作、统一编排。
 
-**Grok Bot**：持久化 Bot 组成团队，支持云端并行与任务交接。
-
-**Multica**：接入不同品牌 Agent，统一分派与运行监控。
-
-**Raft**：连接 Human 与 Agent，支持并行工作与人工 Review。
+- **Grok Bot**：持久化 Bot 组成团队，支持云端并行与任务交接。
+- **Multica**：接入不同品牌 Agent，统一分派与运行监控。
+- **Raft**：连接 Human 与 Agent，支持并行工作与人工 Review。
 
 **趋势**：Agent 正变得更自主、运行时间更长，并逐步走向云端异步执行与多 Agent 协作。
 
@@ -82,21 +78,13 @@ Agent 从本地走向云端，在独立环境中执行长任务；开发者从�
 ### 模型趋势解读
 
 - **Agent 化：** 从单轮回答走向长时间、多步骤任务执行，能够规划、调用工具、验证并持续完成。
-
-代表：GPT-6 Astra、Claude Fable 5.1
-
+  - 代表：GPT-6 Astra、Claude Fable 5.1
 - **能力与效率并行：** 旗舰模型持续冲击能力上限，轻量模型则追求更低延迟、更低成本和更高并发。
-
-效率路线：GPT-5.6 Luna、DeepSeek-V4-Flash
-
+  - 效率路线：GPT-5.6 Luna、DeepSeek-V4-Flash
 - **环境交互原生化：** 模型开始针对浏览器、桌面和专业软件环境专项训练，从“理解信息、调用 API”走向“理解界面、直接操作并完成任务”。
-
-代表：GPT-6 Astra 的 Computer Use
-
+  - 代表：GPT-6 Astra 的 Computer Use
 - **模型与 Harness 协同演进：** 模型提升能力上限，Harness 从“弥补模型缺陷”逐步转向“组织和放大模型能力”。
-
-模型原生能力增强后，Prompt、Skill 和规则会逐步去除历史补丁
-
+  - 模型原生能力增强后，Prompt、Skill 和规则会逐步去除历史补丁。
 - **递归自我改进（RSI）：** 前沿模型已经开始参与下一代模型的研发与改进，推动模型研发与迭代加速。
 
 ## 二、Agent 基本原理
@@ -242,11 +230,9 @@ Loop 读取上下文、调用工具、在环境中执行，并将结果与进度
 
 ### MCP
 
-**MCP**：一种开放协议，让外部能力以工具的形式被 Agent 发现和调用。
-
-**本地 MCP**：运行在本机，通过本地进程与 Agent 通信。
-
-**远程 MCP**：运行在服务器，通过网络与 Agent 通信。
+- **MCP**：一种开放协议，让外部能力以工具的形式被 Agent 发现和调用。
+- **本地 MCP**：运行在本机，通过本地进程与 Agent 通信。
+- **远程 MCP**：运行在服务器，通过网络与 Agent 通信。
 
 Agent 的工具主要有两种来源：Agent 直接调用内置的搜索、文件、终端和代码工具；也可以通过 MCP 连接外部网站、数据库、业务系统和云服务。MCP 提供连接方式，具体能力由接入的服务决定。
 
@@ -254,17 +240,13 @@ Agent 的工具主要有两种来源：Agent 直接调用内置的搜索、文�
 
 Skill 把一类任务的方法封装成 Agent 可复用的能力单元。
 
-**五个特征**
+**五个特征**：
 
-**可复用与可分发** 一份 Skill 可以安装、共享，并跨任务复用。
-
-**渐进式披露** 先发现，后加载，按需读取。
-
-**模块化与可组合** 小 Skill 可以组合成更复杂的能力。
-
-**经验可执行化** 把 SOP 和工具用法沉淀成方法。
-
-**可迭代与可评测** 可以独立升级和验证，无需重新训练模型。
+- **可复用与可分发**：一份 Skill 可以安装、共享，并跨任务复用。
+- **渐进式披露**：先发现，后加载，按需读取。
+- **模块化与可组合**：小 Skill 可以组合成更复杂的能力。
+- **经验可执行化**：把 SOP 和工具用法沉淀成方法。
+- **可迭代与可评测**：可以独立升级和验证，无需重新训练模型。
 
 Agent 使用 Skill 通常经历四个步骤：
 
@@ -277,13 +259,11 @@ Agent 使用 Skill 通常经历四个步骤：
 
 ### Context
 
-上下文组成
+上下文主要由以下部分组成：
 
-**Instructions**：系统指令 / 开发者指令 / 已加载的 Skill 指令
-
-**Messages**：用户输入、模型回复与 tool_call，以及 Tool Result。
-
-**Tools**：当前允许模型调用的 Tools，以及 MCP 提供的 Schema
+- **Instructions**：系统指令、开发者指令和已加载的 Skill 指令。
+- **Messages**：用户输入、模型回复、tool_call 以及 Tool Result。
+- **Tools**：当前允许模型调用的 Tools，以及 MCP 提供的 Schema。
 
 文件、代码和终端输出需要先由 Tool 读取、检索或执行，结果才会进入这次请求。
 
@@ -310,9 +290,10 @@ Context Window：一次请求可容纳的 Token 上限。
 
 服务商匹配请求前缀，命中后直接复用已计算结果，减少重复计算成本。
 
-**缓存关系**：都复用不变前缀，减少重复计算。
+**缓存关系**：两者都复用不变前缀，减少重复计算。
 
-KV Cache 从模型内部计算的角度描述单次推理中的缓存；Prompt Cache 从推理服务的角度描述多次请求间的前缀复用。
+- **KV Cache**：从模型内部计算的角度描述单次推理中的缓存。
+- **Prompt Cache**：从推理服务的角度描述多次请求间的前缀复用。
 
 Prompt Cache 命中时，可复用已计算的前缀状态（通常就是 KV Cache）。
 
@@ -334,43 +315,21 @@ Prompt Cache 命中时，可复用已计算的前缀状态（通常就是 KV Cac
 
 ### 本地开发环境
 
-**[Node.js 22+](https://nodejs.org/en)**：运行 JavaScript / TypeScript 工具，许多 Coding Agent、MCP Server 依赖它。
-
-**[Python 3+](https://www.python.org/)**：运行自动化脚本、数据处理与 Python 工具。
-
-**[PowerShell 7](https://github.com/PowerShell/PowerShell)**：Windows 原生 Shell，Agent 调用系统能力更直接。
-
-**[Windows Terminal](https://github.com/microsoft/terminal)**：统一承载 PowerShell、WSL 等会话，支持多标签和分屏。
-
-**[Git](https://git-scm.com/)**：Git Bash 提供类 Unix 命令行；Git 负责版本管理与代码协作。
-
-**[WSL](https://learn.microsoft.com/en-us/windows/wsl/) 可选**：在 Windows 中运行 Linux 用户空间，兼容 Bash 和 Linux 工具链，无需双系统。
+- **[Node.js 22+](https://nodejs.org/en)**：运行 JavaScript / TypeScript 工具，许多 Coding Agent、MCP Server 依赖它。
+- **[Python 3+](https://www.python.org/)**：运行自动化脚本、数据处理与 Python 工具。
+- **[PowerShell 7](https://github.com/PowerShell/PowerShell)**：Windows 原生 Shell，Agent 调用系统能力更直接。
+- **[Windows Terminal](https://github.com/microsoft/terminal)**：统一承载 PowerShell、WSL 等会话，支持多标签和分屏。
+- **[Git](https://git-scm.com/)**：Git Bash 提供类 Unix 命令行；Git 负责版本管理与代码协作。
+- **[WSL](https://learn.microsoft.com/en-us/windows/wsl/)（可选）**：在 Windows 中运行 Linux 用户空间，兼容 Bash 和 Linux 工具链，无需双系统。
 
 ### 主流 Agent
 
-#### [Claude Code](https://code.claude.com/docs/en/overview)：成熟生态
-
-推出较早，产品成熟度高，围绕 **Skills、Hooks、Subagent、MCP、Plugin** 等形成了完整的 Agent 能力与扩展生态。整体工具链和社区沉淀都比较成熟。
-
-#### [Codex](https://github.com/openai/codex)：一体化工作台
-
-从 CLI 延伸到 **Desktop 与 Cloud**，形成完整的一体化 Coding Agent 工作台；**Desktop 交互体验出色，Browser Use / Computer Use 实用，本地与云端任务衔接顺畅。**
-
-#### [OpenCode](https://github.com/anomalyco/opencode)：开源通用
-
-**完全开源、不绑定模型厂商**，可自由接入不同 Provider 和本地模型。整体配置自由度和可扩展性高，是通用型开源 Coding Agent 的代表。
-
-#### [Pi](https://github.com/earendil-works/pi)：极简底座
-
-刻意保持极简，默认核心只有 **read、write、edit、bash**，不预设复杂的 Agent 工作流；同时支持 **Extensions、Skills、Packages**，可在轻量底座上按需扩展。
-
-#### [OMP](https://github.com/Raudbjorn/omp)：全能增强
-
-基于 Pi 做了大量工程能力增强，内置 **LSP、Browser、Debugger、Subagent** 等能力，并提供 **Role 与模型路由**。相比 Pi 更强调高级能力开箱即用，同时保留较强的可配置性。
-
-#### [DSH](https://github.com/deepseek-ai/deepseek-harness)：可组合架构
-
-采用 **Everything is a Plugin** 的架构思路，Model、Tool、Skill、Agent Loop、Session、Sandbox、UI 等模块都可以独立替换和组合。采用 **本地 Host + Web** 的交互方式。
+- **[Claude Code](https://code.claude.com/docs/en/overview)：成熟生态**：推出较早，产品成熟度高，围绕 **Skills、Hooks、Subagent、MCP、Plugin** 等形成了完整的 Agent 能力与扩展生态。整体工具链和社区沉淀都比较成熟。
+- **[Codex](https://github.com/openai/codex)：一体化工作台**：从 CLI 延伸到 **Desktop 与 Cloud**，形成完整的一体化 Coding Agent 工作台；**Desktop 交互体验出色，Browser Use / Computer Use 实用，本地与云端任务衔接顺畅。**
+- **[OpenCode](https://github.com/anomalyco/opencode)：开源通用**：**完全开源、不绑定模型厂商**，可自由接入不同 Provider 和本地模型。整体配置自由度和可扩展性高，是通用型开源 Coding Agent 的代表。
+- **[Pi](https://github.com/earendil-works/pi)：极简底座**：刻意保持极简，默认核心只有 **read、write、edit、bash**，不预设复杂的 Agent 工作流；同时支持 **Extensions、Skills、Packages**，可在轻量底座上按需扩展。
+- **[OMP](https://github.com/Raudbjorn/omp)：全能增强**：基于 Pi 做了大量工程能力增强，内置 **LSP、Browser、Debugger、Subagent** 等能力，并提供 **Role 与模型路由**。相比 Pi 更强调高级能力开箱即用，同时保留较强的可配置性。
+- **[DSH](https://github.com/deepseek-ai/deepseek-harness)：可组合架构**：采用 **Everything is a Plugin** 的架构思路，Model、Tool、Skill、Agent Loop、Session、Sandbox、UI 等模块都可以独立替换和组合。采用 **本地 Host + Web** 的交互方式。
 
 ### CC Switch：配置切换与本地代理
 
@@ -384,11 +343,9 @@ Prompt Cache 命中时，可复用已计算的前缀状态（通常就是 KV Cac
 
 Provider · Model · API Key · Base URL
 
-**配置管理**：集中管理多套 Provider、模型、API Key、Base URL 等配置，需要时一键切换。
-
-**MCP 与 Skills**：顺带统一维护 MCP Server 和 Skills，让不同 Agent 保持一致。
-
-**本地代理**：支持格式转换、热切换、故障切换和 Provider 健康监测。
+- **配置管理**：集中管理多套 Provider、模型、API Key、Base URL 等配置，需要时一键切换。
+- **MCP 与 Skills**：顺带统一维护 MCP Server 和 Skills，让不同 Agent 保持一致。
+- **本地代理**：支持格式转换、热切换、故障切换和 Provider 健康监测。
 
 CC Switch 既能切换配置，也能在本地转发请求。
 
@@ -396,91 +353,38 @@ CC Switch 既能切换配置，也能在本地转发请求。
 
 不同模型和 Provider 常见的接口格式包括：
 
-#### OpenAI Chat Completions
-
-`POST /v1/chat/completions`
-
-经典的 `messages` 对话格式，每轮请求携带全量消息历史。
-
-#### Anthropic Messages
-
-`POST /v1/messages`
-
-Claude Code 使用的消息式接口，每轮请求携带全量消息历史，工具调用采用 Anthropic 的内容块格式。
-
-#### OpenAI Responses
-
-`POST /v1/responses`
-
-Codex 使用的接口格式，通过 `previous_response_id` 关联上一轮响应，支持根据需要只传递新的输入和工具结果，客户端无需每次重复发送完整历史。
+- **OpenAI Chat Completions**：`POST /v1/chat/completions`，经典的 `messages` 对话格式，每轮请求携带全量消息历史。
+- **Anthropic Messages**：`POST /v1/messages`，Claude Code 使用的消息式接口，每轮请求携带全量消息历史，工具调用采用 Anthropic 的内容块格式。
+- **OpenAI Responses**：`POST /v1/responses`，Codex 使用的接口格式，通过 `previous_response_id` 关联上一轮响应，支持根据需要只传递新的输入和工具结果，客户端无需每次重复发送完整历史。
 
 ### 模型网关
 
-#### [9Router](https://github.com/decolua/9router)
-
-**多 Provider 接入** 通过 OAuth、API Key 等方式接入多个 Provider，OAuth Token 自动刷新。
-
-**模型组合与多模态** 按场景组合文本、图像、音频等模型，并设置多级 Fallback。
-
-**请求适配** 提供统一入口，转换 OpenAI、Claude、Gemini 等请求格式。
-
-**上下文优化** RTK、Caveman 等。
-
-#### 其他模型网关
-
-#### [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)
-
-CLI 代理
-
-把多个 CLI 账号代理成兼容多种协议的本地 API。
-
-#### [New API](https://github.com/QuantumNous/new-api)
-
-模型聚合
-
-面向平台化的模型聚合、渠道管理与用量计费。
-
-#### [Sub2API](https://github.com/Wei-Shaw/sub2api)
-
-额度分发
-
-偏订阅额度分发、账号池管理与并发控制。
+- **[9Router](https://github.com/decolua/9router)**：提供多 Provider 接入、模型组合与多模态、请求适配和上下文优化能力。
+  - **多 Provider 接入**：通过 OAuth、API Key 等方式接入多个 Provider，OAuth Token 自动刷新。
+  - **模型组合与多模态**：按场景组合文本、图像、音频等模型，并设置多级 Fallback。
+  - **请求适配**：提供统一入口，转换 OpenAI、Claude、Gemini 等请求格式。
+  - **上下文优化**：支持 RTK、Caveman 等。
+- **[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)**：把多个 CLI 账号代理成兼容多种协议的本地 API。
+- **[New API](https://github.com/QuantumNous/new-api)**：面向平台化的模型聚合、渠道管理与用量计费。
+- **[Sub2API](https://github.com/Wei-Shaw/sub2api)**：偏订阅额度分发、账号池管理与并发控制。
 
 ### WebSearch 和 WebFetch
 
-#### [Tavily](https://www.tavily.com/)
+- **[Tavily](https://www.tavily.com/)**：面向 AI Agent 的 Web 访问层，覆盖搜索、内容提取、站点 Map/Crawl 与 Research。
+- **[Firecrawl](https://www.firecrawl.dev/)**：面向 AI 的 Web 数据 API，把搜索结果或网页转成 Markdown、JSON 等内容，并支持整站 Crawl。
+- **其他产品**：[Exa](https://exa.ai/)、[Brave](https://api.search.brave.com/app/documentation/web-search/get-started)、[TinyFish](https://www.tinyfish.ai/)。
 
-面向 AI Agent 的 Web 访问层，覆盖搜索、内容提取、站点 Map/Crawl 与 Research。
-
-#### [Firecrawl](https://www.firecrawl.dev/)
-
-面向 AI 的 Web 数据 API，把搜索结果或网页转成 Markdown、JSON 等内容，并支持整站 Crawl。
-
-其他产品
-
-[Exa](https://exa.ai/)、[Brave](https://api.search.brave.com/app/documentation/web-search/get-started)、[TinyFish](https://www.tinyfish.ai/)
-
-接入方式 **MCP** / **Skill + CLI**
+常见接入方式包括 **MCP** 和 **Skill + CLI**。
 
 ### 浏览器自动化
 
 先区分调试、测试和长期任务执行，再选择对应的浏览器工具。
 
-**[Chrome DevTools MCP / CLI](https://github.com/ChromeDevTools/chrome-devtools-mcp)**：偏开发调试，直接使用 Console、Network、Performance 和页面检查能力。
-
-**[Playwright MCP / CLI](https://github.com/microsoft/playwright-mcp)**：偏浏览器自动化，执行页面访问、点击、输入和 UI 测试。
-
-**[Browser Harness](https://github.com/browser-use/browser-harness)**：可扩展的浏览器执行层，适合个人 Agent、内部工具和长尾网站。
-
-**需要可长期演进的浏览器能力**
-
-**[agent-browser](https://github.com/vercel-labs/agent-browser)**：标准化浏览器 CLI，适合 AI Coding、前端验收和 E2E。
-
-**主要执行 AI Coding 中的网页操作**
-
-**[Browser Use](https://github.com/browser-use/browser-use)**：任务级 Browser Agent 框架，适合构建浏览器 Agent 产品与任务自动化。
-
-**要构建完整的 Browser Agent 产品**
+- **[Chrome DevTools MCP / CLI](https://github.com/ChromeDevTools/chrome-devtools-mcp)**：偏开发调试，直接使用 Console、Network、Performance 和页面检查能力。
+- **[Playwright MCP / CLI](https://github.com/microsoft/playwright-mcp)**：偏浏览器自动化，执行页面访问、点击、输入和 UI 测试。
+- **[Browser Harness](https://github.com/browser-use/browser-harness)**：可扩展的浏览器执行层，适合个人 Agent、内部工具和长尾网站。
+- **[agent-browser](https://github.com/vercel-labs/agent-browser)**：标准化浏览器 CLI，适合 AI Coding、前端验收和 E2E。
+- **[Browser Use](https://github.com/browser-use/browser-use)**：任务级 Browser Agent 框架，适合构建浏览器 Agent 产品与任务自动化。
 
 ### Skill 的安装和管理
 
@@ -590,17 +494,17 @@ Claude Code
 
 ### 能力扩展
 
-#### Skills 管理
+**上下文规则**：
 
-- **按需安装** 需要什么装什么，不做全量预装。
-- **分层管理** 通用能力放全局，项目专属能力放项目内。
-- **持续治理** 定期清理重复、过时、低使用的 Skill。
+- **按需安装**：需要什么装什么，不做全量预装。
+- **分层管理**：通用能力放全局，项目专属能力放项目内。
+- **持续治理**：定期清理重复、过时、低使用的 Skill。
 
-#### MCP 管理
+**MCP 管理**：
 
-- **分层配置** 区分项目级和全局级，**优先项目级**，避免污染所有项目。
-- **尽量少用** 能用 Agent 原生能力、CLI、API 解决的，就不要额外挂 MCP。
-- **控制数量** 减少重复和低价值 MCP，降低依赖、权限和稳定性成本。
+- **分层配置**：区分项目级和全局级，**优先项目级**，避免污染所有项目。
+- **尽量少用**：能用 Agent 原生能力、CLI、API 解决的，就不要额外挂 MCP。
+- **控制数量**：减少重复和低价值 MCP，降低依赖、权限和稳定性成本。
 
 #### Hooks
 
@@ -616,39 +520,20 @@ Claude Code
 
 ### 如何写一个 Skill
 
-#### 选择真实任务
+可以按以下步骤把一次真实任务沉淀成可复用的 Skill：
 
-从重复工作中选择一个需求，先让 Agent 完成任务，得到满意的结果。
-
-#### 整理执行经验
-
-记录可复用的步骤、所需资料和工具，以及执行中需要反复提醒的要求。
-
-#### 编写 Skill
-
-写清操作步骤，将固定操作整理成脚本，附上模板或示例，并明确结果检查和错误修复方法。
-
-#### 测试效果
-
-使用不同任务和模型测试，检查结果是否达标，找出容易失败的环节。
-
-#### 持续改进
-
-根据实际使用和分享后的反馈修改，优先解决共性问题，避免堆叠特殊需求。
+- **选择真实任务**：从重复工作中选择一个需求，先让 Agent 完成任务，得到满意的结果。
+- **整理执行经验**：记录可复用的步骤、所需资料和工具，以及执行中需要反复提醒的要求。
+- **编写 Skill**：写清操作步骤，将固定操作整理成脚本，附上模板或示例，并明确结果检查和错误修复方法。
+- **测试效果**：使用不同任务和模型测试，检查结果是否达标，找出容易失败的环节。
+- **持续改进**：根据实际使用和分享后的反馈修改，优先解决共性问题，避免堆叠特殊需求。
 
 ### Superpowers 与 mattpocock
 
-#### [Superpowers](https://github.com/obra/superpowers)
-
-通过 Sub-Agent、TDD、Review 和可选的 Git Worktree，提高交付质量。
-
-brainstorming：头脑风暴 **→** plan：编写计划 **→** execute：执行 **→** review：审查 **→** finish：收尾
-
-#### [mattpocock/skills](https://github.com/mattpocock/skills)
-
-用一组 Skills 把需求澄清、Spec、任务拆分、实现和审查串起来。
-
-grill-with-docs：需求澄清 **→** to-spec：生成 Spec **→** to-tickets：拆分任务 **→** implement：实现 **→** code-review：代码审查
+- **[Superpowers](https://github.com/obra/superpowers)**：通过 Sub-Agent、TDD、Review 和可选的 Git Worktree，提高交付质量。
+  - 工作流：brainstorming（头脑风暴） → plan（编写计划） → execute（执行） → review（审查） → finish（收尾）。
+- **[mattpocock/skills](https://github.com/mattpocock/skills)**：用一组 Skills 把需求澄清、Spec、任务拆分、实现和审查串起来。
+  - 工作流：grill-with-docs（需求澄清） → to-spec（生成 Spec） → to-tickets（拆分任务） → implement（实现） → code-review（代码审查）。
 
 ### SDD
 
@@ -668,63 +553,34 @@ Spec：明确需求 **→** Plan：制定方案 **→** Tasks：拆分任务 **�
 
 ### AI 工程化
 
-**Prompt Engineering**：关注“怎么写好一条指令”。
-
-**Context Engineering**：关注“怎么给 AI 提供足够且精准的上下文”。
-
-**Harness Engineering**：关注“怎么构建一个系统性的框架来约束和驱动 AI”。
-
-**Loop Engineering**：关注“怎么让 Agent 持续执行、验证并在失败后自我修正”。
-
-**Graph Engineering**：关注“怎么把 Agent、工具和流程编排成可分支、可并行的协作网络”。
+- **Prompt Engineering**：关注“怎么写好一条指令”。
+- **Context Engineering**：关注“怎么给 AI 提供足够且精准的上下文”。
+- **Harness Engineering**：关注“怎么构建一个系统性的框架来约束和驱动 AI”。
+- **Loop Engineering**：关注“怎么让 Agent 持续执行、验证并在失败后自我修正”。
+- **Graph Engineering**：关注“怎么把 Agent、工具和流程编排成可分支、可并行的协作网络”。
 
 ## 五、思考
 
 ### Agent 元能力：善于借助 Agent 解决问题
 
-从善用搜索引擎、善用网页 Chat，到善用 Agent，解决问题的方式正在从“获取答案”走向“直接完成任务”。
+从善用搜索引擎、善用网页 Chat，到善用 Agent，解决问题的方式正在从“获取答案”走向“直接完成任务”。具体来说：
 
-#### 先装一个能用的 Agent
+- **先装一个能用的 Agent**：先有一个真正能干活的 Agent，后面的配置、扩展和使用才有基础。
+- **用 Agent 武装 Agent**：环境配置、工具安装、能力接入，都可以让 Agent 参与解决；逐步补齐浏览器、终端、CLI、MCP、Skill 等“手、眼、脚”。
+- **善用 Agent 解决陌生问题**：遇到不会的、没做过的、复杂的问题，也敢于先让 Agent 尝试，善于借助它探索方法、解决阻塞，不断扩展自己能解决的问题边界。
+- **用 Agent 构建自己的工具**：把重复需求和个人工作方式做成 Skill、脚本、小工具、浏览器插件、客户端或自动化流程，让 Agent 不只是现成工具，也能帮你创造新的工具。
 
-先有一个真正能干活的 Agent，后面的配置、扩展和使用才有基础。
-
-#### 用 Agent 武装 Agent
-
-环境配置、工具安装、能力接入，都可以让 Agent 参与解决；逐步补齐浏览器、终端、CLI、MCP、Skill 等“手、眼、脚”。
-
-#### 善用 Agent 解决陌生问题
-
-遇到不会的、没做过的、复杂的问题，也敢于先让 Agent 尝试，善于借助它探索方法、解决阻塞，不断扩展自己能解决的问题边界。
-
-#### 用 Agent 构建自己的工具
-
-把重复需求和个人工作方式做成 Skill、脚本、小工具、浏览器插件、客户端或自动化流程，让 Agent 不只是现成工具，也能帮你创造新的工具。
-
-核心变化 **从“会使用 Agent”，走向“善于借助 Agent 持续扩展自己的问题解决能力”。**
+核心变化是：**从“会使用 Agent”，走向“善于借助 Agent 持续扩展自己的问题解决能力”。**
 
 ### AI 编程中的思维方式
 
-用成熟的思维框架，让问题更清晰、验证更可靠。
+用成熟的思维框架，让问题更清晰、验证更可靠：
 
-#### 第一性原理
-
-先回到问题本身。从目标、事实和约束出发，确认问题是否真实存在、能否复现，再判断根因和解决方案，避免 Agent 一上来就执行，却在错误的问题上越走越远。
-
-#### 对抗式审查
-
-主动引入一个反方，让另一个 Agent 从独立视角寻找漏洞、反例、遗漏和失败场景。不是让多个 Agent 相互附和，而是通过交叉审查提高结论可信度。
-
-#### 消融实验
-
-拿掉一个变量，看结果是否变化。某条 Rule、某个 Skill、Tool 或 Prompt 到底有没有价值，不靠感觉判断；保持其他条件不变，删除后重新运行，用结果验证它是否真的有效。
-
-#### 奥卡姆剃刀
-
-优先选择最简单、能工作的方案。能用简单方案解决，就不要过早引入复杂架构；先完成最小可行闭环，再根据真实需求逐步演进，避免过度设计。
-
-#### 不确定性显式化
-
-让不确定性显式出现，要求 Agent 主动说明：哪些结论缺少证据、哪些场景尚未验证、哪些判断只是推测，把隐藏的不确定性变成下一步可以验证的问题。
+- **第一性原理**：先回到问题本身。从目标、事实和约束出发，确认问题是否真实存在、能否复现，再判断根因和解决方案，避免 Agent 一上来就执行，却在错误的问题上越走越远。
+- **对抗式审查**：主动引入一个反方，让另一个 Agent 从独立视角寻找漏洞、反例、遗漏和失败场景。不是让多个 Agent 相互附和，而是通过交叉审查提高结论可信度。
+- **消融实验**：拿掉一个变量，看结果是否变化。某条 Rule、某个 Skill、Tool 或 Prompt 到底有没有价值，不靠感觉判断；保持其他条件不变，删除后重新运行，用结果验证它是否真的有效。
+- **奥卡姆剃刀**：优先选择最简单、能工作的方案。能用简单方案解决，就不要过早引入复杂架构；先完成最小可行闭环，再根据真实需求逐步演进，避免过度设计。
+- **不确定性显式化**：让不确定性显式出现，要求 Agent 主动说明哪些结论缺少证据、哪些场景尚未验证、哪些判断只是推测，把隐藏的不确定性变成下一步可以验证的问题。
 
 好的思维框架，可以用很少的 Prompt，激活一整套分析、质疑与验证机制。
 
@@ -734,27 +590,20 @@ Coding Agent 正在改变软件开发中人的工作重心：
 
 亲自实现代码 **→** 决定做什么、设计架构、定义 Spec、组织执行和验证结果
 
-**基本工作流**
+**基本工作流**：
 
-**Planning**：理解问题、设计架构、明确 Spec 与执行计划。
+- **Planning**：理解问题、设计架构、明确 Spec 与执行计划。
+- **Execution**：Agent 构建、测试、验证和修复。
+- **Deployment & Monitoring**：部署、监控、发现问题并持续迭代。
+- **Feedback**：根据结果反馈调整计划与执行，进入下一轮闭环。
 
-**Execution**：Agent 构建、测试、验证和修复。
+**核心能力**：驾驭 Coding Agent，放大个人与团队的生产力。
 
-**Deployment & Monitoring**：部署、监控、发现问题并持续迭代。
-
-**Feedback**：根据结果反馈调整计划与执行，进入下一轮闭环。
-
-**核心能力** 驾驭 Coding Agent，放大个人与团队的生产力
-
-**工作流管理**：决定如何拆解、执行与迭代任务。
-
-**Agent 自主性**：控制 Agent 的自主程度、Context 与多 Agent 协作。
-
-**结果审查**：通过测试、Evals、Code Review 等验证输出。
-
-**Agent 与环境定制**：通过 Skills、MCP、Hooks、AGENTS.md 等增强能力。
-
-**Agent 基础原理**：理解 LLM、Harness、Context、Tools、Subagents 等机制。
+- **工作流管理**：决定如何拆解、执行与迭代任务。
+- **Agent 自主性**：控制 Agent 的自主程度、Context 与多 Agent 协作。
+- **结果审查**：通过测试、Evals、Code Review 等验证输出。
+- **Agent 与环境定制**：通过 Skills、MCP、Hooks、AGENTS.md 等增强能力。
+- **Agent 基础原理**：理解 LLM、Harness、Context、Tools、Subagents 等机制。
 
 高效使用 Coding Agent，不是单纯追求更高自主性，而是建立“**规划** → **执行** → **验证** → **反馈**”的工程闭环。
 
@@ -762,32 +611,22 @@ Coding Agent 正在改变软件开发中人的工作重心：
 
 只有能让软件生产率、可靠性和简洁性提升一个数量级的方法，才称得上“银弹”。
 
-#### 软件工程的本质困难
+**软件工程的本质困难**包括：
 
-它们不是“写代码慢”，也不会被 AI 自动消除
-
-**目标与概念**：要解决什么、为什么解决，以及什么才算成功。
-
-**复杂性**：业务规则、状态、依赖和边界相互交织。
-
-**约束与一致性**：系统必须适配既有架构、规范、法规和组织约束。
-
-**变化与验证**：需求持续变化，正确性还要靠测试、运行反馈和长期维护确认。
+- **目标与概念**：要解决什么、为什么解决，以及什么才算成功。
+- **复杂性**：业务规则、状态、依赖和边界相互交织。
+- **约束与一致性**：系统必须适配既有架构、规范、法规和组织约束。
+- **变化与验证**：需求持续变化，正确性还要靠测试、运行反馈和长期维护确认。
 
 #### AI 能解决 / 缓解的部分
 
-不是消灭复杂性，而是让 AI 直接承接复杂实现
+AI 不能消灭复杂性，但可以直接承接复杂实现：
 
-**自主执行**：从任务描述出发，规划、编码、运行、调试并交付。
+- **自主执行**：从任务描述出发，规划、编码、运行、调试并交付。
+- **复杂度承接**：理解并修改大范围代码，把实现复杂性转交给 Code Agent。
+- **流程压缩**：串联规划、开发、测试和文档，减少传统协作中的等待。
+- **并行探索**：同时尝试多种方案，持续迭代，放大个人和小团队的执行规模。
 
-**复杂度承接**：理解并修改大范围代码，把实现复杂性转交给 Code Agent。
-
-**流程压缩**：串联规划、开发、测试和文档，减少传统协作中的等待。
-
-**并行探索**：同时尝试多种方案，持续迭代，放大个人和小团队的执行规模。
-
-AI 不能替代 **目标与价值、架构取舍、组织共识、验收责任**
-
-AI 主要解决 **复杂实现、重复执行、调试迭代、并行探索**
+AI 不能替代 **目标与价值、架构取舍、组织共识、验收责任**，但主要解决 **复杂实现、重复执行、调试迭代、并行探索**。
 
 AI 放大了处理软件复杂性的能力，但没有让复杂性本身消失——所以它仍然不是软件工程的银弹。

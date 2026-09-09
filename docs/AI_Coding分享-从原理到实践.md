@@ -14,6 +14,8 @@ AI Coding 正逐步改变开发者与工具的协作方式。理解模型如何�
 
 ## 一、AI Coding 的发展与趋势
 
+理解 AI Coding 的变化，可以先看开发者把哪些工作交给了 AI：从补全几行代码，到修改多个文件，再到执行完整任务。随着执行范围扩大，开发者需要投入更多精力来明确目标和检查结果。
+
 ### AI Coding 的发展
 
 | 阶段 | 时间 | 代表工具 | 协作方式 |
@@ -30,44 +32,29 @@ CLI、IDE、Workbench 是三种产品形态，不代表能力等级。
 
 Agent 从本地走向云端，在独立环境中执行长任务；开发者从实时协作转向目标管理。
 
-**Codex Cloud**：云端独立环境，支持异步执行与长任务。
+- **Codex Cloud**：云端独立环境，支持异步执行与长任务。
 
-**Cursor Cloud Agents**：把本地编辑转向云端任务执行。
+- **Cursor Cloud Agents**：把本地编辑转向云端任务执行。
 
-**GitHub Copilot cloud agent**：由 Issue 驱动执行，并回到 PR 协作。
+- **GitHub Copilot cloud agent**：由 Issue 驱动执行，并回到 PR 协作。
 
 #### Multi-Agent
 
 多个不同品牌或不同角色的 Agent 并行执行、分工协作、统一编排。
 
-**Grok Bot**：持久化 Bot 组成团队，支持云端并行与任务交接。
+- **Grok Bot**：持久化 Bot 组成团队，支持云端并行与任务交接。
 
-**Multica**：接入不同品牌 Agent，统一分派与运行监控。
+- **Multica**：接入不同品牌 Agent，统一分派与运行监控。
 
-**Raft**：连接 Human 与 Agent，支持并行工作与人工 Review。
+- **Raft**：连接 Human 与 Agent，支持并行工作与人工 Review。
 
-**趋势**：Agent 正变得更自主、运行时间更长，并逐步走向云端异步执行与多 Agent 协作。
+- **趋势**：Agent 正变得更自主、运行时间更长，并逐步走向云端异步执行与多 Agent 协作。
 
 ### 模型发展趋势
 
-模型能力的迭代与 Agent 产品的发展相互推动，下面按时间整理主要节点。
+模型能力的迭代与 Agent 产品的发展相互推动。时间线可以直观看出模型版本、Agent 产品和开源模型的演进节奏：
 
-| 时间 | 模型与产品节点 |
-| --- | --- |
-| 2024.05 | GPT-4o |
-| 2024.06 | Claude 3.5 Sonnet |
-| 2025.01 | DeepSeek R1 |
-| 2025.02 | Claude 3.7 Sonnet、Claude Code |
-| 2025.07 | GLM-4.5、Kimi K2 |
-| 2025.08 | GPT-5 |
-| 2025.09 | Claude Sonnet 4.5 |
-| 2026.01 | Kimi K2.5 |
-| 2026.02 | Claude Sonnet 4.6、Codex App、GLM-5 |
-| 2026.04 | GPT-5.5、GLM-5.1 |
-| 2026.06 | Claude Fable 5、GLM-5.2 |
-| 2026.07 | GPT-5.6、Kimi K3 |
-| 2026.08 | GLM-5.3 |
-| 2026.09 | GPT-6 Astra |
+![模型与 Agent 产品发展时间线](../public/images/image-1.png)
 
 模型能力与 Agent 产品同步演进。理解 AI Coding，需要同时关注模型与运行框架的发展。
 
@@ -81,42 +68,25 @@ Agent 从本地走向云端，在独立环境中执行长任务；开发者从�
 
 ### 模型趋势解读
 
-- **Agent 化：** 从单轮回答走向长时间、多步骤任务执行，能够规划、调用工具、验证并持续完成。
+这些变化可以从几个方向理解：
 
-代表：GPT-6 Astra、Claude Fable 5.1
-
-- **能力与效率并行：** 旗舰模型持续冲击能力上限，轻量模型则追求更低延迟、更低成本和更高并发。
-
-效率路线：GPT-5.6 Luna、DeepSeek-V4-Flash
-
-- **环境交互原生化：** 模型开始针对浏览器、桌面和专业软件环境专项训练，从“理解信息、调用 API”走向“理解界面、直接操作并完成任务”。
-
-代表：GPT-6 Astra 的 Computer Use
-
-- **模型与 Harness 协同演进：** 模型提升能力上限，Harness 从“弥补模型缺陷”逐步转向“组织和放大模型能力”。
-
-模型原生能力增强后，Prompt、Skill 和规则会逐步去除历史补丁
-
-- **递归自我改进（RSI）：** 前沿模型已经开始参与下一代模型的研发与改进，推动模型研发与迭代加速。
+- **Agent 化**：从单轮回答走向长时间、多步骤任务执行，能够规划、调用工具、验证并持续完成。GPT-6 Astra、Claude Fable 5.1 是本文关注的代表。
+- **能力与效率并行**：旗舰模型追求更高能力上限，轻量模型关注延迟、成本和并发。GPT-5.6 Luna、DeepSeek V4 Flash 对应后一个方向。
+- **环境交互原生化**：模型开始针对浏览器、桌面和专业软件环境训练，逐步具备理解界面、操作和验证结果的能力。
+- **模型与 Harness 协同演进**：模型提升能力上限，Harness 组织执行过程。随着模型能力变化，已有 Prompt、Skill 和规则中的补丁也需要重新评估。
+- **模型参与研发**：模型可以参与代码、实验和分析工作。讨论递归自我改进（RSI）时，还需要区分“辅助研发”与“自主完成研发闭环”这两种不同程度的能力。
 
 ## 二、Agent 基本原理
 
 ### Agent 的基本概念
 
-Agent = Model + Harness
+可以用一个简化关系理解 Agent：**Agent = Model + Harness**。
 
-Coding Agent
+Model 根据当前上下文进行推理，决定回复什么或调用什么工具。Harness 是模型之外的运行框架，负责组织上下文、提供工具接口、执行操作、管理状态，以及实施约束、验证和纠正。
 
-面向 SWE（Software Engineering）场景的 Agent，通常具备文件读写、代码搜索、Shell、测试、Git 等工具。
+Coding Agent 面向 SWE（Software Engineering，软件工程）场景，通常具备文件读写、代码搜索、Shell、测试和 Git 等工具。它通过这些工具接触项目，在执行后获得反馈，再决定下一步。
 
-#### Harness
-
-模型之外的运行框架
-
-上下文管理 + 工具接口
-+ 约束 + 验证 + 纠正
-
-通用 Agent 可进一步扩展 Web、Browser、Apps 等能力，而 Coding 正逐渐成为其重要的通用执行能力。
+同样的机制也可以用于网页、浏览器和其他应用。只要具备合适的工具和执行环境，Agent 就可以把代码与自动化作为完成不同任务的手段。
 
 ### Agent Loop
 
@@ -133,98 +103,150 @@ Coding Agent
 
 模型负责决定调用什么工具，工具的实际执行由 Harness 完成，执行结果成为下一轮推理的输入。
 
-### Agent Loop：第一次请求
+#### 第一次请求：模型提出工具调用
 
-#### 发给模型
+发给模型：
 
-```text
+```json
 {
-  "model": "glm-5.2" ,
+  "model": "glm-5.2",
   "messages": [
-    { "role": "user" , "content": "创建 hello.py，打印 Hello, World!" }
+    {
+      "role": "user",
+      "content": "创建 hello.py，打印 Hello, World!"
+    }
   ],
-  "tools": [{
-    "type": "function",
-    "function": {
-      "name": "Edit" ,
-      "parameters": {
-        "type": "object",
-        "required": ["path", "content"]
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "Edit",
+        "parameters": {
+          "type": "object",
+          "required": [
+            "path",
+            "content"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          }
+        }
       }
     }
-  }]
+  ]
 }
 ```
 
-#### 模型返回
+模型返回：
 
-```text
+```json
 {
-  "model": "glm-5.2" ,
-  "choices": [{
-    "finish_reason": "tool_calls" ,
-    "message": {
+  "model": "glm-5.2",
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "call_abc123",
+            "type": "function",
+            "function": {
+              "name": "Edit",
+              "arguments": "{\"path\":\"hello.py\",\"content\":\"print('Hello, World!')\"}"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+模型返回 `tool_calls`，要求 Harness 执行 `Edit`。这里的 `arguments` 是 JSON 字符串，Harness 解析参数后才会真正写入文件。示例中的 `Edit` 是自定义工具名称。
+
+#### 第二次请求：模型读取执行结果
+
+再次发给模型：
+
+```json
+{
+  "model": "glm-5.2",
+  "messages": [
+    {
+      "role": "user",
+      "content": "创建 hello.py，打印 Hello, World!"
+    },
+    {
       "role": "assistant",
       "content": null,
-      "tool_calls": [{
-        "id": "call_abc123",
-        "type": "function",
-        "function": {
-          "name": "Edit" ,
-          "arguments": "{\"path\":\"hello.py\",\"content\":\"print('Hello, World!')\"}"
+      "tool_calls": [
+        {
+          "id": "call_abc123",
+          "type": "function",
+          "function": {
+            "name": "Edit",
+            "arguments": "{\"path\":\"hello.py\",\"content\":\"print('Hello, World!')\"}"
+          }
         }
-      }]
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_abc123",
+      "content": "{\"success\":true,\"path\":\"hello.py\"}"
     }
-  }]
-}
-```
-
-**第一次请求** 模型没有直接回答，而是返回 `tool_calls`，要求 Harness 执行 `Edit`。
-
-### Agent Loop：第二次请求
-
-#### 再次发给模型
-
-```text
-{
-  "model": "glm-5.2" ,
-  "messages": [
-    { "role": "user", "content": "创建 hello.py，打印 Hello, World!" },
-    { "role": "assistant", "content": null,
-      "tool_calls": [{
-        "id": "call_abc123",
-        "type": "function",
-        "function": { "name": "Edit" ,
-          "arguments": "{\"path\":\"hello.py\",\"content\":\"print('Hello, World!')\"}"
-        }}
-      ]},
-    { "role": "tool" , "tool_call_id": "call_abc123",
-      "content": "{\"success\":true,\"path\":\"hello.py\"}" }
   ],
-  "tools": [{
-    "type": "function",
-    "function": { "name": "Edit" ,
-      "parameters": { "type": "object", "required": ["path", "content"] }
-  }}]
-}
-```
-
-#### 模型最终返回
-
-```text
-{
-  "model": "glm-5.2" ,
-  "choices": [{
-    "finish_reason": "stop" ,
-    "message": {
-      "role": "assistant",
-      "content": "已创建 hello.py，文件内容为：\nprint('Hello, World!')"
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "Edit",
+        "parameters": {
+          "type": "object",
+          "required": [
+            "path",
+            "content"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
-  }]
+  ]
 }
 ```
 
-**第二次请求** Harness 把工具结果作为 `role: tool` 追加到消息列表，模型读取结果后返回最终回答。
+模型最终返回：
+
+```json
+{
+  "model": "glm-5.2",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "已创建 hello.py，文件内容为：\nprint('Hello, World!')"
+      }
+    }
+  ]
+}
+```
+
+Harness 把工具结果作为 `role: tool` 追加到消息列表，使用 `tool_call_id` 对应前面的调用。模型读取结果后返回最终回答；如果工具失败，也可以把错误信息传回模型，让它决定如何修正。
 
 ### Agent 核心构成
 
@@ -242,29 +264,26 @@ Loop 读取上下文、调用工具、在环境中执行，并将结果与进度
 
 ### MCP
 
-**MCP**：一种开放协议，让外部能力以工具的形式被 Agent 发现和调用。
+MCP（Model Context Protocol）是一种连接 AI 应用与外部能力的开放协议。这里主要关注工具调用：Agent 可以通过 MCP 发现服务提供的工具，并提交参数获得结果。协议也支持资源和提示模板，具体由服务端提供、客户端接入。参见 [MCP 服务端概念](https://modelcontextprotocol.io/docs/learn/server-concepts)。
 
-**本地 MCP**：运行在本机，通过本地进程与 Agent 通信。
+按部署方式，可以区分为：
 
-**远程 MCP**：运行在服务器，通过网络与 Agent 通信。
+- **本地 MCP**：运行在本机，通常通过本地进程与 Agent 通信。
+- **远程 MCP**：运行在服务器，通过网络与 Agent 通信。
 
-Agent 的工具主要有两种来源：Agent 直接调用内置的搜索、文件、终端和代码工具；也可以通过 MCP 连接外部网站、数据库、业务系统和云服务。MCP 提供连接方式，具体能力由接入的服务决定。
+Agent 可以直接调用内置的搜索、文件、终端和代码工具，也可以通过 MCP 连接网站、数据库、业务系统和云服务。MCP 负责连接，任务如何推进仍由 Agent 的运行流程决定。
 
 ### Skills
 
 Skill 把一类任务的方法封装成 Agent 可复用的能力单元。
 
-**五个特征**
+它的价值主要体现在以下方面：
 
-**可复用与可分发** 一份 Skill 可以安装、共享，并跨任务复用。
-
-**渐进式披露** 先发现，后加载，按需读取。
-
-**模块化与可组合** 小 Skill 可以组合成更复杂的能力。
-
-**经验可执行化** 把 SOP 和工具用法沉淀成方法。
-
-**可迭代与可评测** 可以独立升级和验证，无需重新训练模型。
+- **可复用与可分发**：一份 Skill 可以安装、共享，并跨任务复用。
+- **渐进式披露**：先发现，后加载，按需读取。
+- **模块化与可组合**：小 Skill 可以组合成更复杂的能力。
+- **经验可执行化**：把标准操作流程（SOP）和工具用法沉淀成方法。
+- **可迭代与可评测**：可以独立升级和验证，无需重新训练模型。
 
 Agent 使用 Skill 通常经历四个步骤：
 
@@ -277,19 +296,17 @@ Agent 使用 Skill 通常经历四个步骤：
 
 ### Context
 
-上下文组成
+Context 是模型本轮实际可使用的输入，可从以下几部分理解：
 
-**Instructions**：系统指令 / 开发者指令 / 已加载的 Skill 指令
+- **Instructions**：系统指令、开发者指令，以及已加载的 Skill 指令。
+- **Messages**：用户输入、模型回复、工具调用和工具结果。
+- **Tools**：当前可调用的工具描述与参数 Schema，包括 MCP 提供的工具。
 
-**Messages**：用户输入、模型回复与 tool_call，以及 Tool Result。
-
-**Tools**：当前允许模型调用的 Tools，以及 MCP 提供的 Schema
+这是对内容的分类，各种 API 的字段组织方式可能不同。
 
 文件、代码和终端输出需要先由 Tool 读取、检索或执行，结果才会进入这次请求。
 
-上下文压缩
-
-Context Window：一次请求可容纳的 Token 上限。
+Context Window 是一次请求可容纳的 Token 上限。Token 是模型处理文本等输入的计量单位，不能简单等同于字数。随着会话变长，Harness 需要选择、清理或总结内容，让后续请求保留任务所需的信息。
 
 压缩通常包括以下操作：
 
@@ -332,19 +349,21 @@ Prompt Cache 命中时，可复用已计算的前缀状态（通常就是 KV Cac
 
 ## 三、AI Coding 工具链
 
+工具链可以按使用顺序来组织：准备开发环境，安装 Agent，接入模型，再按任务需要扩展网页、浏览器和会话管理能力。先让一个真实任务运行起来，再逐步补充工具，更容易判断每项配置是否有用。
+
 ### 本地开发环境
 
-**[Node.js 22+](https://nodejs.org/en)**：运行 JavaScript / TypeScript 工具，许多 Coding Agent、MCP Server 依赖它。
+- **[Node.js 22+](https://nodejs.org/en)**：运行 JavaScript / TypeScript 工具，许多 Coding Agent、MCP Server 依赖它。
 
-**[Python 3+](https://www.python.org/)**：运行自动化脚本、数据处理与 Python 工具。
+- **[Python 3+](https://www.python.org/)**：运行自动化脚本、数据处理与 Python 工具。
 
-**[PowerShell 7](https://github.com/PowerShell/PowerShell)**：Windows 原生 Shell，Agent 调用系统能力更直接。
+- **[PowerShell 7](https://github.com/PowerShell/PowerShell)**：Windows 原生 Shell，Agent 调用系统能力更直接。
 
-**[Windows Terminal](https://github.com/microsoft/terminal)**：统一承载 PowerShell、WSL 等会话，支持多标签和分屏。
+- **[Windows Terminal](https://github.com/microsoft/terminal)**：统一承载 PowerShell、WSL 等会话，支持多标签和分屏。
 
-**[Git](https://git-scm.com/)**：Git Bash 提供类 Unix 命令行；Git 负责版本管理与代码协作。
+- **[Git](https://git-scm.com/)**：Git Bash 提供类 Unix 命令行；Git 负责版本管理与代码协作。
 
-**[WSL](https://learn.microsoft.com/en-us/windows/wsl/) 可选**：在 Windows 中运行 Linux 用户空间，兼容 Bash 和 Linux 工具链，无需双系统。
+- **[WSL](https://learn.microsoft.com/en-us/windows/wsl/) 可选**：在 Windows 中运行 Linux 用户空间，兼容 Bash 和 Linux 工具链，无需双系统。
 
 ### 主流 Agent
 
@@ -374,113 +393,69 @@ Prompt Cache 命中时，可复用已计算的前缀状态（通常就是 KV Cac
 
 ### CC Switch：配置切换与本地代理
 
-配置切换
+[CC Switch](https://github.com/Hortus-Edenensis/cc-switch) 将多个 Coding Agent 的连接配置集中管理，方便在不同 Provider 和模型之间切换，同时提供本地代理能力。
 
-#### [CC Switch](https://github.com/Hortus-Edenensis/cc-switch)
+- **配置管理**：维护多套 Provider、模型、API Key、Base URL 等配置，需要时切换。
+- **MCP 与 Skills**：统一维护 MCP Server 和 Skills，方便在不同 Agent 间复用。
+- **本地代理**：支持格式转换、热切换、故障切换和 Provider 健康监测。
 
-管理「用哪套配置」
-
-把多个 Coding Agent 的连接配置集中管理，同时提供本地代理能力。
-
-Provider · Model · API Key · Base URL
-
-**配置管理**：集中管理多套 Provider、模型、API Key、Base URL 等配置，需要时一键切换。
-
-**MCP 与 Skills**：顺带统一维护 MCP Server 和 Skills，让不同 Agent 保持一致。
-
-**本地代理**：支持格式转换、热切换、故障切换和 Provider 健康监测。
-
-CC Switch 既能切换配置，也能在本地转发请求。
+配置切换决定 Agent 使用哪套连接信息，本地代理则参与请求转发。两者可以配合使用。
 
 ### 常见 API 格式
 
-不同模型和 Provider 常见的接口格式包括：
+Provider 指提供模型服务的供应商。不同服务可能采用不同的 API 格式，常见形式如下：
 
-#### OpenAI Chat Completions
+| 接口 | 路径 | 消息组织方式 |
+| --- | --- | --- |
+| OpenAI Chat Completions | POST /v1/chat/completions | 通过 messages 显式传入本轮所需的消息历史。 |
+| Anthropic Messages | POST /v1/messages | 使用消息与内容块组织输入，工具调用和工具结果也采用内容块形式。 |
+| OpenAI Responses | POST /v1/responses | 支持显式传入上下文，也支持通过 previous_response_id 关联前一轮响应。 |
 
-`POST /v1/chat/completions`
-
-经典的 `messages` 对话格式，每轮请求携带全量消息历史。
-
-#### Anthropic Messages
-
-`POST /v1/messages`
-
-Claude Code 使用的消息式接口，每轮请求携带全量消息历史，工具调用采用 Anthropic 的内容块格式。
-
-#### OpenAI Responses
-
-`POST /v1/responses`
-
-Codex 使用的接口格式，通过 `previous_response_id` 关联上一轮响应，支持根据需要只传递新的输入和工具结果，客户端无需每次重复发送完整历史。
+Responses 的关联机制支持按需只发送新的输入和工具结果，但并非所有请求都必须采用这种方式。无论使用哪一种接口，Agent 都需要让模型获得足够的任务上下文。
 
 ### 模型网关
 
+模型网关位于 Agent 与模型服务之间，负责转发请求、适配格式和选择后端。模型接入数量增多后，可以把这些工作集中在网关中处理。
+
 #### [9Router](https://github.com/decolua/9router)
 
-**多 Provider 接入** 通过 OAuth、API Key 等方式接入多个 Provider，OAuth Token 自动刷新。
+- **多 Provider 接入**：通过 OAuth、API Key 等方式接入多个 Provider，OAuth Token 自动刷新。
 
-**模型组合与多模态** 按场景组合文本、图像、音频等模型，并设置多级 Fallback。
+- **模型组合与多模态**：按场景组合文本、图像、音频等模型，并设置多级 Fallback。
 
-**请求适配** 提供统一入口，转换 OpenAI、Claude、Gemini 等请求格式。
+- **请求适配**：提供统一入口，转换 OpenAI、Claude、Gemini 等请求格式。
 
-**上下文优化** RTK、Caveman 等。
+- **上下文优化**：RTK、Caveman 等。
 
-#### 其他模型网关
+其他模型网关各有侧重：
 
-#### [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)
-
-CLI 代理
-
-把多个 CLI 账号代理成兼容多种协议的本地 API。
-
-#### [New API](https://github.com/QuantumNous/new-api)
-
-模型聚合
-
-面向平台化的模型聚合、渠道管理与用量计费。
-
-#### [Sub2API](https://github.com/Wei-Shaw/sub2api)
-
-额度分发
-
-偏订阅额度分发、账号池管理与并发控制。
+- **[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)**：把多个 CLI 账号代理成兼容多种协议的本地 API。
+- **[New API](https://github.com/QuantumNous/new-api)**：面向平台化的模型聚合、渠道管理与用量计费。
+- **[Sub2API](https://github.com/Wei-Shaw/sub2api)**：偏订阅额度分发、账号池管理与并发控制。
 
 ### WebSearch 和 WebFetch
 
-#### [Tavily](https://www.tavily.com/)
+搜索、网页提取和整站抓取经常出现在同一个任务中，因此不同产品的能力存在交叉。
 
-面向 AI Agent 的 Web 访问层，覆盖搜索、内容提取、站点 Map/Crawl 与 Research。
+- **[Tavily](https://www.tavily.com/)**：面向 AI Agent 的 Web 访问层，覆盖搜索、内容提取、站点 Map / Crawl 与 Research。
+- **[Firecrawl](https://www.firecrawl.dev/)**：将搜索结果或网页转成 Markdown、JSON 等内容，并支持整站 Crawl。
 
-#### [Firecrawl](https://www.firecrawl.dev/)
+其他产品还有 [Exa](https://exa.ai/)、[Brave](https://api.search.brave.com/app/documentation/web-search/get-started)、[TinyFish](https://www.tinyfish.ai/)。
 
-面向 AI 的 Web 数据 API，把搜索结果或网页转成 Markdown、JSON 等内容，并支持整站 Crawl。
-
-其他产品
-
-[Exa](https://exa.ai/)、[Brave](https://api.search.brave.com/app/documentation/web-search/get-started)、[TinyFish](https://www.tinyfish.ai/)
-
-接入方式 **MCP** / **Skill + CLI**
+接入 Agent 时，可以使用 MCP，也可以采用 Skill + CLI：MCP 提供工具调用接口，Skill 描述使用方法，CLI 承担具体执行。实际接入还要选择产品提供的对应组件。
 
 ### 浏览器自动化
 
-先区分调试、测试和长期任务执行，再选择对应的浏览器工具。
+需要操作页面、检查动态状态或验证交互结果时，可以使用浏览器自动化工具。
 
-**[Chrome DevTools MCP / CLI](https://github.com/ChromeDevTools/chrome-devtools-mcp)**：偏开发调试，直接使用 Console、Network、Performance 和页面检查能力。
+- **[Chrome DevTools MCP / CLI](https://github.com/ChromeDevTools/chrome-devtools-mcp)**：偏开发调试，使用 Console、Network、Performance 和页面检查能力。
+- **[Playwright MCP / CLI](https://github.com/microsoft/playwright-mcp)**：偏浏览器自动化，执行页面访问、点击、输入和 UI 测试。
 
-**[Playwright MCP / CLI](https://github.com/microsoft/playwright-mcp)**：偏浏览器自动化，执行页面访问、点击、输入和 UI 测试。
+面向 Agent 的工具与框架又有不同侧重：
 
-**[Browser Harness](https://github.com/browser-use/browser-harness)**：可扩展的浏览器执行层，适合个人 Agent、内部工具和长尾网站。
-
-**需要可长期演进的浏览器能力**
-
-**[agent-browser](https://github.com/vercel-labs/agent-browser)**：标准化浏览器 CLI，适合 AI Coding、前端验收和 E2E。
-
-**主要执行 AI Coding 中的网页操作**
-
-**[Browser Use](https://github.com/browser-use/browser-use)**：任务级 Browser Agent 框架，适合构建浏览器 Agent 产品与任务自动化。
-
-**要构建完整的 Browser Agent 产品**
+- **[Browser Harness](https://github.com/browser-use/browser-harness)**：可扩展的浏览器执行层，适合个人 Agent、内部工具和长尾网站，重点在于持续扩展浏览器能力。
+- **[agent-browser](https://github.com/vercel-labs/agent-browser)**：标准化浏览器 CLI，适合 AI Coding 中的网页操作、前端验收和端到端测试（E2E）。
+- **[Browser Use](https://github.com/browser-use/browser-use)**：任务级 Browser Agent 框架，适合构建完整的浏览器 Agent 产品与自动化任务。
 
 ### Skill 的安装和管理
 
@@ -510,25 +485,27 @@ CLI 代理
 
 让多个 Agent 同时工作，并且能够被观察、组织和协作。Herdr 通过后台 Session Server 持有真实终端进程。
 
-- **Agent 状态感知：** 识别 working、blocked、done 和 idle 状态。
-- **持久化 Session：** 关闭窗口或断开连接后，任务仍可继续运行。
-- **多 Agent 工作区：** 用 Workspace、Tab 和 Pane 管理多个项目与多个 Agent。
-- **Agent 协作：** 通过共享工作区、终端状态、脚本或 API 协调并行任务。
+- **Agent 状态感知：**：识别 working、blocked、done 和 idle 状态。
+- **持久化 Session：**：关闭窗口或断开连接后，任务仍可继续运行。
+- **多 Agent 工作区：**：用 Workspace、Tab 和 Pane 管理多个项目与多个 Agent。
+- **Agent 协作：**：通过共享工作区、终端状态、脚本或 API 协调并行任务。
 
 #### [Orca](https://github.com/stablyai/orca)
 
 面向多 Agent 开发的桌面 IDE，将多个 Agent 与开发工具集中到一个工作台。
 
-- **独立 Worktree：** 每个 Agent 使用独立 Git Worktree，便于并行开发、比较结果和合并代码。
-- **内置浏览器：** 提供 Chromium 浏览器与 Design Mode，可将页面元素直接交给 Agent。
-- **文件与终端：** 提供文件管理器、编辑器和终端分屏，减少工具切换。
-- **代码审查：** 集成 Diff 查看、标注、提交和推送，方便从生成到交付。
+- **独立 Worktree：**：每个 Agent 使用独立 Git Worktree，便于并行开发、比较结果和合并代码。
+- **内置浏览器：**：提供 Chromium 浏览器与 Design Mode，可将页面元素直接交给 Agent。
+- **文件与终端：**：提供文件管理器、编辑器和终端分屏，减少工具切换。
+- **代码审查：**：集成 Diff 查看、标注、提交和推送，方便从生成到交付。
 
 ## 四、AI Coding 工作流
 
+工具准备好之后，还需要让 Agent 理解项目、复用经验，并按可检查的步骤完成工作。本章先组织目录和长期上下文，再讨论能力维护、Skill 编写和开发流程。
+
 ### Agent 配置目录结构
 
-Claude Code
+配置通常区分用户级和项目级：用户级用于跨项目复用，项目级用于当前仓库的约定和能力。以 Claude Code 的常用目录为例：
 
 ```text
 用户级目录   ~/.claude/
@@ -549,7 +526,7 @@ Claude Code
     └── agents/*.md
 ```
 
-.agents（支持主流Agent）
+部分 Agent 也会使用以下目录约定，具体支持范围以对应工具为准：
 
 ```text
 用户级目录   ~/.agents/
@@ -569,19 +546,21 @@ Claude Code
 
 #### CLAUDE.md / AGENTS.md
 
-**少而重要**：只保留每个 Session 都值得加载的信息，并控制在 200 行以内。
+- **少而重要**：只保留每个 Session 都值得加载的信息，以 200 行以内为整理目标；这是一项写作建议，不是文件格式的硬限制。
 
-**写不可推断的信息**：记录项目架构、特殊约定、工具命令、历史包袱和踩坑点，不复述代码。
+- **写不可推断的信息**：记录项目架构、特殊约定、工具命令、历史包袱和踩坑点，不复述代码。
 
-**分层组织**：项目根目录的 CLAUDE.md 管项目整体，子目录 CLAUDE.md / Rules 管局部；用户级目录用于跨项目通用配置。
+- **分层组织**：项目根目录的 CLAUDE.md 管项目整体，子目录 CLAUDE.md / Rules 管局部；用户级目录用于跨项目通用配置。
 
-**渐进披露**：复杂流程放进 Skill，按任务需要加载。
+- **渐进披露**：复杂流程放进 Skill，按任务需要加载。
 
-**能强制的交给工具**：格式化、检查和禁止操作等确定性要求交给 Hooks / Permissions。
+- **能强制的交给工具**：格式化、检查和禁止操作等确定性要求交给 Hooks / Permissions。
 
-**兼容性**：Claude Code 读取 `CLAUDE.md`；需要复用 `AGENTS.md` 时，可在 `CLAUDE.md` 首行写 `@AGENTS.md`，或直接建立软链接。
+- **兼容性**：Claude Code 读取 `CLAUDE.md`；需要复用 `AGENTS.md` 时，可在 `CLAUDE.md` 首行写 `@AGENTS.md`，或直接建立软链接。
 
 #### Rules
+
+长期指令较多时，可以把前端、后端、测试等不同主题拆进 Rules。能够按路径限定的规则只在相关文件范围内生效，降低无关信息的干扰。
 
 - **按主题拆分**：前端、后端、测试、安全等规则分开维护，避免一个 Rule 文件越来越大。
 - **按路径生效**：能限定目录或文件类型的规则就限定范围，减少无关加载。
@@ -592,51 +571,41 @@ Claude Code
 
 #### Skills 管理
 
-- **按需安装** 需要什么装什么，不做全量预装。
-- **分层管理** 通用能力放全局，项目专属能力放项目内。
-- **持续治理** 定期清理重复、过时、低使用的 Skill。
+- **按需安装**：需要什么装什么，不做全量预装。
+- **分层管理**：通用能力放全局，项目专属能力放项目内。
+- **持续治理**：定期清理重复、过时、低使用的 Skill。
 
 #### MCP 管理
 
-- **分层配置** 区分项目级和全局级，**优先项目级**，避免污染所有项目。
-- **尽量少用** 能用 Agent 原生能力、CLI、API 解决的，就不要额外挂 MCP。
-- **控制数量** 减少重复和低价值 MCP，降低依赖、权限和稳定性成本。
+- **分层配置**：区分项目级和全局级，**优先项目级**，避免污染所有项目。
+- **尽量少用**：能用 Agent 原生能力、CLI、API 解决的，就不要额外挂 MCP。
+- **控制数量**：减少重复和低价值 MCP，降低依赖、权限和稳定性成本。
 
-#### Hooks
+此外，还可以按需要补充以下能力：
 
-把格式化、Lint、检查和危险操作等确定性动作交给 Hook。
-
-#### LSP / Code Intelligence
-
-为大型代码库提供跳转、引用和类型诊断等代码智能，按语言和项目配置。
-
-#### Subagents
-
-将搜索、Review、Research 等独立任务交给子 Agent，实现上下文隔离与并行执行。
+- **Hooks**：将格式化、Lint、检查和危险操作拦截等确定性动作交给脚本或规则执行。
+- **LSP / Code Intelligence**：为大型代码库提供跳转、引用和类型诊断等代码智能，按语言和项目配置。
+- **Subagents**：将搜索、Review、Research 等独立任务交给子 Agent，实现上下文隔离与并行执行。
 
 ### 如何写一个 Skill
 
-#### 选择真实任务
+Skill 适合从一次已经验证有效的任务中提炼。先跑通任务，再整理可重复的方法，能够避免写出只有原则、缺少具体执行步骤的说明。
 
-从重复工作中选择一个需求，先让 Agent 完成任务，得到满意的结果。
+例如，反复进行发布检查时，可以把“读取版本信息、运行检查、整理变更、输出待确认事项”整理成 Skill。描述中写清适用任务，正文给出执行步骤，固定操作放进脚本，结果格式使用模板。这样下一次遇到同类任务，就有可以直接复用和改进的方法。
 
-#### 整理执行经验
+- **选择真实任务**：从重复工作中选择一个需求，先让 Agent 完成任务，得到满意的结果。
 
-记录可复用的步骤、所需资料和工具，以及执行中需要反复提醒的要求。
+- **整理执行经验**：记录可复用的步骤、所需资料和工具，以及执行中需要反复提醒的要求。
 
-#### 编写 Skill
+- **编写 Skill**：写清操作步骤，将固定操作整理成脚本，附上模板或示例，并明确结果检查和错误修复方法。
 
-写清操作步骤，将固定操作整理成脚本，附上模板或示例，并明确结果检查和错误修复方法。
+- **测试效果**：使用不同任务和模型测试，检查结果是否达标，找出容易失败的环节。
 
-#### 测试效果
-
-使用不同任务和模型测试，检查结果是否达标，找出容易失败的环节。
-
-#### 持续改进
-
-根据实际使用和分享后的反馈修改，优先解决共性问题，避免堆叠特殊需求。
+- **持续改进**：根据实际使用和分享后的反馈修改，优先解决共性问题，避免堆叠特殊需求。
 
 ### Superpowers 与 mattpocock
+
+当任务包含多个阶段时，可以借助现成的工作流 Skills 组织需求、实现和审查。下面两组工具展示了不同的组织方式。
 
 #### [Superpowers](https://github.com/obra/superpowers)
 
@@ -668,15 +637,17 @@ Spec：明确需求 **→** Plan：制定方案 **→** Tasks：拆分任务 **�
 
 ### AI 工程化
 
-**Prompt Engineering**：关注“怎么写好一条指令”。
+前面的实践可以从五个角度理解。这些概念关注的问题不同，不必把它们理解为严格的阶段或层级。
 
-**Context Engineering**：关注“怎么给 AI 提供足够且精准的上下文”。
+- **Prompt Engineering**：关注“怎么写好一条指令”。
 
-**Harness Engineering**：关注“怎么构建一个系统性的框架来约束和驱动 AI”。
+- **Context Engineering**：关注“怎么给 AI 提供足够且精准的上下文”。
 
-**Loop Engineering**：关注“怎么让 Agent 持续执行、验证并在失败后自我修正”。
+- **Harness Engineering**：关注“怎么构建一个系统性的框架来约束和驱动 AI”。
 
-**Graph Engineering**：关注“怎么把 Agent、工具和流程编排成可分支、可并行的协作网络”。
+- **Loop Engineering**：关注“怎么让 Agent 持续执行、验证并在失败后自我修正”。
+
+- **Graph Engineering**：关注“怎么把 Agent、工具和流程编排成可分支、可并行的协作网络”。
 
 ## 五、思考
 
@@ -684,23 +655,15 @@ Spec：明确需求 **→** Plan：制定方案 **→** Tasks：拆分任务 **�
 
 从善用搜索引擎、善用网页 Chat，到善用 Agent，解决问题的方式正在从“获取答案”走向“直接完成任务”。
 
-#### 先装一个能用的 Agent
+- **先装一个能用的 Agent**：先有一个真正能干活的 Agent，后面的配置、扩展和使用才有基础。
 
-先有一个真正能干活的 Agent，后面的配置、扩展和使用才有基础。
+- **用 Agent 武装 Agent**：环境配置、工具安装、能力接入，都可以让 Agent 参与解决；逐步补齐浏览器、终端、CLI、MCP、Skill 等“手、眼、脚”。
 
-#### 用 Agent 武装 Agent
+- **善用 Agent 解决陌生问题**：遇到不会的、没做过的、复杂的问题，也敢于先让 Agent 尝试，善于借助它探索方法、解决阻塞，不断扩展自己能解决的问题边界。
 
-环境配置、工具安装、能力接入，都可以让 Agent 参与解决；逐步补齐浏览器、终端、CLI、MCP、Skill 等“手、眼、脚”。
+- **用 Agent 构建自己的工具**：把重复需求和个人工作方式做成 Skill、脚本、小工具、浏览器插件、客户端或自动化流程，让 Agent 不只是现成工具，也能帮你创造新的工具。
 
-#### 善用 Agent 解决陌生问题
-
-遇到不会的、没做过的、复杂的问题，也敢于先让 Agent 尝试，善于借助它探索方法、解决阻塞，不断扩展自己能解决的问题边界。
-
-#### 用 Agent 构建自己的工具
-
-把重复需求和个人工作方式做成 Skill、脚本、小工具、浏览器插件、客户端或自动化流程，让 Agent 不只是现成工具，也能帮你创造新的工具。
-
-核心变化 **从“会使用 Agent”，走向“善于借助 Agent 持续扩展自己的问题解决能力”。**
+这些实践共同指向一种能力：借助 Agent 持续扩展自己能解决的问题范围，并将有效的方法保存下来反复使用。
 
 ### AI 编程中的思维方式
 
@@ -730,31 +693,29 @@ Spec：明确需求 **→** Plan：制定方案 **→** Tasks：拆分任务 **�
 
 ### 使用 Coding Agent：AI 工程能力
 
-Coding Agent 正在改变软件开发中人的工作重心：
+Coding Agent 正在改变软件开发中人的工作重心：从亲自实现代码，转向决定做什么、设计架构、定义 Spec、组织执行和验证结果。
 
-亲自实现代码 **→** 决定做什么、设计架构、定义 Spec、组织执行和验证结果
+一个完整任务通常包含以下环节：
 
-**基本工作流**
+- **Planning**：理解问题、设计架构、明确 Spec 与执行计划。
 
-**Planning**：理解问题、设计架构、明确 Spec 与执行计划。
+- **Execution**：Agent 构建、测试、验证和修复。
 
-**Execution**：Agent 构建、测试、验证和修复。
+- **Deployment & Monitoring**：部署、监控、发现问题并持续迭代。
 
-**Deployment & Monitoring**：部署、监控、发现问题并持续迭代。
+- **Feedback**：根据结果反馈调整计划与执行，进入下一轮闭环。
 
-**Feedback**：根据结果反馈调整计划与执行，进入下一轮闭环。
+要把这些环节组织好，需要相应的工程能力：
 
-**核心能力** 驾驭 Coding Agent，放大个人与团队的生产力
+- **工作流管理**：决定如何拆解、执行与迭代任务。
 
-**工作流管理**：决定如何拆解、执行与迭代任务。
+- **Agent 自主性**：控制 Agent 的自主程度、Context 与多 Agent 协作。
 
-**Agent 自主性**：控制 Agent 的自主程度、Context 与多 Agent 协作。
+- **结果审查**：通过测试、Evals、Code Review 等验证输出。
 
-**结果审查**：通过测试、Evals、Code Review 等验证输出。
+- **Agent 与环境定制**：通过 Skills、MCP、Hooks、AGENTS.md 等增强能力。
 
-**Agent 与环境定制**：通过 Skills、MCP、Hooks、AGENTS.md 等增强能力。
-
-**Agent 基础原理**：理解 LLM、Harness、Context、Tools、Subagents 等机制。
+- **Agent 基础原理**：理解 LLM、Harness、Context、Tools、Subagents 等机制。
 
 高效使用 Coding Agent，不是单纯追求更高自主性，而是建立“**规划** → **执行** → **验证** → **反馈**”的工程闭环。
 
@@ -764,30 +725,28 @@ Coding Agent 正在改变软件开发中人的工作重心：
 
 #### 软件工程的本质困难
 
-它们不是“写代码慢”，也不会被 AI 自动消除
+软件工程中的困难涉及目标、业务和组织关系，不能仅靠提高代码生成速度解决。
 
-**目标与概念**：要解决什么、为什么解决，以及什么才算成功。
+- **目标与概念**：要解决什么、为什么解决，以及什么才算成功。
 
-**复杂性**：业务规则、状态、依赖和边界相互交织。
+- **复杂性**：业务规则、状态、依赖和边界相互交织。
 
-**约束与一致性**：系统必须适配既有架构、规范、法规和组织约束。
+- **约束与一致性**：系统必须适配既有架构、规范、法规和组织约束。
 
-**变化与验证**：需求持续变化，正确性还要靠测试、运行反馈和长期维护确认。
+- **变化与验证**：需求持续变化，正确性还要靠测试、运行反馈和长期维护确认。
 
 #### AI 能解决 / 缓解的部分
 
-不是消灭复杂性，而是让 AI 直接承接复杂实现
+AI 可以承接更多实现和迭代工作，主要体现在以下方面：
 
-**自主执行**：从任务描述出发，规划、编码、运行、调试并交付。
+- **自主执行**：从任务描述出发，规划、编码、运行、调试并交付。
 
-**复杂度承接**：理解并修改大范围代码，把实现复杂性转交给 Code Agent。
+- **复杂度承接**：理解并修改大范围代码，把实现复杂性转交给 Code Agent。
 
-**流程压缩**：串联规划、开发、测试和文档，减少传统协作中的等待。
+- **流程压缩**：串联规划、开发、测试和文档，减少传统协作中的等待。
 
-**并行探索**：同时尝试多种方案，持续迭代，放大个人和小团队的执行规模。
+- **并行探索**：同时尝试多种方案，持续迭代，放大个人和小团队的执行规模。
 
-AI 不能替代 **目标与价值、架构取舍、组织共识、验收责任**
-
-AI 主要解决 **复杂实现、重复执行、调试迭代、并行探索**
+人仍需负责目标与价值、架构取舍、组织共识和验收责任。AI 则承担更多复杂实现、重复执行、调试迭代与并行探索。
 
 AI 放大了处理软件复杂性的能力，但没有让复杂性本身消失——所以它仍然不是软件工程的银弹。
