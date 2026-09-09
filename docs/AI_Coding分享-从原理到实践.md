@@ -1,6 +1,8 @@
 # AI Coding：从原理到实践
 
-> 从 AI Coding 的发展历程出发，了解 Agent 的基本原理与运行机制，认识 Coding Agent 的工具链，并探索适合个人与团队的工作流实践。
+从模型趋势与 Agent 原理出发，认识 Coding Agent 工具链，了解工作流与工程实践。
+
+AI Coding 正逐步改变开发者与工具的协作方式。理解模型如何决策、Agent 如何执行，以及人如何组织和验证任务，是将这些能力用到实际项目中的基础。
 
 ## 内容概览
 
@@ -8,423 +10,784 @@
 2. Agent 基本原理
 3. AI Coding 工具链
 4. AI Coding 工作流
-5. 实践与思考
+5. 思考
 
----
+## 一、AI Coding 的发展与趋势
 
-# 一、AI Coding 的发展与趋势
+### AI Coding 的发展
 
-## 1.1 AI Coding 的发展
+| 阶段 | 时间 | 代表工具 | 协作方式 |
+| --- | --- | --- | --- |
+| 1.0：代码补全 | 2021—2022 年底 | GitHub Copilot 初代插件、Tabnine | AI 行内预测代码，开发者按 Tab 采纳。 |
+| 2.0：编程助手 | 2023—2024 年底 | GitHub Copilot Chat、早期 Cursor、早期 Cline | AI 理解项目并修改多个相关文件，开发者检查和确认结果。 |
+| 3.0：Agent | 2025—至今 | Claude Code、Cursor、Codex | 开发者给出目标，Agent 自主执行、测试和修复。 |
 
-AI Coding 的演进，是 AI 逐步进入开发环境并接管更多执行环节的过程。下面的 0.0—3.0 是便于理解的能力分层，0.0 作为工程接入前的对照阶段，并非严格的发布时间排序。
+CLI、IDE、Workbench 是三种产品形态，不代表能力等级。
 
-- **0.0 时代：通用对话（Chat）**（2022.11—2023 年初）
-  - **代表工具**：ChatGPT（Web）
-  - **协作方式**：开发者在浏览器与终端间手动搬运代码和报错。
+### Cloud Agent 与 Multi-Agent
 
-- **1.0 时代：代码补全（Completion）**（2021—2022 年底）
-  - **代表工具**：GitHub Copilot（初代插件）、Tabnine
-  - **协作方式**：AI 行内预测代码，开发者按 `Tab` 采纳。
+#### Cloud Agent
 
-- **2.0 时代：编程助手（Assistant）**（2023—2024 年底）
-  - **代表工具**：GitHub Copilot Chat、早期 Cursor、早期 Cline
-  - **协作方式**：AI 能理解项目，并同时修改多个相关文件。开发者负责检查和确认结果。
+Agent 从本地走向云端，在独立环境中执行长任务；开发者从实时协作转向目标管理。
 
-- **3.0 时代：Agent**（2025—至今）
-  - **代表工具**：Claude Code、Cursor、Codex
-  - **三种形态**：
-    - **CLI**：Claude Code——以 CLI 为核心，以终端为主
-    - **IDE**：Cursor——VS Code + Agent SDK，以代码编辑器为主
-    - **Workbench**：Codex——Agent SDK + 对话页面，以对话和任务为主
-  - **协作方式**：开发者给出目标，Agent 自主执行、测试和修复。
+**Codex Cloud**：云端独立环境，支持异步执行与长任务。
 
-## 1.2 Next：Cloud & Multi-Agent
+**Cursor Cloud Agents**：把本地编辑转向云端任务执行。
 
-AI Coding 正从“人和 AI 同步协作”，走向“人定义目标，Agent 异步完成任务”。
+**GitHub Copilot cloud agent**：由 Issue 驱动执行，并回到 PR 协作。
 
-- **Cloud Agent**：Codex Cloud、Cursor Cloud Agents、GitHub Copilot cloud agent 将 Agent 从本地带到云端，借助独立环境支持异步执行、长任务和 Issue/PR 驱动，开发者从实时协作转向目标管理。
+#### Multi-Agent
 
-- **Multi-Agent：单 Agent → 多 Agent 协作**
-  - 多个不同品牌或不同角色的 Agent 并行执行、分工协作、统一编排。
-  - **代表产品**：
-    - **Grok Bot**：以多个持久化 Bot 组成 AI 团队，支持云端并行工作、共享上下文与任务交接。
-    - **Multica**：开源的 Coding Agent 管理平台，接入不同品牌的 Agent，统一进行任务分派、运行监控与技能复用。
-    - **Raft**：面向 Human + Agent 的协作平台，用频道、线程和任务连接不同 Agent，支持并行工作、任务交接与人工 Review。
+多个不同品牌或不同角色的 Agent 并行执行、分工协作、统一编排。
 
-- **趋势**：Agent 正变得更自主、运行时间更长，并逐步走向云端异步执行与多 Agent 协作。
+**Grok Bot**：持久化 Bot 组成团队，支持云端并行与任务交接。
 
-## 1.3 模型发展趋势
+**Multica**：接入不同品牌 Agent，统一分派与运行监控。
 
-![alt text](../public/images/image-1.png)
+**Raft**：连接 Human 与 Agent，支持并行工作与人工 Review。
 
-### 总体趋势
+**趋势**：Agent 正变得更自主、运行时间更长，并逐步走向云端异步执行与多 Agent 协作。
 
-- **Agent 化**：从单轮回答走向长时间、多步骤任务执行，能够规划、调用工具、验证并持续完成。
-  *代表：GPT-6 Astra、Claude Fable 5.1*
+### 模型发展趋势
 
-- **能力与效率并行**：旗舰模型持续冲击能力上限，轻量模型则追求更低延迟、更低成本和更高并发。
-  *效率路线：GPT-5.6 Luna、DeepSeek-V4-Flash*
+模型能力的迭代与 Agent 产品的发展相互推动，下面按时间整理主要节点。
 
-- **环境交互原生化**：模型开始针对浏览器、桌面和专业软件环境专项训练，从“理解信息、调用 API”走向“理解界面、直接操作并完成任务”。
-  *代表：GPT-6 Astra 的 Computer Use*
-- **模型与 Harness 协同演进**：模型提升能力上限，Harness 从“弥补模型缺陷”逐步转向“组织和放大模型能力”。
-  *模型原生能力增强后，Prompt、Skill 和规则会逐步去除历史补丁*
----
+| 时间 | 模型与产品节点 |
+| --- | --- |
+| 2024.05 | GPT-4o |
+| 2024.06 | Claude 3.5 Sonnet |
+| 2025.01 | DeepSeek R1 |
+| 2025.02 | Claude 3.7 Sonnet、Claude Code |
+| 2025.07 | GLM-4.5、Kimi K2 |
+| 2025.08 | GPT-5 |
+| 2025.09 | Claude Sonnet 4.5 |
+| 2026.01 | Kimi K2.5 |
+| 2026.02 | Claude Sonnet 4.6、Codex App、GLM-5 |
+| 2026.04 | GPT-5.5、GLM-5.1 |
+| 2026.06 | Claude Fable 5、GLM-5.2 |
+| 2026.07 | GPT-5.6、Kimi K3 |
+| 2026.08 | GLM-5.3 |
+| 2026.09 | GPT-6 Astra |
 
-# 二、Agent 基本原理
+模型能力与 Agent 产品同步演进。理解 AI Coding，需要同时关注模型与运行框架的发展。
 
-## 2.1 概念
+### 主流模型
 
-- Agent：可以理解为 LLM + Context + Tools + Loop，通过持续的“理解 → 决策 → 执行 → 观察”循环完成任务。
-- Coding Agent：面向 SWE（Software Engineering） 场景的 Agent，通常具备文件读写、代码搜索、Shell、测试、Git 等工具。
-- Harness：围绕模型搭建的运行框架，负责上下文组织、工具调用、状态管理、权限控制、测试验证和失败恢复。
+| 分类 | 关注点 | 模型 |
+| --- | --- | --- |
+| 顶级模型 | 能力上限 | GPT-6 Astra、Claude Fable 5.1、Claude Fable 5、Claude Opus 5、GPT-5.6 Sol |
+| 强模型 | 综合能力 | Kimi K3、GLM-5.3、Qwen3.8 Max、Grok 4.6、~~DeepSeek V4 Pro~~ |
+| 高效模型 | 速度与成本 | Gemini 3.8 Flash、GLM-5.3-Flash、GPT-5.6 Luna、Qwen3.8-Flash-Next、DeepSeek V4 Flash |
 
-关系可以简化为：
+### 模型趋势解读
 
-Model + Harness → Agent
-Agent + SWE Environment → Coding Agent
+- **Agent 化：** 从单轮回答走向长时间、多步骤任务执行，能够规划、调用工具、验证并持续完成。
 
-> 通用 Agent 可进一步扩展 Web、Browser、Apps 等能力，而 Coding 正逐渐成为其重要的通用执行能力。
+代表：GPT-6 Astra、Claude Fable 5.1
 
-## 2.2 Agent Loop
+- **能力与效率并行：** 旗舰模型持续冲击能力上限，轻量模型则追求更低延迟、更低成本和更高并发。
 
-Agent 的核心工作机制，可以概括为：LLM 基于上下文进行决策，通过工具调用与环境交互，并根据结果反馈循环执行，直到任务完成：
+效率路线：GPT-5.6 Luna、DeepSeek-V4-Flash
 
-![alt text](../public/images/image.png)
+- **环境交互原生化：** 模型开始针对浏览器、桌面和专业软件环境专项训练，从“理解信息、调用 API”走向“理解界面、直接操作并完成任务”。
 
-**一句话总结：** LLM 不断在“调用工具”和“返回结果”之间做决策，工具执行结果会成为下一轮推理的输入。
+代表：GPT-6 Astra 的 Computer Use
 
-第一次请求
-![alt text](../public/images/image-2.png)
-第二次请求
-![alt text](../public/images/image-3.png)
+- **模型与 Harness 协同演进：** 模型提升能力上限，Harness 从“弥补模型缺陷”逐步转向“组织和放大模型能力”。
 
-## 2.3 Context
+模型原生能力增强后，Prompt、Skill 和规则会逐步去除历史补丁
 
-### Context：模型本轮可见的输入
+- **递归自我改进（RSI）：** 前沿模型已经开始参与下一代模型的研发与改进，推动模型研发与迭代加速。
 
-从 API 的视角看，Context 不是整个 JSON 请求，而是模型在这一轮实际能够使用的输入内容。以 Chat Completions API 为例，主要包括：
+## 二、Agent 基本原理
 
-- **`messages`**：系统指令、用户需求、历史回复和工具结果
-- **`tools`**：模型可调用的工具描述和参数 Schema
-- **其他输入**：消息中的图片、文件等多模态内容
+### Agent 的基本概念
 
-在 Coding Agent 中，代码、文件和终端输出不会自动进入 Context。Agent 会先读取或执行，再把需要的内容写入 `messages` 或工具消息中。
+Agent = Model + Harness
 
-**Context Window** 是模型一次请求能够容纳的最大 Token 容量，具体上限由模型和接口决定。Context 接近上限时，Agent 通常会在下一次请求前压缩或重建 `messages`。
+Coding Agent
 
-### KV Cache
+面向 SWE（Software Engineering）场景的 Agent，通常具备文件读写、代码搜索、Shell、测试、Git 等工具。
 
-![alt text](../public/images/image-5.png)
-![alt text](../public/images/image-6.png)
+#### Harness
 
-KV Cache 是模型对已经处理过的 Context 前缀进行的内部计算缓存，用于减少重复计算、提升响应速度。对 Agent 设计的实践启发主要有两点：
+模型之外的运行框架
 
-1. **固定前缀不变**：需要切换 System Prompt、工具或规则时，新开对话。
-2. **合理选择会话**：目标相关就继续，目标变化就新开。
+上下文管理 + 工具接口
++ 约束 + 验证 + 纠正
 
-## 2.4 MCP 与 Skills
+通用 Agent 可进一步扩展 Web、Browser、Apps 等能力，而 Coding 正逐渐成为其重要的通用执行能力。
+
+### Agent Loop
+
+一次任务通常需要多轮模型请求。以“帮我创建 hello.py”为例：
+
+1. 用户需求进入消息列表 `messages[]`。
+2. Harness 把消息历史和工具定义发送给模型。
+3. 模型判断是否需要工具；需要时返回工具名称和参数。
+4. Harness 执行工具，例如 `Edit(path, content)`。
+5. 工具结果追加到消息列表，再次请求模型。
+6. 模型根据更新后的上下文继续执行，直到返回最终结果或触发停止条件。
+
+在这个 Chat Completions 示例中，`finish_reason == "tool_calls"` 表示模型返回了工具调用。Harness 执行后把工具结果写回上下文。模型正常结束生成后，Harness 还需结合任务状态决定是否结束任务。
+
+模型负责决定调用什么工具，工具的实际执行由 Harness 完成，执行结果成为下一轮推理的输入。
+
+### Agent Loop：第一次请求
+
+#### 发给模型
+
+```text
+{
+  "model": "glm-5.2" ,
+  "messages": [
+    { "role": "user" , "content": "创建 hello.py，打印 Hello, World!" }
+  ],
+  "tools": [{
+    "type": "function",
+    "function": {
+      "name": "Edit" ,
+      "parameters": {
+        "type": "object",
+        "required": ["path", "content"]
+      }
+    }
+  }]
+}
+```
+
+#### 模型返回
+
+```text
+{
+  "model": "glm-5.2" ,
+  "choices": [{
+    "finish_reason": "tool_calls" ,
+    "message": {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [{
+        "id": "call_abc123",
+        "type": "function",
+        "function": {
+          "name": "Edit" ,
+          "arguments": "{\"path\":\"hello.py\",\"content\":\"print('Hello, World!')\"}"
+        }
+      }]
+    }
+  }]
+}
+```
+
+**第一次请求** 模型没有直接回答，而是返回 `tool_calls`，要求 Harness 执行 `Edit`。
+
+### Agent Loop：第二次请求
+
+#### 再次发给模型
+
+```text
+{
+  "model": "glm-5.2" ,
+  "messages": [
+    { "role": "user", "content": "创建 hello.py，打印 Hello, World!" },
+    { "role": "assistant", "content": null,
+      "tool_calls": [{
+        "id": "call_abc123",
+        "type": "function",
+        "function": { "name": "Edit" ,
+          "arguments": "{\"path\":\"hello.py\",\"content\":\"print('Hello, World!')\"}"
+        }}
+      ]},
+    { "role": "tool" , "tool_call_id": "call_abc123",
+      "content": "{\"success\":true,\"path\":\"hello.py\"}" }
+  ],
+  "tools": [{
+    "type": "function",
+    "function": { "name": "Edit" ,
+      "parameters": { "type": "object", "required": ["path", "content"] }
+  }}]
+}
+```
+
+#### 模型最终返回
+
+```text
+{
+  "model": "glm-5.2" ,
+  "choices": [{
+    "finish_reason": "stop" ,
+    "message": {
+      "role": "assistant",
+      "content": "已创建 hello.py，文件内容为：\nprint('Hello, World!')"
+    }
+  }]
+}
+```
+
+**第二次请求** Harness 把工具结果作为 `role: tool` 追加到消息列表，模型读取结果后返回最终回答。
+
+### Agent 核心构成
+
+围绕 Agent Loop，五类模块共同支撑任务运行。
+
+| 模块 | 职责 |
+| --- | --- |
+| Context | 组织当前任务所需的上下文信息。 |
+| State / Session | 维护任务进度与会话状态。 |
+| Tool System | 连接并调用外部能力。 |
+| Execution Environment | 提供文件、终端、浏览器等实际操作环境。 |
+| Permission / Guardrails | 控制权限、边界与安全约束。 |
+
+Loop 读取上下文、调用工具、在环境中执行，并将结果与进度写回状态；权限约束贯穿执行过程。
 
 ### MCP
 
-MCP（Model Context Protocol）是一种连接 Agent 与外部工具、数据源的开放协议，让 Agent 可以用统一方式发现和调用外部能力。
+**MCP**：一种开放协议，让外部能力以工具的形式被 Agent 发现和调用。
 
-![alt text](../public/images/image-7.png)
+**本地 MCP**：运行在本机，通过本地进程与 Agent 通信。
 
-MCP 按部署方式主要分为两类：
+**远程 MCP**：运行在服务器，通过网络与 Agent 通信。
 
-- **本地 MCP**：运行在本机，通过本地进程与 Agent 通信
-- **远程 MCP**：运行在服务器，通过网络与 Agent 通信
+Agent 的工具主要有两种来源：Agent 直接调用内置的搜索、文件、终端和代码工具；也可以通过 MCP 连接外部网站、数据库、业务系统和云服务。MCP 提供连接方式，具体能力由接入的服务决定。
 
-### Skills：面向任务的能力封装
+### Skills
 
-Skill 是把专家经验、工作流、品味与工具使用方式，封装成可发现、可分发、可复用、可迭代的 Agent 能力单元。
+Skill 把一类任务的方法封装成 Agent 可复用的能力单元。
 
-- **可复用 / 可分发**：像 Agent 的能力包，可安装、共享、跨任务复用。
-- **渐进式披露**：先发现、后加载、按需读取，减少 Context 占用。
-- **模块化 / 可组合**：小 Skill 可以组合成更复杂的 Agent 能力。
-- **经验可执行化**：把专家经验、SOP、品味、工具使用方式沉淀成 Agent 可执行的方法。
-- **可迭代 / 可评测**：Skill 可以独立升级和验证，无需重新训练模型。
-  ![alt text](../public/images/image-8.png)
+**五个特征**
 
----
+**可复用与可分发** 一份 Skill 可以安装、共享，并跨任务复用。
 
-# 三、AI Coding 工具链
+**渐进式披露** 先发现，后加载，按需读取。
 
-## 开发环境准备
+**模块化与可组合** 小 Skill 可以组合成更复杂的能力。
 
-### PowerShell 7
+**经验可执行化** 把 SOP 和工具用法沉淀成方法。
 
-https://github.com/powershell/powershell
-Windows 下更现代的 Shell，适合日常开发、脚本编写和 CLI Agent 使用。
+**可迭代与可评测** 可以独立升级和验证，无需重新训练模型。
 
-### Windows Terminal
+Agent 使用 Skill 通常经历四个步骤：
 
-https://github.com/microsoft/terminal
-统一的终端入口，支持多标签和分屏，适合同时管理多个 CLI 或 Agent 会话。
+1. **发现 Skill**：先看到名称、描述和触发条件。
+2. **加载核心说明**：读取 `SKILL.md`，了解使用方法和执行步骤。
+3. **按需加载资源**：需要时读取 `examples/`、`templates/`、`scripts/`、`references/` 中的示例、模板、脚本和参考资料。
+4. **执行对应能力**：调用 Tools、MCP、CLI 或脚本完成任务。
 
-### Node.js 22+
+这四步体现了渐进式披露：先发现适用能力，再加载说明和任务所需资源。
 
-许多 AI Coding CLI、MCP Server 以及 npm / npx 工具都依赖 Node.js。
+### Context
 
-### Python 3+
+上下文组成
 
-自动化、数据处理和脚本工具常见的运行环境。
+**Instructions**：系统指令 / 开发者指令 / 已加载的 Skill 指令
 
-### Git
+**Messages**：用户输入、模型回复与 tool_call，以及 Tool Result。
 
-基础开发环境，用于版本控制、分支管理和变更追踪。
+**Tools**：当前允许模型调用的 Tools，以及 MCP 提供的 Schema
 
-### WSL（可选）
+文件、代码和终端输出需要先由 Tool 读取、检索或执行，结果才会进入这次请求。
 
-提供更完整的 Linux 环境。如果经常使用 Linux Shell、Docker 或部分 MCP 工具，WSL 可以减少兼容性问题。
+上下文压缩
 
-### 推荐组合
+Context Window：一次请求可容纳的 Token 上限。
 
-> Windows Terminal + PowerShell 7 + Node.js 22+ + Python 3+，WSL 按需安装。
+压缩通常包括以下操作：
 
-## Agent 软件
+- **清理 Tool Result**：删除或截断终端日志、搜索结果、长代码等旧输出。
+- **总结历史消息**：把较早的用户消息、Agent 回复和执行过程总结成 Summary。
+- **保留近期上下文**：保留最近几轮 Messages 与当前任务状态。
 
-- **CLI**：Claude Code、OpenCode、OpenCode 2、Pi Coding Agent、OMP（oh-my-pi）、Codex CLI
-- **IDE**：Cursor、Qoder、CodeBuddy、Trae
-- **App**：Codex、WorkBuddy、Qoder Work、Trae Work
+### KV Cache：单次推理中的内部缓存
 
-## Agent 配置与目录结构
+以“写一个 Python 文件读取日志并统计错误行数”为例，模型逐步生成内容时，可以通过 KV Cache 复用前面已经计算过的状态。
 
-以 Claude Code 为例，配置主要分为**用户级**与**项目级**：前者用于个人跨项目复用，后者用于当前项目与团队协作。
+- **没有 KV Cache**：逐步生成时，需要重复计算已有前缀的状态。
+- **使用 KV Cache**：将已处理 Token 的 Key 和 Value 缓存下来，后续生成复用历史状态，减少重复计算。
 
-```text
-~/.claude/                         # 用户级目录
-├── CLAUDE.md                      # 个人通用指令
-├── settings.json                  # 个人设置：权限、Hooks 等
-└── skills/<name>/SKILL.md          # 个人 Skills
+新 Token 仍需要与已有上下文进行注意力计算。缓存节省的是历史状态的重复计算，并不意味着后续生成不再依赖前面的内容。
 
-项目根目录/
-├── CLAUDE.md                      # 项目背景、开发约定、常用命令
-├── .mcp.json                      # 项目共享的 MCP 配置
-└── .claude/
-    ├── settings.json              # 项目共享设置
-    ├── settings.local.json        # 当前项目的个人设置
-    ├── rules/*.md                 # 按主题或文件路径组织的规则
-    ├── skills/<name>/SKILL.md      # 项目 Skills
-    └── agents/*.md                # 自定义子 Agent
-```
+### Prompt Cache：跨请求复用相同前缀
 
-`~` 表示用户主目录：macOS / Linux 通常是 `/Users/用户名` 或 `/home/用户名`，Windows 对应 `%USERPROFILE%`，例如 `C:\Users\用户名`。以上为默认位置与常用文件，按需创建即可。
+服务商匹配请求前缀，命中后直接复用已计算结果，减少重复计算成本。
 
-- **指令与规则**：`CLAUDE.md` 提供持续使用的上下文和约定；`rules/` 可拆分规则，并按文件路径限定加载范围。
-- **设置与能力**：`settings.json` 配置运行行为；MCP 接入工具；Skills 根据任务需要加载，也可手动调用。
-- **系统提示词**：由工具内置并组织；`CLAUDE.md` 和 Rules 是用户补充的指令，不等同于完整的系统提示词，也不能代替权限控制。
+**缓存关系**：都复用不变前缀，减少重复计算。
 
-参考：[Claude Code 官方目录说明](https://code.claude.com/docs/en/claude-directory)、[配置说明](https://code.claude.com/docs/en/settings)。
+KV Cache 从模型内部计算的角度描述单次推理中的缓存；Prompt Cache 从推理服务的角度描述多次请求间的前缀复用。
 
-## CC Switch：统一管理 Agent 配置
+Prompt Cache 命中时，可复用已计算的前缀状态（通常就是 KV Cache）。
 
-项目地址：[GitHub](https://github.com/farion1231/cc-switch)
+**实践启发**
 
-### 解决的问题
+- 系统提示词和工具定义保持固定。
+- 用户输入、运行结果等动态信息追加到末尾。
 
-不同 Coding Agent 的 Provider、Model、API Key 和 Base URL 配置通常彼此分散，切换和维护成本较高。
+以下历史计价示例说明普通输入与缓存命中输入的差别：
 
-### 主要能力
+| 模型 | 普通输入 | 缓存命中输入 |
+| --- | --- | --- |
+| GLM-5.3 | 8 元 / 百万 Token | 2 元 / 百万 Token |
+| GLM-5.3-Flash | 0.4 元 / 百万 Token | 0.115 元 / 百万 Token |
 
-- 统一管理 Claude Code、Codex、OpenCode 等工具
-- 快速切换 Provider 和 Model
-- 提供 API Proxy，统一转发模型请求
-- 管理 MCP 与 Skills 配置
-- 减少手动修改 JSON、TOML 和环境变量的操作
+这些价格包含阶段性优惠，仅用于说明计价关系。缓存命中的输入可能采用更低计价，从而减少重复前缀的处理成本；实际价格以服务商公布的信息为准。
 
-### 工具定位
+## 三、AI Coding 工具链
 
-> CC Switch 是 Coding Agent 的配置管理、切换与 API 代理工具。
+### 本地开发环境
 
-```text
-Coding Agent → CC Switch（配置切换 / API Proxy）→ Provider / Model
-```
+**[Node.js 22+](https://nodejs.org/en)**：运行 JavaScript / TypeScript 工具，许多 Coding Agent、MCP Server 依赖它。
 
-## 常见 API 格式
+**[Python 3+](https://www.python.org/)**：运行自动化脚本、数据处理与 Python 工具。
+
+**[PowerShell 7](https://github.com/PowerShell/PowerShell)**：Windows 原生 Shell，Agent 调用系统能力更直接。
+
+**[Windows Terminal](https://github.com/microsoft/terminal)**：统一承载 PowerShell、WSL 等会话，支持多标签和分屏。
+
+**[Git](https://git-scm.com/)**：Git Bash 提供类 Unix 命令行；Git 负责版本管理与代码协作。
+
+**[WSL](https://learn.microsoft.com/en-us/windows/wsl/) 可选**：在 Windows 中运行 Linux 用户空间，兼容 Bash 和 Linux 工具链，无需双系统。
+
+### 主流 Agent
+
+#### [Claude Code](https://code.claude.com/docs/en/overview)：成熟生态
+
+推出较早，产品成熟度高，围绕 **Skills、Hooks、Subagent、MCP、Plugin** 等形成了完整的 Agent 能力与扩展生态。整体工具链和社区沉淀都比较成熟。
+
+#### [Codex](https://github.com/openai/codex)：一体化工作台
+
+从 CLI 延伸到 **Desktop 与 Cloud**，形成完整的一体化 Coding Agent 工作台；**Desktop 交互体验出色，Browser Use / Computer Use 实用，本地与云端任务衔接顺畅。**
+
+#### [OpenCode](https://github.com/anomalyco/opencode)：开源通用
+
+**完全开源、不绑定模型厂商**，可自由接入不同 Provider 和本地模型。整体配置自由度和可扩展性高，是通用型开源 Coding Agent 的代表。
+
+#### [Pi](https://github.com/earendil-works/pi)：极简底座
+
+刻意保持极简，默认核心只有 **read、write、edit、bash**，不预设复杂的 Agent 工作流；同时支持 **Extensions、Skills、Packages**，可在轻量底座上按需扩展。
+
+#### [OMP](https://github.com/Raudbjorn/omp)：全能增强
+
+基于 Pi 做了大量工程能力增强，内置 **LSP、Browser、Debugger、Subagent** 等能力，并提供 **Role 与模型路由**。相比 Pi 更强调高级能力开箱即用，同时保留较强的可配置性。
+
+#### [DSH](https://github.com/deepseek-ai/deepseek-harness)：可组合架构
+
+采用 **Everything is a Plugin** 的架构思路，Model、Tool、Skill、Agent Loop、Session、Sandbox、UI 等模块都可以独立替换和组合。采用 **本地 Host + Web** 的交互方式。
+
+### CC Switch：配置切换与本地代理
+
+配置切换
+
+#### [CC Switch](https://github.com/Hortus-Edenensis/cc-switch)
+
+管理「用哪套配置」
+
+把多个 Coding Agent 的连接配置集中管理，同时提供本地代理能力。
+
+Provider · Model · API Key · Base URL
+
+**配置管理**：集中管理多套 Provider、模型、API Key、Base URL 等配置，需要时一键切换。
+
+**MCP 与 Skills**：顺带统一维护 MCP Server 和 Skills，让不同 Agent 保持一致。
+
+**本地代理**：支持格式转换、热切换、故障切换和 Provider 健康监测。
+
+CC Switch 既能切换配置，也能在本地转发请求。
+
+### 常见 API 格式
 
 不同模型和 Provider 常见的接口格式包括：
 
-- **OpenAI Chat Completions**（`POST /v1/chat/completions`）：经典的 `messages` 对话格式，每轮请求携带全量消息历史。
-- **Anthropic Messages**（`POST /v1/messages`）：Claude Code 使用的消息式接口，每轮请求携带全量消息历史，工具调用采用 Anthropic 的内容块格式。
-- **OpenAI Responses**（`POST /v1/responses`）：Codex 使用的接口格式，通过 `previous_response_id` 关联上一轮响应，支持只传递新的输入和工具结果，无需客户端重复发送完整历史。
+#### OpenAI Chat Completions
 
-## 9Router：统一模型网关
+`POST /v1/chat/completions`
 
-### 解决的问题
+经典的 `messages` 对话格式，每轮请求携带全量消息历史。
 
-不同 Coding Agent、模型和供应商之间的 API 格式与接入方式并不统一。
+#### Anthropic Messages
 
-### 主要能力
+`POST /v1/messages`
 
-- 提供统一 API 入口
-- 支持多 Provider / Model 路由
-- 支持 Failover
-- 管理配额与用量
-- 进行 API 协议适配
+Claude Code 使用的消息式接口，每轮请求携带全量消息历史，工具调用采用 Anthropic 的内容块格式。
 
-### 工具定位
+#### OpenAI Responses
 
-> 9Router 是位于 Coding Agent 与模型之间的 AI Gateway / Router。
+`POST /v1/responses`
 
-## Web Search 与 Web Fetch
+Codex 使用的接口格式，通过 `previous_response_id` 关联上一轮响应，支持根据需要只传递新的输入和工具结果，客户端无需每次重复发送完整历史。
 
-### Tavily（[官网](https://www.tavily.com/)）：偏 Search / Research
+### 模型网关
 
-- Web Search、Extract、Crawl、Research
-- 适合资料搜索、文档查询和技术调研
-- 支持 MCP，也可以通过 CLI + Skills 接入
+#### [9Router](https://github.com/decolua/9router)
 
-### Firecrawl（[官网](https://www.firecrawl.dev/)）：偏 Fetch / Crawl
+**多 Provider 接入** 通过 OAuth、API Key 等方式接入多个 Provider，OAuth Token 自动刷新。
 
-- Search、Scrape、Crawl、Extract
-- 擅长将网页转换为干净、结构化的内容
-- 支持动态网页和批量抓取
-- 支持 MCP，也可以通过 CLI + Skills 接入
+**模型组合与多模态** 按场景组合文本、图像、音频等模型，并设置多级 Fallback。
 
-### 接入方式
+**请求适配** 提供统一入口，转换 OpenAI、Claude、Gemini 等请求格式。
 
-- **MCP**：直接作为 Agent 的 Tools 使用
-- **CLI + Skills**：Agent 通过命令行调用，Skill 负责说明使用方法和流程
+**上下文优化** RTK、Caveman 等。
 
-### 实践组合
+#### 其他模型网关
 
-> 在内网或受限环境中，可以使用 Tavily + Firecrawl 构建 Web Search / Web Fetch 能力。
+#### [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)
 
-## 浏览器自动化
+CLI 代理
 
-浏览器自动化让 Agent 能够访问网页、操作页面并验证结果，底层通常基于 Chrome DevTools Protocol（CDP）、Playwright，再通过 CLI、Skill 或 Agent 框架接入。
+把多个 CLI 账号代理成兼容多种协议的本地 API。
 
-**MCP 工具**
+#### [New API](https://github.com/QuantumNous/new-api)
 
-- **[Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp)**：面向开发调试，提供 Console、Network、Performance 和页面检查能力。
-- **[Playwright MCP](https://github.com/microsoft/playwright-mcp)**：面向浏览器自动化，提供页面访问、点击、输入和 UI 测试能力。
+模型聚合
 
-**Agent 浏览器工具与框架**
+面向平台化的模型聚合、渠道管理与用量计费。
 
-![Browser Harness、Browser Use 与 agent-browser 对比](../public/images/browser-agent-comparison.png)
+#### [Sub2API](https://github.com/Wei-Shaw/sub2api)
 
-这些工具通过 CLI、MCP 或 Skill 暴露给 Agent，分别承担浏览器调试、页面自动化和任务执行等职责。
+额度分发
 
-## skills
+偏订阅额度分发、账号池管理与并发控制。
 
-### Skill Manager
+### WebSearch 和 WebFetch
 
-[Skills Manager](https://github.com/xingkongliang/skills-manager) 是一个跨平台的桌面 Skill 管理工具，提供统一 Skill 库、跨 Agent 部署、Preset 管理、版本更新和 Git 备份同步，支持 50+ 个 AI Coding 工具。
+#### [Tavily](https://www.tavily.com/)
 
-skills.sh 是开放的 Agent Skills 目录与排行榜，可以用于：
+面向 AI Agent 的 Web 访问层，覆盖搜索、内容提取、站点 Map/Crawl 与 Research。
 
-- 搜索和发现社区 Skills
-- 查看 Trending、Hot、Official 等分类
-- 安装可复用的任务能力
+#### [Firecrawl](https://www.firecrawl.dev/)
 
-```bash
-npx skills add <owner/repo>
-```
+面向 AI 的 Web 数据 API，把搜索结果或网页转成 Markdown、JSON 等内容，并支持整站 Crawl。
 
-## Agent 会话管理
+其他产品
 
-### [Herdr](https://github.com/herdrdev/herdr)
+[Exa](https://exa.ai/)、[Brave](https://api.search.brave.com/app/documentation/web-search/get-started)、[TinyFish](https://www.tinyfish.ai/)
 
-Herdr 是面向 AI Coding Agent 的终端工作区管理器。它通过后台 Session Server 持有真实终端进程，并提供 Workspace、Tab 和 Pane 等组织方式。
+接入方式 **MCP** / **Skill + CLI**
 
-- **持久化 Session**：关闭终端、断开 SSH 后，Agent、Shell、测试和服务仍可继续运行。
-- **Agent 状态识别**：显示 Agent 的 `working`、`blocked`、`done` 和 `idle` 状态。
-- **多 Workspace**：在不同项目或任务中分别管理 Claude Code、Codex、Cursor、OpenCode 等终端会话。
-- **远程与自动化**：支持 SSH 连接，并提供 CLI 和 Socket API，便于脚本或其他 Agent 操作会话。
-- **多 Agent 协作**：多个 Agent 可在不同 Pane 中并行运行，统一查看状态并切换会话。
+### 浏览器自动化
 
-### [Orca](https://github.com/stablyai/orca)
+先区分调试、测试和长期任务执行，再选择对应的浏览器工具。
 
-Orca 是面向并行 Coding Agent 的 ADE（Agent Development Environment），将多个 Agent、Git Worktree、终端、浏览器和代码审查集中到一个工作台中。
+**[Chrome DevTools MCP / CLI](https://github.com/ChromeDevTools/chrome-devtools-mcp)**：偏开发调试，直接使用 Console、Network、Performance 和页面检查能力。
 
-- **并行 Worktree**：为不同 Agent 创建隔离的 Git Worktree，并行执行同一个任务，再比较和合并结果。
-- **Agent 工作台**：统一管理 Codex、Claude Code、OpenCode、Pi 等终端 Agent。
-- **浏览器与设计模式**：通过浏览器选择页面元素，将对应的 HTML、CSS 和截图发送给 Agent。
-- **远程与移动协作**：支持 SSH Worktree，并可通过移动端查看状态、接收通知和继续交互。
-- **工程协作**：支持 Diff 标注、文件拖拽、GitHub / Linear 集成，以及用于自动化的 Orca CLI。
+**[Playwright MCP / CLI](https://github.com/microsoft/playwright-mcp)**：偏浏览器自动化，执行页面访问、点击、输入和 UI 测试。
 
----
+**[Browser Harness](https://github.com/browser-use/browser-harness)**：可扩展的浏览器执行层，适合个人 Agent、内部工具和长尾网站。
 
-# 四、AI Coding 工作流
+**需要可长期演进的浏览器能力**
 
-## 4.1 AI Coding 通用工作流
+**[agent-browser](https://github.com/vercel-labs/agent-browser)**：标准化浏览器 CLI，适合 AI Coding、前端验收和 E2E。
 
-![AI Engineering：用 Coding Agent 构建更好的软件](../public/images/ai-engineering-workflow.png)
+**主要执行 AI Coding 中的网页操作**
 
-## 4.2 Agent 开发工作流
+**[Browser Use](https://github.com/browser-use/browser-use)**：任务级 Browser Agent 框架，适合构建浏览器 Agent 产品与任务自动化。
 
-### SDD：Spec-Driven Development
+**要构建完整的 Browser Agent 产品**
 
-SDD（规范驱动开发）是先用结构化 Spec 明确需求、约束和验收标准，再让 Agent 按 Spec 设计、实现和验证；代码是 Spec 的实现结果，Spec 也是后续 Review 和协作的依据。
+### Skill 的安装和管理
 
-### OpenSpec 与 Superpowers
+从目录发现并安装 Skill，再统一维护不同 Agent 的能力配置。
 
-两者都可以独立完成同一个需求，但侧重点不同：
+#### [skills.sh](https://skills.sh/)
 
-- **[OpenSpec](https://github.com/Fission-AI/OpenSpec)（设计与变更契约）**
-  - **流程**：`propose（提出变更） → review / update（评审修改） → apply（实现） → archive（归档）`
-  - **侧重点**：明确改什么、为什么改、边界和验收标准，并将变更沉淀为结构化记录。
-- **[Superpowers](https://github.com/obra/superpowers)（执行纪律与技能流水线）**
-  - **流程**：`brainstorming（头脑风暴） → plan（编写计划） → execute（执行） → review（审查） → finish（收尾）`
-  - **侧重点**：规范 Agent 的执行过程，通过 Sub-Agent、TDD 和 Review 提升交付质量；Git Worktree 作为可选的隔离机制。
+开放的 Agent Skills 目录与排行榜，用于发现和安装可复用的任务能力。
 
-### mattpocock
+- 按 Trending、Hot、Official 等分类发现社区 Skills。
+- 选定 Skill 后，用 Skills CLI 安装到指定 Agent。
 
-> https://github.com/mattpocock/skills
+[`npx skills add <owner/repo>`](https://www.skills.sh/docs/cli)
+
+#### [Skills Manager](https://github.com/xingkongliang/skills-manager)
+
+跨平台桌面管理工具，提供统一 Skill 库、跨 Agent 部署、Preset 管理、版本更新和 Git 备份同步。
+
+- 统一管理不同来源的 Skills。
+- 跨 Agent、跨项目部署，并保留版本和备份恢复路径。
+
+### Agent 会话管理
+
+长任务需要状态可观察、可交接、可恢复。
+
+#### [Herdr](https://github.com/herdrdev/herdr)
+
+让多个 Agent 同时工作，并且能够被观察、组织和协作。Herdr 通过后台 Session Server 持有真实终端进程。
+
+- **Agent 状态感知：** 识别 working、blocked、done 和 idle 状态。
+- **持久化 Session：** 关闭窗口或断开连接后，任务仍可继续运行。
+- **多 Agent 工作区：** 用 Workspace、Tab 和 Pane 管理多个项目与多个 Agent。
+- **Agent 协作：** 通过共享工作区、终端状态、脚本或 API 协调并行任务。
+
+#### [Orca](https://github.com/stablyai/orca)
+
+面向多 Agent 开发的桌面 IDE，将多个 Agent 与开发工具集中到一个工作台。
+
+- **独立 Worktree：** 每个 Agent 使用独立 Git Worktree，便于并行开发、比较结果和合并代码。
+- **内置浏览器：** 提供 Chromium 浏览器与 Design Mode，可将页面元素直接交给 Agent。
+- **文件与终端：** 提供文件管理器、编辑器和终端分屏，减少工具切换。
+- **代码审查：** 集成 Diff 查看、标注、提交和推送，方便从生成到交付。
+
+## 四、AI Coding 工作流
+
+### Agent 配置目录结构
+
+Claude Code
 
 ```text
-/grill-with-docs（头脑风暴）
-    ↓
-/to-spec（生成 Spec）
-    ↓
-/to-tickets（拆分任务）
-    ↓
-/implement（实现）
-    ↓
-/code-review（代码审查）
+用户级目录   ~/.claude/
+├── CLAUDE.md
+├── settings.json
+├── skills/
+└── agents/*.md
+
+项目根目录   /repo
+├── CLAUDE.md
+├── CLAUDE.local.md
+├── .mcp.json
+└── .claude/
+    ├── settings.json
+    ├── settings.local.json
+    ├── rules/*.md
+    ├── skills/
+    └── agents/*.md
 ```
 
-**grilling/grill-me的核心：
+.agents（支持主流Agent）
 
-- **苏格拉底式提问**：Agent 提问并给出建议，用户作出决定。
-- **设计树分轮推进**：按决策依赖逐轮展开，回答一层再进入下一层。
-- **达成共识后再行动**：Agent 查代码，用户做决策，确认后再进入 Spec 和实现。
+```text
+用户级目录   ~/.agents/
+└── skills/
 
+项目级目录   repo/
+├── AGENTS.md
+└── .agents/
+    └── skills/
+```
 
-## 4.3 AI 开发工作流的趋势
+指令与 Skills 可以复用：在 `AGENTS.md` 中写 `@CLAUDE.md` 来引用内容，`skills/` 直接使用软链接。引用语法是否会自动展开，需要结合目标 Agent 的支持情况确认。
 
-AI 开发工作流正从显式、固定的流程，转向 Agent / Harness 内置的、按任务复杂度自适应的执行机制。外部工具不会消失，但会逐渐变成可插拔的 Skill、规则和评测层。
+目录中的文件分别承担不同职责：`CLAUDE.md` / `AGENTS.md` 保存指令与约定，`settings.json` 保存运行设置，`.mcp.json` 保存 MCP 配置，`rules/` 组织规则，`skills/` 存放 Skills，`agents/*.md` 定义子 Agent。带有 `local` 的文件用于项目中的个人配置。
 
-## 4.4 AI Coding 工程化范式
+### 全局/项目级长期上下文
 
-- **Prompt Engineering**：通过 Prompt等方式，把需求说清楚，让模型按预期回答。
-- **Context Engineering**：让 Agent 看到完成任务所需的信息。
-- **Harness Engineering**：为 Agent 提供执行环境，让它能调用工具、运行代码并获得反馈。
-- **Loop Engineering**：让 Agent 自动执行、验证和修正，直到完成或停止。
-- **Graph Engineering**：让多个运行各自 Loop 的 Agent，按职责、任务依赖和交接关系协作，并根据执行情况动态调整任务图。
+#### CLAUDE.md / AGENTS.md
 
----
+**少而重要**：只保留每个 Session 都值得加载的信息，并控制在 200 行以内。
 
-# 五、实践与思考
+**写不可推断的信息**：记录项目架构、特殊约定、工具命令、历史包袱和踩坑点，不复述代码。
 
-## 如何写一个 Skill
+**分层组织**：项目根目录的 CLAUDE.md 管项目整体，子目录 CLAUDE.md / Rules 管局部；用户级目录用于跨项目通用配置。
 
-1. **选择真实任务**：从重复工作中选择一个需求，先让 Agent 完成任务，得到满意的结果。
-2. **整理执行经验**：记录可复用的步骤、所需资料和工具，以及执行中需要反复提醒的要求。
-3. **编写 Skill**：写清操作步骤，将固定操作整理成脚本，附上模板或示例，并明确结果检查和错误修复方法。
-4. **测试效果**：使用不同任务和模型测试，检查结果是否达标，找出容易失败的环节。
-5. **持续改进**：根据实际使用和分享后的反馈修改，优先解决共性问题，避免堆叠特殊需求。
+**渐进披露**：复杂流程放进 Skill，按任务需要加载。
 
-## 思考
+**能强制的交给工具**：格式化、检查和禁止操作等确定性要求交给 Hooks / Permissions。
 
-- **开发者的角色与工作重心变化**：以前更多是自己掌勺炒菜，现在更像负责整个厨房的主厨：决定做什么、准备好厨房、安排分工，最后把关出菜质量。Agent 承担更多执行工作，人仍然需要懂技术、能判断方案，并对交付负责。
-- **需求澄清与对齐**：开火之前，要先弄清楚给谁吃、有什么忌口、预算多少。做开发也是一样：先和 Agent 把目标、范围、约束和验收标准说清楚，不确定的地方通过提问、读代码和讨论逐步对齐。
-- **搭建验证环境**：让 Agent 能自己运行、测试和修正，形成验证闭环。人从“验证者”退为“审阅者”，重点审阅变更与验证结果，把关交付质量。
+**兼容性**：Claude Code 读取 `CLAUDE.md`；需要复用 `AGENTS.md` 时，可在 `CLAUDE.md` 首行写 `@AGENTS.md`，或直接建立软链接。
 
----
+#### Rules
 
-## 参考大纲
+- **按主题拆分**：前端、后端、测试、安全等规则分开维护，避免一个 Rule 文件越来越大。
+- **按路径生效**：能限定目录或文件类型的规则就限定范围，减少无关加载。
+- **项目优先**：项目规则放项目内，全局只保留真正跨项目通用的规则。
+- **持续治理**：定期清理重复、过时、冲突的 Rules，避免和 CLAUDE.md、Skills 互相打架。
 
-[FlowUs 大纲](https://flowus.cn/d7f002f0-f800-41a7-9803-fa12187417ca)
+### 能力扩展
+
+#### Skills 管理
+
+- **按需安装** 需要什么装什么，不做全量预装。
+- **分层管理** 通用能力放全局，项目专属能力放项目内。
+- **持续治理** 定期清理重复、过时、低使用的 Skill。
+
+#### MCP 管理
+
+- **分层配置** 区分项目级和全局级，**优先项目级**，避免污染所有项目。
+- **尽量少用** 能用 Agent 原生能力、CLI、API 解决的，就不要额外挂 MCP。
+- **控制数量** 减少重复和低价值 MCP，降低依赖、权限和稳定性成本。
+
+#### Hooks
+
+把格式化、Lint、检查和危险操作等确定性动作交给 Hook。
+
+#### LSP / Code Intelligence
+
+为大型代码库提供跳转、引用和类型诊断等代码智能，按语言和项目配置。
+
+#### Subagents
+
+将搜索、Review、Research 等独立任务交给子 Agent，实现上下文隔离与并行执行。
+
+### 如何写一个 Skill
+
+#### 选择真实任务
+
+从重复工作中选择一个需求，先让 Agent 完成任务，得到满意的结果。
+
+#### 整理执行经验
+
+记录可复用的步骤、所需资料和工具，以及执行中需要反复提醒的要求。
+
+#### 编写 Skill
+
+写清操作步骤，将固定操作整理成脚本，附上模板或示例，并明确结果检查和错误修复方法。
+
+#### 测试效果
+
+使用不同任务和模型测试，检查结果是否达标，找出容易失败的环节。
+
+#### 持续改进
+
+根据实际使用和分享后的反馈修改，优先解决共性问题，避免堆叠特殊需求。
+
+### Superpowers 与 mattpocock
+
+#### [Superpowers](https://github.com/obra/superpowers)
+
+通过 Sub-Agent、TDD、Review 和可选的 Git Worktree，提高交付质量。
+
+brainstorming：头脑风暴 **→** plan：编写计划 **→** execute：执行 **→** review：审查 **→** finish：收尾
+
+#### [mattpocock/skills](https://github.com/mattpocock/skills)
+
+用一组 Skills 把需求澄清、Spec、任务拆分、实现和审查串起来。
+
+grill-with-docs：需求澄清 **→** to-spec：生成 Spec **→** to-tickets：拆分任务 **→** implement：实现 **→** code-review：代码审查
+
+### SDD
+
+SDD（Spec-Driven Development，规范驱动开发）：以规格说明为核心，先明确要构建什么，再让 Agent 根据规格完成设计、拆解和实现。
+
+#### [OpenSpec](https://github.com/Fission-AI/OpenSpec)：设计与变更契约
+
+轻量、流程清晰（propose → apply → sync/archive）；规范与代码同仓，持续维护当前系统行为的主规范。
+
+propose：提出变更 **→** review / update：评审修改 **→** apply：开始实现 **→** archive：归档记录
+
+#### [Spec Kit](https://github.com/github/spec-kit)：规范驱动流程
+
+功能更强、扩展性更高，支持预设、扩展和工作流；但标准流程更复杂，规范归档需要额外组织。
+
+Spec：明确需求 **→** Plan：制定方案 **→** Tasks：拆分任务 **→** Implement：开始实现
+
+### AI 工程化
+
+**Prompt Engineering**：关注“怎么写好一条指令”。
+
+**Context Engineering**：关注“怎么给 AI 提供足够且精准的上下文”。
+
+**Harness Engineering**：关注“怎么构建一个系统性的框架来约束和驱动 AI”。
+
+**Loop Engineering**：关注“怎么让 Agent 持续执行、验证并在失败后自我修正”。
+
+**Graph Engineering**：关注“怎么把 Agent、工具和流程编排成可分支、可并行的协作网络”。
+
+## 五、思考
+
+### Agent 元能力：善于借助 Agent 解决问题
+
+从善用搜索引擎、善用网页 Chat，到善用 Agent，解决问题的方式正在从“获取答案”走向“直接完成任务”。
+
+#### 先装一个能用的 Agent
+
+先有一个真正能干活的 Agent，后面的配置、扩展和使用才有基础。
+
+#### 用 Agent 武装 Agent
+
+环境配置、工具安装、能力接入，都可以让 Agent 参与解决；逐步补齐浏览器、终端、CLI、MCP、Skill 等“手、眼、脚”。
+
+#### 善用 Agent 解决陌生问题
+
+遇到不会的、没做过的、复杂的问题，也敢于先让 Agent 尝试，善于借助它探索方法、解决阻塞，不断扩展自己能解决的问题边界。
+
+#### 用 Agent 构建自己的工具
+
+把重复需求和个人工作方式做成 Skill、脚本、小工具、浏览器插件、客户端或自动化流程，让 Agent 不只是现成工具，也能帮你创造新的工具。
+
+核心变化 **从“会使用 Agent”，走向“善于借助 Agent 持续扩展自己的问题解决能力”。**
+
+### AI 编程中的思维方式
+
+用成熟的思维框架，让问题更清晰、验证更可靠。
+
+#### 第一性原理
+
+先回到问题本身。从目标、事实和约束出发，确认问题是否真实存在、能否复现，再判断根因和解决方案，避免 Agent 一上来就执行，却在错误的问题上越走越远。
+
+#### 对抗式审查
+
+主动引入一个反方，让另一个 Agent 从独立视角寻找漏洞、反例、遗漏和失败场景。不是让多个 Agent 相互附和，而是通过交叉审查提高结论可信度。
+
+#### 消融实验
+
+拿掉一个变量，看结果是否变化。某条 Rule、某个 Skill、Tool 或 Prompt 到底有没有价值，不靠感觉判断；保持其他条件不变，删除后重新运行，用结果验证它是否真的有效。
+
+#### 奥卡姆剃刀
+
+优先选择最简单、能工作的方案。能用简单方案解决，就不要过早引入复杂架构；先完成最小可行闭环，再根据真实需求逐步演进，避免过度设计。
+
+#### 不确定性显式化
+
+让不确定性显式出现，要求 Agent 主动说明：哪些结论缺少证据、哪些场景尚未验证、哪些判断只是推测，把隐藏的不确定性变成下一步可以验证的问题。
+
+好的思维框架，可以用很少的 Prompt，激活一整套分析、质疑与验证机制。
+
+### 使用 Coding Agent：AI 工程能力
+
+Coding Agent 正在改变软件开发中人的工作重心：
+
+亲自实现代码 **→** 决定做什么、设计架构、定义 Spec、组织执行和验证结果
+
+**基本工作流**
+
+**Planning**：理解问题、设计架构、明确 Spec 与执行计划。
+
+**Execution**：Agent 构建、测试、验证和修复。
+
+**Deployment & Monitoring**：部署、监控、发现问题并持续迭代。
+
+**Feedback**：根据结果反馈调整计划与执行，进入下一轮闭环。
+
+**核心能力** 驾驭 Coding Agent，放大个人与团队的生产力
+
+**工作流管理**：决定如何拆解、执行与迭代任务。
+
+**Agent 自主性**：控制 Agent 的自主程度、Context 与多 Agent 协作。
+
+**结果审查**：通过测试、Evals、Code Review 等验证输出。
+
+**Agent 与环境定制**：通过 Skills、MCP、Hooks、AGENTS.md 等增强能力。
+
+**Agent 基础原理**：理解 LLM、Harness、Context、Tools、Subagents 等机制。
+
+高效使用 Coding Agent，不是单纯追求更高自主性，而是建立“**规划** → **执行** → **验证** → **反馈**”的工程闭环。
+
+### AI 不是软件工程的银弹
+
+只有能让软件生产率、可靠性和简洁性提升一个数量级的方法，才称得上“银弹”。
+
+#### 软件工程的本质困难
+
+它们不是“写代码慢”，也不会被 AI 自动消除
+
+**目标与概念**：要解决什么、为什么解决，以及什么才算成功。
+
+**复杂性**：业务规则、状态、依赖和边界相互交织。
+
+**约束与一致性**：系统必须适配既有架构、规范、法规和组织约束。
+
+**变化与验证**：需求持续变化，正确性还要靠测试、运行反馈和长期维护确认。
+
+#### AI 能解决 / 缓解的部分
+
+不是消灭复杂性，而是让 AI 直接承接复杂实现
+
+**自主执行**：从任务描述出发，规划、编码、运行、调试并交付。
+
+**复杂度承接**：理解并修改大范围代码，把实现复杂性转交给 Code Agent。
+
+**流程压缩**：串联规划、开发、测试和文档，减少传统协作中的等待。
+
+**并行探索**：同时尝试多种方案，持续迭代，放大个人和小团队的执行规模。
+
+AI 不能替代 **目标与价值、架构取舍、组织共识、验收责任**
+
+AI 主要解决 **复杂实现、重复执行、调试迭代、并行探索**
+
+AI 放大了处理软件复杂性的能力，但没有让复杂性本身消失——所以它仍然不是软件工程的银弹。
