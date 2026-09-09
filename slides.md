@@ -772,17 +772,39 @@ fonts:
 
 ---
 
-<div class="editorial-slide project-context-page">
-  <h1 class="title">管理好项目提示词、Skills 和 MCP</h1>
-  <p class="lead">它们不是简单的配置项，会直接影响 Token 消耗与模型效果。</p>
-  <div class="context-management-grid">
-    <article class="context-management-card context-management-prompt"><h2>CLAUDE.md / AGENTS.md</h2><p>只放项目背景、约束、常用命令和验收标准。内容稳定、短小，避免把所有知识都塞进上下文。</p><strong>越聚焦，模型越容易抓住重点。</strong></article>
-    <article class="context-management-card context-management-skill"><h2>Skills</h2><p>把可复用的方法、步骤和检查方式封装起来，按任务需要加载，而不是每次都重复说明。</p><strong>按需加载，减少无关 Token。</strong></article>
-    <article class="context-management-card context-management-mcp"><h2>MCP</h2><p>只接入当前任务需要的工具，控制工具描述和返回结果，避免工具过多挤占 Context。</p><strong>工具可用，更要边界清楚。</strong></article>
+<div class="editorial-slide project-context-page prompt-only-page">
+  <h1 class="title">全局/项目级长期上下文</h1>
+  <div class="prompt-context-layout">
+    <section class="system-prompt-card">
+    <div class="system-prompt-heading"><h2>CLAUDE.md / AGENTS.md</h2><span>提示词文件</span></div>
+    <div class="system-prompt-principles">
+      <article><strong>少而重要</strong><p>只保留每个 Session 都值得加载的信息，并控制在 200 行以内。</p></article>
+      <article><strong>写不可推断的信息</strong><p>记录项目架构、特殊约定、工具命令、历史包袱和踩坑点，不复述代码。</p></article>
+      <article><strong>分层组织</strong><p>Root CLAUDE.md 管全局，子目录 CLAUDE.md / Rules 管局部。</p></article>
+      <article><strong>渐进披露</strong><p>复杂流程放进 Skill，按任务需要加载。</p></article>
+      <article><strong>能强制的交给工具</strong><p>格式化、检查和禁止操作等确定性要求交给 Hooks / Permissions。</p></article>
+    </div>
+    <div class="system-prompt-compat"><strong>兼容性</strong><span>Claude Code 读取 <code>CLAUDE.md</code>；需要兼容其他 Agent 时，可在首行写 <code>@AGENTS.md</code>，或直接建立软链接。</span></div>
+    </section>
+    <section class="rules-card">
+      <div class="rules-card-heading"><h2>Rules</h2><span>路径级规则</span></div>
+      <ul class="system-prompt-rules"><li><b>按主题拆分</b>：前端、后端、测试、安全等规则分开维护，避免一个 Rule 文件越来越大。</li><li><b>按路径生效</b>：能限定目录或文件类型的规则就限定范围，减少无关加载。</li><li><b>项目优先</b>：项目规则放项目内，全局只保留真正跨项目通用的规则。</li><li><b>持续治理</b>：定期清理重复、过时、冲突的 Rules，避免和 CLAUDE.md、Skills 互相打架。</li></ul>
+    </section>
   </div>
-  <div class="context-management-effects">
-    <article class="context-effect context-effect-token"><h3>Token 消耗</h3><p>无关提示词、Skill 内容和 MCP 返回越多，输入越长，调用成本和上下文压力越高。</p></article>
-    <article class="context-effect context-effect-quality"><h3>模型效果</h3><p>上下文越清晰，模型越容易理解约束、选对工具，并稳定完成任务。</p></article>
+</div>
+
+---
+
+<div class="editorial-slide capability-management-page">
+  <h1 class="title">能力扩展</h1>
+  <div class="capability-focus-grid">
+    <article class="context-management-card context-management-skill"><h2>Skills 管理</h2><ul class="context-management-list"><li><strong>按需安装</strong><span>需要什么装什么，不做全量预装。</span></li><li><strong>分层管理</strong><span>通用能力放全局，项目专属能力放项目内。</span></li><li><strong>持续治理</strong><span>定期清理重复、过时、低使用的 Skill。</span></li></ul></article>
+    <article class="context-management-card context-management-mcp"><h2>MCP 管理</h2><ul class="context-management-list"><li><strong>分层配置</strong><span>区分项目级和全局级，<b>优先项目级</b>，避免污染所有项目。</span></li><li><strong>尽量少用</strong><span>能用 Agent 原生能力、CLI、API 解决的，就不要额外挂 MCP。</span></li><li><strong>控制数量</strong><span>减少重复和低价值 MCP，降低依赖、权限和稳定性成本。</span></li></ul></article>
+  </div>
+  <div class="capability-secondary-grid">
+    <article class="capability-secondary-card capability-hooks"><h2>Hooks</h2><p class="capability-one-line">把格式化、Lint、检查和危险操作等确定性动作交给 Hook。</p></article>
+    <article class="capability-secondary-card capability-lsp"><h2>LSP / Code Intelligence</h2><p class="capability-one-line">为大型代码库提供跳转、引用和类型诊断等代码智能，按语言和项目配置。</p></article>
+    <article class="capability-secondary-card capability-subagents"><h2>Subagents</h2><p class="capability-one-line">将搜索、Review、Research 等独立任务交给子 Agent，实现上下文隔离与并行执行。</p></article>
   </div>
 </div>
 
