@@ -92,6 +92,10 @@ Coding Agent 面向 SWE（Software Engineering，软件工程）场景，通常�
 
 一次任务通常需要多轮模型请求。以“帮我创建 hello.py”为例：
 
+![Agent Loop：从用户提问到工具执行，再把结果写回消息列表](../public/images/image.png)
+
+图中用 `tool_use` 和 `run_bash` 表示通用的工具调用；不同 API 对应的字段和工具名称可能不同，下面以 Chat Completions 的 `tool_calls` 和 `Edit` 为例。
+
 1. 用户需求进入消息列表 `messages[]`。
 2. Harness 把消息历史和工具定义发送给模型。
 3. 模型判断是否需要工具；需要时返回工具名称和参数。
@@ -266,6 +270,8 @@ Loop 读取上下文、调用工具、在环境中执行，并将结果与进度
 
 MCP（Model Context Protocol）是一种连接 AI 应用与外部能力的开放协议。这里主要关注工具调用：Agent 可以通过 MCP 发现服务提供的工具，并提交参数获得结果。协议也支持资源和提示模板，具体由服务端提供、客户端接入。参见 [MCP 服务端概念](https://modelcontextprotocol.io/docs/learn/server-concepts)。
 
+![MCP：Agent 连接内置工具与外部工具](../public/images/image-7.png)
+
 按部署方式，可以区分为：
 
 - **本地 MCP**：运行在本机，通常通过本地进程与 Agent 通信。
@@ -276,6 +282,8 @@ Agent 可以直接调用内置的搜索、文件、终端和代码工具，也�
 ### Skills
 
 Skill 把一类任务的方法封装成 Agent 可复用的能力单元。
+
+![Skill 的运行流程与基本结构](../public/images/image-8.png)
 
 它的价值主要体现在以下方面：
 
@@ -317,6 +325,8 @@ Context Window 是一次请求可容纳的 Token 上限。Token 是模型处理�
 ### KV Cache：单次推理中的内部缓存
 
 以“写一个 Python 文件读取日志并统计错误行数”为例，模型逐步生成内容时，可以通过 KV Cache 复用前面已经计算过的状态。
+
+![KV Cache：不使用缓存与使用缓存的对比](../public/images/image-5.png)
 
 - **没有 KV Cache**：逐步生成时，需要重复计算已有前缀的状态。
 - **使用 KV Cache**：将已处理 Token 的 Key 和 Value 缓存下来，后续生成复用历史状态，减少重复计算。
