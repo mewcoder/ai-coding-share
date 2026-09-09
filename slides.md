@@ -15,7 +15,7 @@ fonts:
   <div class="cover-left">
     <h1><span class="cover-title-en">AI Coding</span><span class="cover-title-cn">从原理到实践</span></h1>
     <div class="cover-rule"></div>
-    <p class="cover-subtitle">从 AI Coding 的发展历程出发，了解 Agent 的基本原理与运行机制，认识 Coding Agent 的工具链，并探索适合个人与团队的工作流实践。</p>
+    <p class="cover-subtitle">从模型趋势与 Agent 原理出发，认识 Coding Agent 工具链，<br />了解工作流与工程实践。</p>
   </div>
   <div class="cover-right">
       <img class="cover-agent-illustration" src="/images/cover-agent-orchestration-transparent.png" alt="AI Coding Agent 编排文档、终端、浏览器与工具的工作流插画" aria-hidden="true" />
@@ -878,6 +878,36 @@ fonts:
     <article class="meta-capability-card meta-capability-build"><div class="meta-capability-number">04</div><div><h2>用 Agent 构建自己的工具</h2><p>把重复需求和个人工作方式做成 Skill、脚本、小工具、浏览器插件、客户端或自动化流程，让 Agent 不只是现成工具，也能帮你创造新的工具。</p></div></article>
   </div>
   <div class="meta-capability-conclusion"><span>核心变化</span><strong>从“会使用 Agent”，走向“善于借助 Agent 持续扩展自己的问题解决能力”。</strong></div>
+</div>
+
+---
+
+<div class="editorial-slide thinking-methods-page">
+  <h1 class="title">AI 编程中的思维方式</h1>
+  <p class="thinking-methods-subtitle">用成熟的思维框架，让问题更清晰、验证更可靠。</p>
+  <div class="thinking-method-list">
+    <article class="thinking-method-card thinking-method-first">
+      <h2>第一性原理</h2>
+      <p>先回到问题本身。从目标、事实和约束出发，确认问题是否真实存在、能否复现，再判断根因和解决方案，避免 Agent 一上来就执行，却在错误的问题上越走越远。</p>
+    </article>
+    <article class="thinking-method-card thinking-method-adversarial">
+      <h2>对抗式审查</h2>
+      <p>主动引入一个反方，让另一个 Agent 从独立视角寻找漏洞、反例、遗漏和失败场景。不是让多个 Agent 相互附和，而是通过交叉审查提高结论可信度。</p>
+    </article>
+    <article class="thinking-method-card thinking-method-ablation">
+      <h2>消融实验</h2>
+      <p>拿掉一个变量，看结果是否变化。某条 Rule、某个 Skill、Tool 或 Prompt 到底有没有价值，不靠感觉判断；保持其他条件不变，删除后重新运行，用结果验证它是否真的有效。</p>
+    </article>
+    <article class="thinking-method-card thinking-method-razor">
+      <h2>奥卡姆剃刀</h2>
+      <p>优先选择最简单、能工作的方案。能用简单方案解决，就不要过早引入复杂架构；先完成最小可行闭环，再根据真实需求逐步演进，避免过度设计。</p>
+    </article>
+    <article class="thinking-method-card thinking-method-uncertainty">
+      <h2>不确定性显式化</h2>
+      <p>让不确定性显式出现，要求 Agent 主动说明：哪些结论缺少证据、哪些场景尚未验证、哪些判断只是推测，把隐藏的不确定性变成下一步可以验证的问题。</p>
+    </article>
+  </div>
+  <div class="thinking-methods-conclusion">好的思维框架，可以用很少的 Prompt，激活一整套分析、质疑与验证机制。</div>
 </div>
 
 ---
