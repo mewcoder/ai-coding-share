@@ -765,7 +765,7 @@ fonts:
       <pre class="directory-tree"><span class="directory-heading">用户级目录</span>  <span class="directory-path">~/.agents/</span>&#10;<span class="directory-skills">└── skills/</span>&#10;&#10;<span class="directory-heading">项目级目录</span>  <span class="directory-path">repo/</span>&#10;<span class="directory-context">├── AGENTS.md</span>&#10;<span class="directory-folder">└── .agents/</span>&#10;<span class="directory-skills">    └── skills/</span></pre>
     </div>
     <div class="directory-note">
-      <div><strong class="directory-note-reuse">CLAUDE.md</strong>：写入 <strong class="directory-note-agent">@AGENTS.md</strong> 复用内容；<br /><strong class="directory-note-skill">skills/</strong>：直接软链接</div>
+      <div><strong class="directory-note-agent">AGENTS.md</strong>：<strong class="directory-note-reuse">@CLAUDE.md</strong> 的内容，实现复用；<br /><strong class="directory-note-skill">skills/</strong>：直接软链接</div>
     </div>
   </div>
 </div>
@@ -832,7 +832,6 @@ fonts:
 
 <div class="editorial-slide">
   <h1 class="title">AI工程化</h1>
-  <p class="lead">外部工具不会消失，但会逐渐变成可插拔的 Skill、规则和评测层。</p>
   <div class="paradigm-layout"><div class="paradigm-row"><h3>Prompt Engineering</h3><p>关注“怎么写好一条指令”。</p></div><div class="paradigm-row"><h3>Context Engineering</h3><p>关注“怎么给 AI 提供足够且精准的上下文”。</p></div><div class="paradigm-row"><h3>Harness Engineering</h3><p>关注“怎么构建一个系统性的框架来约束和驱动 AI”。</p></div><div class="paradigm-row"><h3>Loop Engineering</h3><p>关注“怎么让 Agent 持续执行、验证并在失败后自我修正”。</p></div><div class="paradigm-row"><h3>Graph Engineering</h3><p>关注“怎么把 Agent、工具和流程编排成可分支、可并行的协作网络”。</p></div></div>
 </div>
 
