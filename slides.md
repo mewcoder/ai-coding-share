@@ -5,6 +5,10 @@ aspectRatio: 16/9
 canvasWidth: 1280
 transition: fade
 mdc: true
+fonts:
+  sans: "PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif"
+  mono: "SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,monospace"
+  provider: none
 ---
 
 <div class="editorial-slide cover">
@@ -27,7 +31,7 @@ mdc: true
     <div class="toc-row"><strong>二</strong><h3>Agent 基本原理</h3></div>
     <div class="toc-row"><strong>三</strong><h3>AI Coding 工具链</h3></div>
     <div class="toc-row"><strong>四</strong><h3>AI Coding 工作流</h3></div>
-    <div class="toc-row"><strong>五</strong><h3>实践与思考</h3></div>
+    <div class="toc-row"><strong>五</strong><h3>思考</h3></div>
   </div>
 </div>
 
@@ -492,128 +496,241 @@ mdc: true
   <div class="chapter-index">第三章</div>
   <div class="chapter-copy">
     <h1>AI Coding 工具链</h1>
+    <p>开发环境&nbsp;&nbsp;Agent 选择&nbsp;&nbsp;模型配置&nbsp;&nbsp;能力扩展</p>
   </div>
 </div>
 
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">开发环境准备</h1>
-  <p class="lead">路径、权限、依赖和验证命令稳定，Agent 才有可靠的落点。</p>
-  <div class="environment-layout">
-    <div class="environment-column"><h2>基础环境</h2><div class="environment-item"><h3>PowerShell 7</h3><p>Windows 下更现代的 Shell，适合日常开发、脚本和 CLI Agent。</p></div><div class="environment-item"><h3>Windows Terminal</h3><p>统一承载多标签和分屏，方便管理多个会话。</p></div><div class="environment-item"><h3>Node.js 22+</h3><p>许多 AI Coding CLI、MCP Server 和 npm 工具的运行环境。</p></div><div class="environment-item"><h3>Python 3+</h3><p>自动化、数据处理和脚本工具常见的运行环境。</p></div></div>
-    <div class="environment-column"><h2>工程基础</h2><div class="environment-item"><h3>Git</h3><p>版本控制、分支管理和变更追踪，保留恢复路径。</p></div><div class="environment-item"><h3>WSL</h3><p>可选的 Linux 环境，适合 Docker、Linux Shell 和部分 MCP 工具。</p></div><div class="environment-item"><h3>推荐组合</h3><p>Windows Terminal、PowerShell 7、Node.js 22+ 和 Python 3+，WSL 按需安装。</p></div></div>
-  </div>
-  <div class="environment-bottom">先让 Agent 能稳定运行，再讨论它能完成多复杂的任务。</div>
-</div>
-
----
-
-<div class="editorial-slide tool-page">
-  <div class="tool-name"><h1>CLI</h1><div class="tool-role">终端是工作面</div></div>
-  <div class="tool-content"><h2>适合命令驱动的开发方式</h2><div class="tool-row"><h3>代表工具</h3><p class="tool-links">Claude Code、OpenCode、OpenCode 2、Pi Coding Agent、OMP、Codex CLI</p></div><div class="tool-row"><h3>工作特点</h3><p>贴近 Shell、脚本和远程环境，适合连续执行、自动化和可复现命令。</p></div><div class="tool-row"><h3>使用判断</h3><p>当任务需要频繁读写文件、运行测试或串接命令时，终端工作面更直接。</p></div></div>
-</div>
-
----
-
-<div class="editorial-slide tool-page">
-  <div class="tool-name"><h1>IDE</h1><div class="tool-role">代码与对话在同一工作面</div></div>
-  <div class="tool-content"><h2>适合需要持续查看代码和 Diff 的开发方式</h2><div class="tool-row"><h3>代表工具</h3><p class="tool-links">Cursor、Qoder、CodeBuddy、Trae</p></div><div class="tool-row"><h3>工作特点</h3><p>代码、变更、对话和运行结果在编辑器内持续展开，适合边看边改。</p></div><div class="tool-row"><h3>使用判断</h3><p>当开发者需要频繁审阅局部变更、文件关联和界面反馈时，IDE 更顺手。</p></div></div>
-</div>
-
----
-
-<div class="editorial-slide tool-page">
-  <div class="tool-name"><h1>App</h1><div class="tool-role">任务与会话的工作台</div></div>
-  <div class="tool-content"><h2>适合并行协作和状态查看</h2><div class="tool-row"><h3>代表工具</h3><p class="tool-links">Codex、WorkBuddy、Qoder Work、Trae Work</p></div><div class="tool-row"><h3>工作特点</h3><p>把对话、任务、会话和交付状态放在更完整的工作台中。</p></div><div class="tool-row"><h3>使用判断</h3><p>当任务需要异步运行、并行推进、交接或 Review 时，平台态更合适。</p></div></div>
-</div>
-
----
-
-<div class="editorial-slide">
-  <h1 class="title">Agent 配置与目录结构</h1>
-  <p class="lead">以 Claude Code 为例，配置分为用户级和项目级，分别服务个人复用与团队协作。</p>
-  <div class="code-layout">
-    <pre class="code-block">用户级目录
-~/.claude/
-├── CLAUDE.md
-├── settings.json
-└── skills/{name}/SKILL.md
-项目根目录
-├── CLAUDE.md
-├── .mcp.json
-└── .claude/
-    ├── settings.json
-    ├── settings.local.json
-    ├── rules/*.md
-    ├── skills/{name}/SKILL.md
-    └── agents/*.md</pre>
-    <div class="explanation"><h2>配置的分工</h2><div class="explanation-row"><h3>指令与规则</h3><p>CLAUDE.md 提供持续上下文，rules 按主题或文件路径拆分规则。</p></div><div class="explanation-row"><h3>设置与能力</h3><p>settings.json 配置运行行为，MCP 接入工具，Skills 按任务需要加载。</p></div><div class="explanation-row"><h3>权限边界</h3><p>这些文件是用户补充的上下文和配置，不等同于完整系统提示词，也不能代替权限控制。</p></div></div>
+<div class="editorial-slide environment-page">
+  <h1 class="title">本地开发环境</h1>
+  <div class="environment-light-grid">
+    <article class="environment-item environment-item-node"><h3><a href="https://nodejs.org/en" target="_blank" rel="noreferrer">Node.js 22+</a></h3><p>运行 JavaScript / TypeScript 工具，许多 Coding Agent、MCP Server 依赖它。</p></article>
+    <article class="environment-item environment-item-python"><h3><a href="https://www.python.org/" target="_blank" rel="noreferrer">Python 3+</a></h3><p>运行自动化脚本、数据处理与 Python 工具。</p></article>
+    <article class="environment-item environment-item-powershell"><h3><a href="https://github.com/PowerShell/PowerShell" target="_blank" rel="noreferrer">PowerShell 7</a></h3><p>Windows 原生 Shell，Agent 调用系统能力更直接。</p></article>
+    <article class="environment-item environment-item-terminal"><h3><a href="https://github.com/microsoft/terminal" target="_blank" rel="noreferrer">Windows Terminal</a></h3><p>统一承载 PowerShell、WSL 等会话，支持多标签和分屏。</p></article>
+    <article class="environment-item environment-item-git"><h3><a href="https://git-scm.com/" target="_blank" rel="noreferrer">Git</a></h3><p>Git Bash 提供类 Unix 命令行；Git 负责版本管理与代码协作。</p></article>
+    <article class="environment-item environment-item-wsl"><h3><a href="https://learn.microsoft.com/en-us/windows/wsl/" target="_blank" rel="noreferrer">WSL</a> <small>可选</small></h3><p>在 Windows 中运行 Linux 用户空间，兼容 Bash 和 Linux 工具链，无需双系统。</p></article>
   </div>
 </div>
 
+<!--
+参考资料（官方文档与仓库）：
+- Node.js: https://nodejs.org/en
+- Python: https://www.python.org/
+- PowerShell: https://github.com/PowerShell/PowerShell
+- Windows Terminal: https://github.com/microsoft/terminal
+- Git: https://git-scm.com/
+- WSL: https://learn.microsoft.com/en-us/windows/wsl/
+-->
+
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">CC Switch：配置切换与 API 代理</h1>
-  <p class="lead">把 Provider、Model、API Key 和 Base URL 从项目逻辑中隔离出来。</p>
-  <div class="flow-line"><div class="flow-cell"><h3>Coding Agent</h3><p>Claude Code、Codex、OpenCode 等工具。</p></div><div class="flow-connector"></div><div class="flow-cell"><h3>CC Switch</h3><p>统一切换 Provider、Model、代理、MCP 与 Skills。</p></div><div class="flow-connector"></div><div class="flow-cell"><h3>Provider 与 Model</h3><p>不同服务入口、API Key 和 Base URL。</p></div></div>
-  <div class="rule-list" style="margin-top: 44px"><div class="rule-item"><h3>解决的问题</h3><p>不同 Coding Agent 的连接配置彼此分散，切换和维护成本较高。</p></div><div class="rule-item"><h3>工具定位</h3><p>CC Switch 是 Coding Agent 的配置管理、切换与 API 代理工具。</p></div></div>
+<div class="editorial-slide harness-page">
+  <h1 class="title">主流 Agent</h1>
+  <div class="harness-grid">
+    <article class="harness-card harness-card-claude">
+      <h2><a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noreferrer">Claude Code</a><strong class="harness-card-kicker">成熟生态</strong></h2>
+      <p>推出较早，产品成熟度高，围绕 <strong>Skills、Hooks、Subagent、MCP、Plugin</strong> 等形成了完整的 Agent 能力与扩展生态。整体工具链和社区沉淀都比较成熟。</p>
+    </article>
+    <article class="harness-card harness-card-codex">
+      <h2><a href="https://github.com/openai/codex" target="_blank" rel="noreferrer">Codex</a><strong class="harness-card-kicker">一体化工作台</strong></h2>
+      <p>从 CLI 延伸到 <strong>Desktop 与 Cloud</strong>，形成完整的一体化 Coding Agent 工作台；<strong>Desktop 交互体验出色，Browser Use / Computer Use 实用，本地与云端任务衔接顺畅。</strong></p>
+    </article>
+    <article class="harness-card harness-card-opencode">
+      <h2><a href="https://github.com/anomalyco/opencode" target="_blank" rel="noreferrer">OpenCode</a><strong class="harness-card-kicker">开源通用</strong></h2>
+      <p><strong>完全开源、不绑定模型厂商</strong>，可自由接入不同 Provider 和本地模型。整体配置自由度和可扩展性高，是通用型开源 Coding Agent 的代表。</p>
+    </article>
+    <article class="harness-card harness-card-pi">
+      <h2><a href="https://github.com/earendil-works/pi" target="_blank" rel="noreferrer">Pi</a><strong class="harness-card-kicker">极简底座</strong></h2>
+      <p>刻意保持极简，默认核心只有 <strong>read、write、edit、bash</strong>，不预设复杂的 Agent 工作流；同时支持 <strong>Extensions、Skills、Packages</strong>，可在轻量底座上按需扩展。</p>
+    </article>
+    <article class="harness-card harness-card-omp">
+      <h2><a href="https://github.com/Raudbjorn/omp" target="_blank" rel="noreferrer">OMP</a><strong class="harness-card-kicker">全能增强</strong></h2>
+      <p>基于 Pi 做了大量工程能力增强，内置 <strong>LSP、Browser、Debugger、Subagent</strong> 等能力，并提供 <strong>Role 与模型路由</strong>。相比 Pi 更强调高级能力开箱即用，同时保留较强的可配置性。</p>
+    </article>
+    <article class="harness-card harness-card-dsh">
+      <h2><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noreferrer">DSH</a><strong class="harness-card-kicker">可组合架构</strong></h2>
+      <p>采用 <strong>Everything is a Plugin</strong> 的架构思路，Model、Tool、Skill、Agent Loop、Session、Sandbox、UI 等模块都可以独立替换和组合。采用 <strong>本地 Host + Web</strong> 的交互方式。</p>
+    </article>
+  </div>
+</div>
+
+<!--
+参考资料（官方文档与仓库）：
+- Claude Code: https://code.claude.com/docs/en/overview
+- Codex Computer Use: https://learn.chatgpt.com/docs/computer-use?translationFallback=zh-Hans
+- Codex: https://github.com/openai/codex
+- OpenCode: https://github.com/anomalyco/opencode
+- Pi: https://github.com/earendil-works/pi
+- OMP: https://github.com/Raudbjorn/omp
+- DeepSeek Harness 架构: https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md
+-->
+
+---
+
+<div class="editorial-slide cc-switch-page">
+  <h1 class="title">CC Switch：配置切换与本地代理</h1>
+  <div class="cc-switch-layout">
+    <section class="cc-switch-intro">
+      <div class="cc-switch-label">配置切换</div>
+      <h2><a href="https://github.com/Hortus-Edenensis/cc-switch" target="_blank" rel="noreferrer">CC Switch</a></h2>
+      <p class="cc-switch-key">管理「用哪套配置」</p>
+      <p class="cc-switch-summary">把多个 Coding Agent 的连接配置集中管理，同时提供本地代理能力。</p>
+      <div class="cc-switch-config">Provider · Model · API Key · Base URL</div>
+    </section>
+    <section class="cc-switch-details">
+      <div class="cc-switch-detail"><h3>配置管理</h3><p>集中管理多套 Provider、模型、API Key、Base URL 等配置，需要时一键切换。</p></div>
+      <div class="cc-switch-detail"><h3>MCP 与 Skills</h3><p>顺带统一维护 MCP Server 和 Skills，让不同 Agent 保持一致。</p></div>
+      <div class="cc-switch-detail"><h3>本地代理</h3><p>支持格式转换、热切换、故障切换和 Provider 健康监测。</p></div>
+    </section>
+  </div>
+  <div class="cc-switch-note">CC Switch 既能切换配置，也能在本地转发请求。</div>
 </div>
 
 ---
 
-<div class="editorial-slide">
+<div class="editorial-slide api-formats-page">
   <h1 class="title">常见 API 格式</h1>
-  <p class="lead">URL 相似，不代表消息契约相同。接入时要确认消息结构、工具调用、流式事件和状态续接方式。</p>
-  <div class="api-table" style="margin-top: 36px"><div class="tool-row"><h3>OpenAI Chat Completions</h3><p><code>POST /v1/chat/completions</code><br />以 messages 为中心，每轮请求通常携带完整消息历史。</p></div><div class="tool-row"><h3>Anthropic Messages</h3><p><code>POST /v1/messages</code><br />以 system、messages、内容块和工具定义组织请求。</p></div><div class="tool-row"><h3>OpenAI Responses</h3><p><code>POST /v1/responses</code><br />通过 previous_response_id 关联上一轮，减少重复传递。</p></div></div>
+  <p class="lead">不同模型和 Provider 常见的接口格式包括：</p>
+  <div class="api-format-stack">
+    <div class="api-format-row api-format-chat">
+      <div class="api-format-index">01</div>
+      <div class="api-format-name"><h2>OpenAI Chat Completions</h2><code>POST /v1/chat/completions</code></div>
+      <p>经典的 <code>messages</code> 对话格式，每轮请求携带全量消息历史。</p>
+    </div>
+    <div class="api-format-row api-format-anthropic">
+      <div class="api-format-index">02</div>
+      <div class="api-format-name"><h2>Anthropic Messages</h2><code>POST /v1/messages</code></div>
+      <p>Claude Code 使用的消息式接口，每轮请求携带全量消息历史，工具调用采用 Anthropic 的内容块格式。</p>
+    </div>
+    <div class="api-format-row api-format-responses">
+      <div class="api-format-index">03</div>
+      <div class="api-format-name"><h2>OpenAI Responses</h2><code>POST /v1/responses</code></div>
+      <p>Codex 使用的接口格式，通过 <code>previous_response_id</code> 关联上一轮响应，支持根据需要只传递新的输入和工具结果，客户端无需每次重复发送完整历史。</p>
+    </div>
+  </div>
 </div>
 
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">9Router：统一模型网关</h1>
-  <p class="lead">9Router 位于 Coding Agent 与模型之间，负责入口、路由、降级与协议适配。</p>
-  <div class="flow-line"><div class="flow-cell"><h3>调用方</h3><p>Coding Agent、业务脚本和工具。</p></div><div class="flow-connector"></div><div class="flow-cell"><h3>9Router</h3><p>统一入口、Provider 路由与故障切换。</p></div><div class="flow-connector"></div><div class="flow-cell"><h3>模型服务</h3><p>不同 Provider、Model 和协议。</p></div></div>
-  <div class="capability-list"><div class="capability"><h3>统一入口</h3><p>减少接入差异。</p></div><div class="capability"><h3>模型路由</h3><p>按任务选择模型。</p></div><div class="capability"><h3>Failover</h3><p>服务异常时保留路径。</p></div><div class="capability"><h3>配额用量</h3><p>记录调用与消耗。</p></div><div class="capability"><h3>协议适配</h3><p>隔离上游差异。</p></div></div>
+<div class="editorial-slide gateway-page">
+  <h1 class="title">模型网关</h1>
+  <div class="gateway-grid">
+    <section class="gateway-card gateway-9router gateway-featured">
+      <div class="gateway-featured-copy">
+        <div class="gateway-card-head"><h2><a href="https://github.com/decolua/9router" target="_blank" rel="noreferrer">9Router</a></h2></div>
+        <div class="gateway-feature-grid">
+          <div class="gateway-feature"><strong>多 Provider 接入</strong><span>通过 OAuth、API Key 等方式接入多个 Provider，OAuth Token 自动刷新。</span></div>
+          <div class="gateway-feature"><strong>模型组合与多模态</strong><span>按场景组合文本、图像、音频等模型，并设置多级 Fallback。</span></div>
+          <div class="gateway-feature"><strong>请求适配</strong><span>提供统一入口，转换 OpenAI、Claude、Gemini 等请求格式。</span></div>
+          <div class="gateway-feature"><strong>上下文优化</strong><span>RTK、Caveman 等。</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="gateway-card gateway-others">
+      <div class="gateway-card-head"><h2>其他模型网关</h2><span>简要介绍</span></div>
+      <div class="gateway-others-list">
+        <div class="gateway-mini gateway-cliproxy">
+          <div class="gateway-card-head"><h2><a href="https://github.com/router-for-me/CLIProxyAPI" target="_blank" rel="noreferrer">CLIProxyAPI</a></h2><span>CLI 代理</span></div>
+          <p>把多个 CLI 账号代理成兼容多种协议的本地 API。</p>
+        </div>
+        <div class="gateway-mini gateway-newapi">
+          <div class="gateway-card-head"><h2><a href="https://github.com/QuantumNous/new-api" target="_blank" rel="noreferrer">New API</a></h2><span>模型聚合</span></div>
+          <p>面向平台化的模型聚合、渠道管理与用量计费。</p>
+        </div>
+        <div class="gateway-mini gateway-sub2api">
+          <div class="gateway-card-head"><h2><a href="https://github.com/Wei-Shaw/sub2api" target="_blank" rel="noreferrer">Sub2API</a></h2><span>额度分发</span></div>
+          <p>偏订阅额度分发、账号池管理与并发控制。</p>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 
 ---
 
-<div class="editorial-slide tool-page">
-  <div class="tool-name"><h1>Tavily</h1><div class="tool-role">偏 Search 与 Research</div></div>
-  <div class="tool-content"><h2>面向 Agent 的搜索与研究接口</h2><div class="tool-row"><h3>主要能力</h3><p>Web Search、Extract、Crawl、Research。</p></div><div class="tool-row"><h3>适合任务</h3><p>资料搜索、文档查询、技术调研，以及把搜索结果交给下一步 Agent。</p></div><div class="tool-row"><h3>接入方式</h3><p>支持 MCP，也可以通过 CLI 与 Skills 接入。</p></div><div class="tool-row"><h3>实践判断</h3><p>先约束查询边界，再决定哪些来源、摘要和线索值得带回 Context。</p></div></div>
+<div class="editorial-slide web-products-page">
+  <h1 class="title">WebSearch 和 WebFetch</h1>
+  <div class="web-products-stage">
+    <article class="web-product-card web-product-tavily">
+      <div class="web-product-copy">
+        <h2><a href="https://www.tavily.com/" target="_blank" rel="noreferrer">Tavily</a></h2>
+        <p>面向 AI Agent 的 Web 访问层，覆盖搜索、内容提取、站点 Map/Crawl 与 Research。</p>
+      </div>
+    </article>
+    <article class="web-product-card web-product-firecrawl">
+      <div class="web-product-copy">
+        <h2><a href="https://www.firecrawl.dev/" target="_blank" rel="noreferrer">Firecrawl</a></h2>
+        <p>面向 AI 的 Web 数据 API，把搜索结果或网页转成 Markdown、JSON 等内容，并支持整站 Crawl。</p>
+      </div>
+    </article>
+    </div>
+    <div class="web-products-meta">
+      <div class="web-related-products">
+        <span>其他产品</span>
+        <p><a href="https://exa.ai/" target="_blank" rel="noreferrer">Exa</a>、<a href="https://api.search.brave.com/app/documentation/web-search/get-started" target="_blank" rel="noreferrer">Brave</a>、<a href="https://www.tinyfish.ai/" target="_blank" rel="noreferrer">TinyFish</a></p>
+      </div>
+      <div class="web-products-integration">
+        <span class="web-products-integration-heading">接入方式</span>
+        <strong>MCP</strong>
+        <span class="web-products-integration-separator">/</span>
+        <strong>Skill + CLI</strong>
+      </div>
+    </div>
 </div>
 
 ---
 
-<div class="editorial-slide tool-page">
-  <div class="tool-name"><h1>Firecrawl</h1><div class="tool-role">偏 Fetch 与 Crawl</div></div>
-  <div class="tool-content"><h2>把网页转换成下游可以消费的内容</h2><div class="tool-row"><h3>主要能力</h3><p>Search、Scrape、Crawl、Extract。</p></div><div class="tool-row"><h3>适合任务</h3><p>知识采集、站点级抓取、动态网页处理和批量提取。</p></div><div class="tool-row"><h3>接入方式</h3><p>支持 MCP，也可以通过 CLI 与 Skills 接入。</p></div><div class="tool-row"><h3>实践判断</h3><p>先分清单页抓取还是多页爬取，再设计范围、频率、落盘和失败降级。</p></div></div>
-</div>
-
----
-
-<div class="editorial-slide">
-  <h1 class="title">Web Search 与 Web Fetch 的接入方式</h1>
-  <p class="lead">同一项外部能力，可以通过协议接入，也可以通过命令和方法包接入。</p>
-  <div class="web-layout"><div class="web-column"><h2>MCP</h2><p>直接作为 Agent 的 Tools 使用，适合统一发现能力并返回结构化结果。</p><ul class="bullet-list"><li>Agent 发现工具描述和参数 Schema。</li><li>调用搜索、抓取或抽取能力。</li><li>把结果写回 Context，支撑下一步判断。</li></ul></div><div class="web-column"><h2>CLI + Skills</h2><p>Agent 通过命令行调用，Skill 负责说明使用方法、参数和流程。</p><ul class="bullet-list"><li>Skill 沉淀常用命令和任务方法。</li><li>CLI 连接具体服务或脚本。</li><li>适合内网或受限环境中的组合方案。</li></ul></div></div>
-</div>
-
----
-
-<div class="editorial-slide">
+<div class="editorial-slide browser-page">
   <h1 class="title">浏览器自动化</h1>
   <p class="lead">先区分调试、测试和长期任务执行，再选择对应的浏览器工具。</p>
-  <div class="browser-layout"><div class="image-panel browser-image"><img src="/images/browser-agent-comparison.png" alt="浏览器工具与框架对比" /></div><div class="browser-tools"><div class="browser-tool"><h3>Chrome DevTools MCP</h3><p>面向开发调试，提供 Console、Network、Performance 和页面检查能力。</p></div><div class="browser-tool"><h3>Playwright MCP</h3><p>面向浏览器自动化，提供页面访问、点击、输入和 UI 测试能力。</p></div><div class="browser-tool"><h3>Agent 浏览器工具与框架</h3><p>通过 CLI、MCP 或 Skill 暴露给 Agent，承担任务执行和长期自动化。</p></div></div></div>
+  <div class="browser-layout">
+    <div class="browser-tools">
+      <div class="browser-tool"><h3><a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank" rel="noreferrer">Chrome DevTools MCP / CLI</a></h3><p>偏开发调试，直接使用 Console、Network、Performance 和页面检查能力。</p></div>
+      <div class="browser-tool"><h3><a href="https://github.com/microsoft/playwright-mcp" target="_blank" rel="noreferrer">Playwright MCP / CLI</a></h3><p>偏浏览器自动化，执行页面访问、点击、输入和 UI 测试。</p></div>
+    </div>
+    <div class="browser-comparison">
+      <div class="browser-route browser-route-harness">
+        <div class="browser-route-name"><strong><a href="https://github.com/browser-use/browser-harness" target="_blank" rel="noreferrer">Browser Harness</a></strong></div>
+        <div class="browser-route-copy"><p>可扩展的浏览器执行层，适合个人 Agent、内部工具和长尾网站。</p><b>需要可长期演进的浏览器能力</b></div>
+      </div>
+      <div class="browser-route browser-route-cli">
+        <div class="browser-route-name"><strong><a href="https://github.com/vercel-labs/agent-browser" target="_blank" rel="noreferrer">agent-browser</a></strong></div>
+        <div class="browser-route-copy"><p>标准化浏览器 CLI，适合 AI Coding、前端验收和 E2E。</p><b>主要执行 AI Coding 中的网页操作</b></div>
+      </div>
+      <div class="browser-route browser-route-use">
+        <div class="browser-route-name"><strong><a href="https://github.com/browser-use/browser-use" target="_blank" rel="noreferrer">Browser Use</a></strong></div>
+        <div class="browser-route-copy"><p>任务级 Browser Agent 框架，适合构建浏览器 Agent 产品与任务自动化。</p><b>要构建完整的 Browser Agent 产品</b></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 ---
 
 <div class="editorial-slide">
-  <h1 class="title">Skill Manager：让方法包可发现、可部署</h1>
-  <p class="lead">Skill 规模变大后，也需要来源、版本、适用范围和回滚方式。</p>
-  <div class="manager-layout"><div class="manager-column"><h2>Skills Manager</h2><p>跨平台桌面管理工具，提供统一 Skill 库、跨 Agent 部署、Preset 管理、版本更新和 Git 备份同步。</p><ul class="bullet-list"><li>统一管理不同来源的 Skills。</li><li>跨 Agent、跨项目部署。</li><li>通过版本和备份保留恢复路径。</li></ul></div><div class="manager-column"><h2>skills.sh</h2><p>开放的 Agent Skills 目录与排行榜。</p><ul class="bullet-list"><li>搜索和发现社区 Skills。</li><li>查看 Trending、Hot 和 Official 分类。</li><li>安装可复用的任务能力。</li></ul><div class="manager-command">npx skills add {owner}/{repo}</div></div></div>
+  <h1 class="title">Skill的安装和管理</h1>
+  <p class="lead">从目录发现并安装 Skill，再统一维护不同 Agent 的能力配置。</p>
+  <div class="manager-layout">
+    <div class="manager-column">
+      <h2><a href="https://skills.sh/" target="_blank" rel="noreferrer">skills.sh</a></h2>
+      <p>开放的 Agent Skills 目录与排行榜，用于发现和安装可复用的任务能力。</p>
+      <ul class="bullet-list">
+        <li>按 Trending、Hot、Official 等分类发现社区 Skills。</li>
+        <li>选定 Skill 后，用 Skills CLI 安装到指定 Agent。</li>
+      </ul>
+      <div class="manager-command"><a href="https://www.skills.sh/docs/cli" target="_blank" rel="noreferrer">npx skills add &lt;owner/repo&gt;</a></div>
+    </div>
+    <div class="manager-column">
+      <h2><a href="https://github.com/xingkongliang/skills-manager" target="_blank" rel="noreferrer">Skills Manager</a></h2>
+      <p>跨平台桌面管理工具，提供统一 Skill 库、跨 Agent 部署、Preset 管理、版本更新和 Git 备份同步。</p>
+      <ul class="bullet-list">
+        <li>统一管理不同来源的 Skills。</li>
+        <li>跨 Agent、跨项目部署，并保留版本和备份恢复路径。</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 ---
@@ -621,7 +738,7 @@ mdc: true
 <div class="editorial-slide">
   <h1 class="title">Agent 会话管理</h1>
   <p class="lead">长任务需要状态可观察、可交接、可恢复。</p>
-  <div class="session-layout"><div class="session-column"><h2>Herdr</h2><p>面向 AI Coding Agent 的终端工作区管理器，通过后台 Session Server 持有真实终端进程。</p><ul class="bullet-list"><li>持久化 Session，断开 SSH 后任务仍可继续。</li><li>识别 working、blocked、done 和 idle 状态。</li><li>用 Workspace、Tab 和 Pane 管理多项目与多 Agent。</li><li>支持远程连接、CLI、Socket API 和多 Agent 协作。</li></ul></div><div class="session-column"><h2>Orca</h2><p>面向并行 Coding Agent 的 ADE，将 Agent、Git Worktree、终端、浏览器和代码审查集中到一个工作台。</p><ul class="bullet-list"><li>为不同 Agent 创建隔离 Worktree。</li><li>统一管理 Codex、Claude Code、OpenCode 和 Pi 等终端 Agent。</li><li>支持浏览器选择、Diff 标注和任务交接。</li><li>支持远程与移动协作。</li></ul></div></div>
+  <div class="session-layout"><div class="session-column"><h2><a href="https://github.com/herdrdev/herdr" target="_blank" rel="noreferrer">Herdr</a></h2><p>让多个 Agent 同时工作，并且能够被观察、组织和协作。Herdr 通过后台 Session Server 持有真实终端进程。</p><ul class="bullet-list"><li><strong>Agent 状态感知：</strong>识别 working、blocked、done 和 idle 状态。</li><li><strong>持久化 Session：</strong>关闭窗口或断开连接后，任务仍可继续运行。</li><li><strong>多 Agent 工作区：</strong>用 Workspace、Tab 和 Pane 管理多个项目与多个 Agent。</li><li><strong>Agent 协作：</strong>通过共享工作区、终端状态、脚本或 API 协调并行任务。</li></ul></div><div class="session-column"><h2><a href="https://github.com/stablyai/orca" target="_blank" rel="noreferrer">Orca</a></h2><p>面向多 Agent 开发的桌面 IDE，将多个 Agent 与开发工具集中到一个工作台。</p><ul class="bullet-list"><li><strong>独立 Worktree：</strong>每个 Agent 使用独立 Git Worktree，便于并行开发、比较结果和合并代码。</li><li><strong>内置浏览器：</strong>提供 Chromium 浏览器与 Design Mode，可将页面元素直接交给 Agent。</li><li><strong>文件与终端：</strong>提供文件管理器、编辑器和终端分屏，减少工具切换。</li><li><strong>代码审查：</strong>集成 Diff 查看、标注、提交和推送，方便从生成到交付。</li></ul></div></div>
 </div>
 
 ---
@@ -637,34 +754,86 @@ mdc: true
 ---
 
 <div class="editorial-slide">
-  <h1 class="title">AI Coding 通用工作流</h1>
-  <p class="lead">用 Coding Agent 构建软件，核心仍然是目标、架构、Spec 与验证。</p>
-  <div class="image-panel workflow-image"><img src="/images/ai-engineering-workflow.png" alt="AI Engineering 工作流总览" /></div>
-  <div class="workflow-strip"><div><h3>目标清楚</h3><p>明确范围、验收标准和完成定义。</p></div><div><h3>运行可控</h3><p>配置上下文、权限和工具。</p></div><div><h3>失败可回</h3><p>保留测试、日志、Review 和恢复路径。</p></div></div>
+  <h1 class="title">Agent配置目录结构</h1>
+  <div class="code-layout directory-layout">
+    <div class="directory-board">
+      <div class="directory-board-title">Claude Code</div>
+      <pre class="directory-tree"><span class="directory-heading">用户级目录</span>  <span class="directory-path">~/.claude/</span>&#10;<span class="directory-context">├── CLAUDE.md</span>&#10;<span class="directory-settings">├── settings.json</span>&#10;<span class="directory-skills">├── skills/</span>&#10;<span class="directory-agent">└── agents/*.md</span>&#10;&#10;<span class="directory-heading">项目根目录</span>  <span class="directory-path">/repo</span>&#10;<span class="directory-context">├── CLAUDE.md</span>&#10;<span class="directory-local">├── CLAUDE.local.md</span>&#10;<span class="directory-mcp">├── .mcp.json</span>&#10;<span class="directory-folder">└── .claude/</span>&#10;<span class="directory-settings">    ├── settings.json</span>&#10;<span class="directory-local">    ├── settings.local.json</span>&#10;<span class="directory-rules">    ├── rules/*.md</span>&#10;<span class="directory-skills">    ├── skills/</span>&#10;<span class="directory-agent">    └── agents/*.md</span></pre>
+    </div>
+    <div class="directory-board">
+      <div class="directory-board-title">.agents（支持主流Agent）</div>
+      <pre class="directory-tree"><span class="directory-heading">用户级目录</span>  <span class="directory-path">~/.agents/</span>&#10;<span class="directory-skills">└── skills/</span>&#10;&#10;<span class="directory-heading">项目级目录</span>  <span class="directory-path">repo/</span>&#10;<span class="directory-context">├── AGENTS.md</span>&#10;<span class="directory-folder">└── .agents/</span>&#10;<span class="directory-skills">    └── skills/</span></pre>
+    </div>
+    <div class="directory-note">
+      <div><strong class="directory-note-reuse">CLAUDE.md</strong>：写入 <strong class="directory-note-agent">@AGENTS.md</strong> 复用内容；<br /><strong class="directory-note-skill">skills/</strong>：直接软链接</div>
+    </div>
+  </div>
+</div>
+
+---
+
+<div class="editorial-slide project-context-page">
+  <h1 class="title">管理好项目提示词、Skills 和 MCP</h1>
+  <p class="lead">它们不是简单的配置项，会直接影响 Token 消耗与模型效果。</p>
+  <div class="context-management-grid">
+    <article class="context-management-card context-management-prompt"><h2>CLAUDE.md / AGENTS.md</h2><p>只放项目背景、约束、常用命令和验收标准。内容稳定、短小，避免把所有知识都塞进上下文。</p><strong>越聚焦，模型越容易抓住重点。</strong></article>
+    <article class="context-management-card context-management-skill"><h2>Skills</h2><p>把可复用的方法、步骤和检查方式封装起来，按任务需要加载，而不是每次都重复说明。</p><strong>按需加载，减少无关 Token。</strong></article>
+    <article class="context-management-card context-management-mcp"><h2>MCP</h2><p>只接入当前任务需要的工具，控制工具描述和返回结果，避免工具过多挤占 Context。</p><strong>工具可用，更要边界清楚。</strong></article>
+  </div>
+  <div class="context-management-effects">
+    <article class="context-effect context-effect-token"><h3>Token 消耗</h3><p>无关提示词、Skill 内容和 MCP 返回越多，输入越长，调用成本和上下文压力越高。</p></article>
+    <article class="context-effect context-effect-quality"><h3>模型效果</h3><p>上下文越清晰，模型越容易理解约束、选对工具，并稳定完成任务。</p></article>
+  </div>
 </div>
 
 ---
 
 <div class="editorial-slide">
-  <h1 class="title">SDD 与 OpenSpec</h1>
-  <p class="lead">先用结构化 Spec 明确需求、约束和验收标准，再让 Agent 进入实现。</p>
-  <div class="workflow-methods"><div class="method-column"><h2>SDD：规范驱动开发</h2><p>代码是 Spec 的实现结果，Spec 也是后续 Review 和协作的依据。</p><ul class="bullet-list"><li>先澄清需求和边界。</li><li>把验收标准写成可检查的条件。</li><li>让实现、验证和 Review 围绕同一份契约展开。</li></ul></div><div class="method-column"><h2>OpenSpec：设计与变更契约</h2><p>适合沉淀改什么、为什么改、边界和验收标准。</p><div class="method-flow"><span>propose：提出变更</span><span>review / update：评审修改</span><span>apply：开始实现</span><span>archive：归档记录</span></div></div></div>
+  <h1 class="title">如何写一个 Skill</h1>
+  <div class="skill-practice-list">
+    <article class="skill-practice-item"><strong class="skill-practice-number">01</strong><div><h2>选择真实任务</h2><p>从重复工作中选择一个需求，先让 Agent 完成任务，得到满意的结果。</p></div></article>
+    <article class="skill-practice-item"><strong class="skill-practice-number">02</strong><div><h2>整理执行经验</h2><p>记录可复用的步骤、所需资料和工具，以及执行中需要反复提醒的要求。</p></div></article>
+    <article class="skill-practice-item"><strong class="skill-practice-number">03</strong><div><h2>编写 Skill</h2><p>写清操作步骤，将固定操作整理成脚本，附上模板或示例，并明确结果检查和错误修复方法。</p></div></article>
+    <article class="skill-practice-item"><strong class="skill-practice-number">04</strong><div><h2>测试效果</h2><p>使用不同任务和模型测试，检查结果是否达标，找出容易失败的环节。</p></div></article>
+    <article class="skill-practice-item"><strong class="skill-practice-number">05</strong><div><h2>持续改进</h2><p>根据实际使用和分享后的反馈修改，优先解决共性问题，避免堆叠特殊需求。</p></div></article>
+  </div>
 </div>
 
 ---
 
 <div class="editorial-slide">
   <h1 class="title">Superpowers 与 mattpocock</h1>
-  <p class="lead">不同方法都在解决同一件事：让 Agent 的执行过程更有纪律。</p>
-  <div class="workflow-methods"><div class="method-column"><h2>Superpowers</h2><p>通过 Sub-Agent、TDD、Review 和可选的 Git Worktree，提高交付质量。</p><div class="method-flow"><span>brainstorming：头脑风暴</span><span>plan：编写计划</span><span>execute：执行</span><span>review：审查</span><span>finish：收尾</span></div></div><div class="method-column"><h2>mattpocock/skills</h2><p>用一组 Skills 把需求澄清、Spec、任务拆分、实现和审查串起来。</p><div class="method-flow"><span>grill-with-docs：头脑风暴</span><span>to-spec：生成 Spec</span><span>to-tickets：拆分任务</span><span>implement：实现</span><span>code-review：代码审查</span></div></div></div>
+  <div class="workflow-methods sdd-methods">
+    <div class="method-column"><h2><a href="https://github.com/obra/superpowers" target="_blank" rel="noreferrer">Superpowers</a></h2><p>通过 Sub-Agent、TDD、Review 和可选的 Git Worktree，提高交付质量。</p><div class="method-flow method-arrow-flow method-arrow-flow-five"><span>brainstorming：头脑风暴</span><b class="method-arrow">→</b><span>plan：编写计划</span><b class="method-arrow">→</b><span>execute：执行</span><b class="method-arrow">→</b><span>review：审查</span><b class="method-arrow">→</b><span>finish：收尾</span></div></div>
+    <div class="method-column"><h2><a href="https://github.com/mattpocock/skills" target="_blank" rel="noreferrer">mattpocock/skills</a></h2><p>用一组 Skills 把需求澄清、Spec、任务拆分、实现和审查串起来。</p><div class="method-flow method-arrow-flow method-arrow-flow-five"><span>grill-with-docs：需求澄清</span><b class="method-arrow">→</b><span>to-spec：生成 Spec</span><b class="method-arrow">→</b><span>to-tickets：拆分任务</span><b class="method-arrow">→</b><span>implement：实现</span><b class="method-arrow">→</b><span>code-review：代码审查</span></div></div>
+  </div>
+</div>
+
+---
+
+<div class="editorial-slide sdd-page">
+  <h1 class="title">SDD</h1>
+  <p class="lead">SDD（Spec-Driven Development，规范驱动开发）：以规格说明为核心，先明确要构建什么，再让 Agent 根据规格完成设计、拆解和实现。</p>
+  <div class="workflow-methods sdd-methods">
+    <div class="method-column">
+      <h2><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noreferrer">OpenSpec</a>：设计与变更契约</h2>
+      <p>轻量、流程清晰（propose → apply → sync/archive）；规范与代码同仓，持续维护当前系统行为的主规范。</p>
+      <div class="method-flow method-arrow-flow"><span>propose：提出变更</span><b class="method-arrow">→</b><span>review / update：评审修改</span><b class="method-arrow">→</b><span>apply：开始实现</span><b class="method-arrow">→</b><span>archive：归档记录</span></div>
+    </div>
+    <div class="method-column">
+      <h2><a href="https://github.com/github/spec-kit" target="_blank" rel="noreferrer">Spec Kit</a>：规范驱动流程</h2>
+      <p>功能更强、扩展性更高，支持预设、扩展和工作流；但标准流程更复杂，规范归档需要额外组织。</p>
+      <div class="method-flow method-arrow-flow"><span>Spec：明确需求</span><b class="method-arrow">→</b><span>Plan：制定方案</span><b class="method-arrow">→</b><span>Tasks：拆分任务</span><b class="method-arrow">→</b><span>Implement：开始实现</span></div>
+    </div>
+  </div>
 </div>
 
 ---
 
 <div class="editorial-slide">
-  <h1 class="title">AI 开发工作流的工程化范式</h1>
+  <h1 class="title">AI工程化</h1>
   <p class="lead">外部工具不会消失，但会逐渐变成可插拔的 Skill、规则和评测层。</p>
-  <div class="paradigm-layout"><div class="paradigm-row"><h3>Prompt Engineering</h3><p>把需求说清楚，让模型按预期回答。</p></div><div class="paradigm-row"><h3>Context Engineering</h3><p>让 Agent 看到完成任务所需的信息。</p></div><div class="paradigm-row"><h3>Harness Engineering</h3><p>提供执行环境，让 Agent 调用工具、运行代码并获得反馈。</p></div><div class="paradigm-row"><h3>Loop Engineering</h3><p>让 Agent 自动执行、验证和修正，直到完成或停止。</p></div><div class="paradigm-row"><h3>Graph Engineering</h3><p>让多个各自运行 Loop 的 Agent，按职责、依赖和交接关系协作。</p></div></div>
+  <div class="paradigm-layout"><div class="paradigm-row"><h3>Prompt Engineering</h3><p>关注“怎么写好一条指令”。</p></div><div class="paradigm-row"><h3>Context Engineering</h3><p>关注“怎么给 AI 提供足够且精准的上下文”。</p></div><div class="paradigm-row"><h3>Harness Engineering</h3><p>关注“怎么构建一个系统性的框架来约束和驱动 AI”。</p></div><div class="paradigm-row"><h3>Loop Engineering</h3><p>关注“怎么让 Agent 持续执行、验证并在失败后自我修正”。</p></div><div class="paradigm-row"><h3>Graph Engineering</h3><p>关注“怎么把 Agent、工具和流程编排成可分支、可并行的协作网络”。</p></div></div>
 </div>
 
 ---
@@ -672,29 +841,97 @@ mdc: true
 <div class="editorial-slide chapter-page">
   <div class="chapter-index">第五章</div>
   <div class="chapter-copy">
-    <h1>实践与思考</h1>
-    <p>把一次成功的协作，沉淀成下一次可以复用的方法。</p>
+    <h1>思考</h1>
   </div>
 </div>
 
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">如何写出一个可复用 Skill</h1>
-  <p class="lead">好的 Skill 是一类任务的方法包，不是堆满背景知识的长文档。</p>
-  <div class="skill-steps"><div class="skill-step"><strong>1</strong><h3>选择真实任务</h3><p>从重复工作中选择一个需求，先让 Agent 完成并得到满意结果。</p></div><div class="skill-step"><strong>2</strong><h3>整理执行经验</h3><p>记录可复用步骤、所需资料、工具和需要反复提醒的要求。</p></div><div class="skill-step"><strong>3</strong><h3>编写 Skill</h3><p>写清操作步骤，整理脚本，附上模板或示例，明确检查和修复方法。</p></div><div class="skill-step"><strong>4</strong><h3>测试效果</h3><p>使用不同任务和模型测试，找到容易失败的环节。</p></div><div class="skill-step"><strong>5</strong><h3>持续改进</h3><p>根据实际使用和分享反馈修改，优先解决共性问题。</p></div></div>
+<div class="editorial-slide meta-capability-page">
+  <h1 class="title">Agent 元能力：善于借助 Agent 解决问题</h1>
+  <p class="meta-capability-intro">从善用搜索引擎、善用网页 Chat，到善用 Agent，解决问题的方式正在从“获取答案”走向“直接完成任务”。</p>
+  <div class="meta-capability-grid">
+    <article class="meta-capability-card meta-capability-install"><div class="meta-capability-number">01</div><div><h2>先装一个能用的 Agent</h2><p>先有一个真正能干活的 Agent，后面的配置、扩展和使用才有基础。</p></div></article>
+    <article class="meta-capability-card meta-capability-equip"><div class="meta-capability-number">02</div><div><h2>用 Agent 武装 Agent</h2><p>环境配置、工具安装、能力接入，都可以让 Agent 参与解决；逐步补齐浏览器、终端、CLI、MCP、Skill 等“手、眼、脚”。</p></div></article>
+    <article class="meta-capability-card meta-capability-explore"><div class="meta-capability-number">03</div><div><h2>善用 Agent 解决陌生问题</h2><p>遇到不会的、没做过的、复杂的问题，也敢于先让 Agent 尝试，善于借助它探索方法、解决阻塞，不断扩展自己能解决的问题边界。</p></div></article>
+    <article class="meta-capability-card meta-capability-build"><div class="meta-capability-number">04</div><div><h2>用 Agent 构建自己的工具</h2><p>把重复需求和个人工作方式做成 Skill、脚本、小工具、浏览器插件、客户端或自动化流程，让 Agent 不只是现成工具，也能帮你创造新的工具。</p></div></article>
+  </div>
+  <div class="meta-capability-conclusion"><span>核心变化</span><strong>从“会使用 Agent”，走向“善于借助 Agent 持续扩展自己的问题解决能力”。</strong></div>
 </div>
 
 ---
 
-<div class="editorial-slide">
-  <h1 class="title">开发者的工作重心</h1>
-  <p class="lead">Agent 承担更多执行工作，人仍然需要懂技术、能判断方案，并对交付负责。</p>
-  <div class="thought-layout"><div class="thought-column"><h2>从掌勺者到主厨</h2><p>以前更多是自己完成每一道工序，现在更像负责整个厨房：决定做什么，准备环境，安排分工，最后把关出菜质量。</p><ul class="bullet-list"><li>定义目标、范围和优先级。</li><li>准备可执行、可验证的环境。</li><li>审阅变更，判断结果是否达标。</li></ul></div><div class="thought-column"><h2>先对齐，再开火</h2><p>做开发也一样。先和 Agent 说清楚目标、范围、约束和验收标准，不确定的地方通过提问、读代码和讨论逐步对齐。</p><ul class="bullet-list"><li>需求澄清减少返工。</li><li>验证环境形成闭环。</li><li>人从验证者转为审阅者。</li></ul></div></div>
+<div class="editorial-slide engineering-map-page">
+  <div class="engineering-title-row"><h1 class="title">使用 Coding Agent <span class="engineering-title-note">AI 工程能力</span></h1></div>
+  <p class="engineering-map-intro">Coding Agent 正在改变软件开发中人的工作重心：</p>
+  <div class="engineering-transition-graphic"><span class="engineering-transition-from">亲自实现代码</span><b>→</b><span class="engineering-transition-to">决定做什么、设计架构、定义 Spec、组织执行和验证结果</span></div>
+  <div class="engineering-workflow-grid">
+    <section class="engineering-process">
+      <div class="engineering-section-heading"><strong>基本工作流</strong><span>Planning → Execution → Deployment &amp; Monitoring → Feedback</span></div>
+      <div class="engineering-map-steps">
+        <article class="engineering-map-step engineering-map-step-plan"><strong>01</strong><div><h3>Planning</h3><p>理解问题、设计架构、明确 Spec 与执行计划。</p></div></article>
+        <article class="engineering-map-step engineering-map-step-build"><strong>02</strong><div><h3>Execution</h3><p>Agent 构建、测试、验证和修复。</p></div></article>
+        <article class="engineering-map-step engineering-map-step-ship"><strong>03</strong><div><h3>Deployment &amp; Monitoring</h3><p>部署、监控、发现问题并持续迭代。</p></div></article>
+        <article class="engineering-map-step engineering-map-step-feedback"><strong>04</strong><div><h3>Feedback</h3><p>根据结果反馈调整计划与执行，进入下一轮闭环。</p></div></article>
+      </div>
+    </section>
+    <section class="engineering-human">
+      <div class="engineering-section-heading"><strong>五项核心能力</strong><span>驾驭 Coding Agent，放大个人与团队的生产力</span></div>
+      <div class="engineering-capability-grid">
+        <article class="engineering-capability engineering-capability-guide"><h3>工作流管理</h3><p>决定如何拆解、执行与迭代任务。</p></article>
+        <article class="engineering-capability engineering-capability-autonomy"><h3>Agent 自主性</h3><p>控制 Agent 的自主程度、Context 与多 Agent 协作。</p></article>
+        <article class="engineering-capability engineering-capability-review"><h3>结果审查</h3><p>通过测试、Evals、Code Review 等验证输出。</p></article>
+        <article class="engineering-capability engineering-capability-custom"><h3>Agent 与环境定制</h3><p>通过 Skills、MCP、Hooks、AGENTS.md 等增强能力。</p></article>
+        <article class="engineering-capability engineering-capability-core"><h3>Agent 基础原理</h3><p>理解 LLM、Harness、Context、Tools、Subagents 等机制。</p></article>
+      </div>
+    </section>
+  </div>
+  <div class="engineering-practice-bar"><span>高效使用 Coding Agent，不是单纯追求更高自主性，而是建立“<strong class="engineering-loop-step engineering-loop-plan">规划</strong> → <strong class="engineering-loop-step engineering-loop-build">执行</strong> → <strong class="engineering-loop-step engineering-loop-review">验证</strong> → <strong class="engineering-loop-step engineering-loop-feedback">反馈</strong>”的工程闭环。</span></div>
 </div>
 
 ---
 
-<div class="editorial-slide final">
-  <div><h1>从写代码，到设计一个能持续交付的系统</h1><div class="final-line"></div><p>人定义目标，设计环境，把关结果。Agent 承担更多执行，但交付标准仍然需要被人守住。</p><div class="final-conditions"><span>目标清楚</span><span>环境可用</span><span>结果可验</span></div></div>
+<div class="editorial-slide silver-bullet-page">
+  <div class="silver-bullet-header">
+    <div>
+      <h1 class="title">AI不是软件工程的银弹</h1>
+      <p class="silver-bullet-subtitle">只有能让软件生产率、可靠性和简洁性提升一个数量级的方法，才称得上“银弹”。</p>
+    </div>
+  </div>
+
+  <div class="silver-bullet-columns">
+    <section class="silver-bullet-column silver-bullet-essential">
+      <div class="silver-bullet-column-head">
+        <div><h2>软件工程的本质困难</h2><p>它们不是“写代码慢”，也不会被 AI 自动消除</p></div>
+      </div>
+      <div class="silver-bullet-list">
+        <article><strong>目标与概念</strong><p>要解决什么、为什么解决，以及什么才算成功。</p></article>
+        <article><strong>复杂性</strong><p>业务规则、状态、依赖和边界相互交织。</p></article>
+        <article><strong>约束与一致性</strong><p>系统必须适配既有架构、规范、法规和组织约束。</p></article>
+        <article><strong>变化与验证</strong><p>需求持续变化，正确性还要靠测试、运行反馈和长期维护确认。</p></article>
+      </div>
+    </section>
+    <section class="silver-bullet-column silver-bullet-accidental">
+      <div class="silver-bullet-column-head">
+        <div><h2>AI 能解决 / 缓解的部分</h2><p>不是消灭复杂性，而是让 AI 直接承接复杂实现</p></div>
+      </div>
+      <div class="silver-bullet-list">
+        <article><strong>自主执行</strong><p>从任务描述出发，规划、编码、运行、调试并交付。</p></article>
+        <article><strong>复杂度承接</strong><p>理解并修改大范围代码，把实现复杂性转交给 Code Agent。</p></article>
+        <article><strong>流程压缩</strong><p>串联规划、开发、测试和文档，减少传统协作中的等待。</p></article>
+        <article><strong>并行探索</strong><p>同时尝试多种方案，持续迭代，放大个人和小团队的执行规模。</p></article>
+      </div>
+    </section>
+  </div>
+
+  <div class="silver-bullet-boundary">
+    <div class="silver-bullet-boundary-item silver-bullet-cannot">
+      <span>AI 不能替代</span><strong>目标与价值、架构取舍、组织共识、验收责任</strong>
+    </div>
+    <div class="silver-bullet-boundary-item silver-bullet-can">
+      <span>AI 主要解决</span><strong>复杂实现、重复执行、调试迭代、并行探索</strong>
+    </div>
+  </div>
+
+  <div class="silver-bullet-conclusion">AI 放大了处理软件复杂性的能力，但没有让复杂性本身消失——所以它仍然不是软件工程的银弹。</div>
 </div>
