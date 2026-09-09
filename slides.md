@@ -918,7 +918,7 @@ fonts:
   <div class="engineering-transition-graphic"><span class="engineering-transition-from">亲自实现代码</span><b>→</b><span class="engineering-transition-to">决定做什么、设计架构、定义 Spec、组织执行和验证结果</span></div>
   <div class="engineering-workflow-grid">
     <section class="engineering-process">
-      <div class="engineering-section-heading"><strong>基本工作流</strong><span>Planning → Execution → Deployment &amp; Monitoring → Feedback</span></div>
+      <div class="engineering-section-heading"><strong>基本工作流</strong></div>
       <div class="engineering-map-steps">
         <article class="engineering-map-step engineering-map-step-plan"><strong>01</strong><div><h3>Planning</h3><p>理解问题、设计架构、明确 Spec 与执行计划。</p></div></article>
         <article class="engineering-map-step engineering-map-step-build"><strong>02</strong><div><h3>Execution</h3><p>Agent 构建、测试、验证和修复。</p></div></article>
@@ -927,7 +927,7 @@ fonts:
       </div>
     </section>
     <section class="engineering-human">
-      <div class="engineering-section-heading"><strong>五项核心能力</strong><span>驾驭 Coding Agent，放大个人与团队的生产力</span></div>
+      <div class="engineering-section-heading"><strong>核心能力</strong><span>驾驭 Coding Agent，放大个人与团队的生产力</span></div>
       <div class="engineering-capability-grid">
         <article class="engineering-capability engineering-capability-guide"><h3>工作流管理</h3><p>决定如何拆解、执行与迭代任务。</p></article>
         <article class="engineering-capability engineering-capability-autonomy"><h3>Agent 自主性</h3><p>控制 Agent 的自主程度、Context 与多 Agent 协作。</p></article>
