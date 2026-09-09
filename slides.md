@@ -127,7 +127,7 @@ fonts:
       <div class="model-tier-label"><strong>2</strong><div><h2>强模型</h2><span>综合能力</span></div></div>
       <div class="model-tier-models">
         <span>Kimi K3</span><span>GLM-5.3</span><span>Qwen3.8 Max</span>
-        <span>Grok 4.6</span><span>DeepSeek V4 Pro</span>
+        <span>Grok 4.6</span><span><s>DeepSeek V4 Pro</s></span>
       </div>
     </section>
     <section class="model-tier-row tier-efficient">
